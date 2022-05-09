@@ -1,4 +1,3 @@
-from array import array
 import requests
 from requests.structures import CaseInsensitiveDict
 import base64
@@ -37,21 +36,22 @@ class spotifyPlay:
         resp = requests.get(url, headers=headers)
         return resp.content
     
-    def getTracksPlaylist(self, id) -> array:
+    def getTracksPlaylist(self, id) -> list:
         playlist = json.loads(self.getPlaylist(id))['tracks']
         rescueTracks = []
         iterator = 0
         while True:
-            if playlist['next'] == None:
-                    break
             if iterator == 100:
                 if playlist['next'] == None:
                     break
                 offsetUp = str(playlist['offset']+100)
                 playlist = json.loads(self.getPlaylist(id+'/tracks?offset='+offsetUp+'&limit=100'))
                 iterator = 0
-            name = playlist['items'][iterator]['track']['name']
-            artists = playlist['items'][iterator]['track']['artists'][0]['name']
-            rescueTracks.append([name, artists])
-            iterator += 1
+            try:
+                name = playlist['items'][iterator]['track']['name']
+                artists = playlist['items'][iterator]['track']['artists'][0]['name']
+                rescueTracks.append([name, artists])
+                iterator += 1
+            except IndexError:
+                break
         return rescueTracks
