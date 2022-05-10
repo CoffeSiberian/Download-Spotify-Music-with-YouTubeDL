@@ -23,6 +23,9 @@ menu.rows.append(['2', 'Salir'])
 menu.columns.alignment = BeautifulTable.ALIGN_LEFT
 
 def download(url, name_file) -> None:
+    os.system(cmd)
+    print(f'downloading... {name_file}')
+    print('')
     response = requests.get(url, stream=True)
     total_size= int(response.headers.get('content-length'))
     block_size = 1024
@@ -41,14 +44,16 @@ def splitURL(url) -> str:
 def queryYTurl(id) -> str:
     for r in api.getTracksPlaylist(id):
         name = f'{r[0]} - {r[1]}'
-        url_download = yt_dl.search(name)[0]['url']
+        url_download = yt_dl.search(name)['entries'][0]['url']
         download(url_download, name)
 
 while True:
+    os.system(cmd)
+    print(menu)
     textSelect = input(str('Ingresa un numero: '))
-    if textSelect == 1:
+    if textSelect == '1':
         os.system(cmd)
         url = input(str('Ingresa la URL de la PlayList: '))
         queryYTurl(splitURL(url))
-    elif textSelect == 2:
+    elif textSelect == '2':
         break

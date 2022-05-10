@@ -18,6 +18,6 @@ class youtube:
         vidinfo = self.__ytdl.extract_info(url, download=False)
         return vidinfo
     
-    def search(self, find) -> str:
-        vidinfo = self.__ytdl.extract_info(f"ytsearch:{find}", download=False)
+    def search(self, find) -> list:
+        vidinfo = self.__ytdl.extract_info(f'ytsearch:{find}', download=False)
         return vidinfo
