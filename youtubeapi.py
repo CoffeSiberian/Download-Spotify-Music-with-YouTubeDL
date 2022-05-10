@@ -14,7 +14,7 @@ class youtube:
         }
         self.__ytdl = youtube_dl.YoutubeDL(self.__ytdl_options)
 
-    def findVideoInfoURL(self, url) -> str:
+    def findVideoInfoURL(self, url) -> list:
         vidinfo = self.__ytdl.extract_info(url, download=False)
         return vidinfo
     
