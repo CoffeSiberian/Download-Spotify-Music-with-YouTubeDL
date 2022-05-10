@@ -17,7 +17,7 @@ class spotifyPlay:
         return self.__clienSecret
 
     def getBearer(self) -> str:
-        concat = '{self.clienId}:{self.clienSecret}'
+        concat = f'{self.clienId}:{self.clienSecret}'
         encoded = base64.b64encode(bytes(concat, "utf-8")).decode(("utf-8"))
         url = "https://accounts.spotify.com/api/token"
         headers = CaseInsensitiveDict()
@@ -29,7 +29,7 @@ class spotifyPlay:
         return jsonLoads['access_token']
 
     def getPlaylist(self, id) -> dict:
-        url = 'https://api.spotify.com/v1/playlists/{id}'
+        url = f'https://api.spotify.com/v1/playlists/{id}'
         headers = CaseInsensitiveDict()
         headers["Authorization"] = "Bearer "+self.getBearer()
         headers["Content-Type"] = "application/json"
@@ -37,7 +37,11 @@ class spotifyPlay:
         return resp.content
     
     def getTracksPlaylist(self, id) -> list: #returns an list with song name and author
-        playlist = json.loads(self.getPlaylist(id))['tracks']
+        get_json = json.loads(self.getPlaylist(id))
+        try:
+            playlist = get_json['tracks']
+        except KeyError:
+            return [get_json['error']['status'], get_json['error']['message']]
         rescueTracks = []
         iterator = 0
         while True:
@@ -45,7 +49,7 @@ class spotifyPlay:
                 if playlist['next'] == None:
                     break
                 offsetUp = str(playlist['offset']+100)
-                playlist = json.loads(self.getPlaylist('{id}/tracks?offset={offsetUp}&limit=100'))
+                playlist = json.loads(self.getPlaylist(f'{id}/tracks?offset={offsetUp}&limit=100'))
                 iterator = 0
             try:
                 name = playlist['items'][iterator]['track']['name']
