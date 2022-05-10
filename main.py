@@ -22,9 +22,9 @@ menu.rows.append(['1', 'Descargar playlist Spotify'])
 menu.rows.append(['2', 'Salir'])
 menu.columns.alignment = BeautifulTable.ALIGN_LEFT
 
-def download(url, name_file) -> None:
+def download(url, name_file, remaining) -> None:
     os.system(cmd)
-    print(f'downloading... {name_file}')
+    print(f'Downloading... {name_file} | {remaining}')
     print('')
     response = requests.get(url, stream=True)
     total_size= int(response.headers.get('content-length'))
@@ -42,10 +42,14 @@ def splitURL(url) -> str:
     return url.split(sep='/')[4]
 
 def queryYTurl(id) -> str:
-    for r in api.getTracksPlaylist(id):
+    music_list = api.getTracksPlaylist(id)
+    music_count = len(music_list)
+    suple = 0
+    for r in music_list:
+        suple += 1
         name = f'{r[0]} - {r[1]}'
         url_download = yt_dl.search(name)['entries'][0]['url']
-        download(url_download, name)
+        download(url_download, name, f'[{suple} - {music_count}]')
 
 while True:
     os.system(cmd)
