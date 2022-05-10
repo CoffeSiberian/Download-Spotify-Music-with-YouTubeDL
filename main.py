@@ -4,6 +4,7 @@ import pathlib
 import tqdm
 from beautifultable import BeautifulTable
 from youtubeapi import *
+import time
 
 dirt = str(pathlib.Path(__file__).parent.absolute())
 conf_d = open(dirt+'/credentials.json')
@@ -27,7 +28,7 @@ def download(url, name_file, remaining) -> None:
     print(f'Downloading... {name_file} | {remaining}')
     print('')
     response = requests.get(url, stream=True)
-    total_size= int(response.headers.get('content-length'))
+    total_size = int(response.headers.get('content-length'))
     block_size = 1024
     progress_bar = tqdm.tqdm(total=total_size, unit='iB', unit_scale=True)
     with open(f'{name_file}.mp3', 'wb') as file:
@@ -35,11 +36,12 @@ def download(url, name_file, remaining) -> None:
             progress_bar.update(len(r))
             file.write(r)
     progress_bar.close()
-    if total_size != 0 and progress_bar.n != total_size:
-        print("ERROR, something went wrong")
 
 def splitURL(url) -> str:
-    return url.split(sep='/')[4]
+    try:
+        return url.split(sep='/')[4]
+    except IndexError:
+        return False
 
 def queryYTurl(id) -> str:
     music_list = api.getTracksPlaylist(id)
@@ -58,6 +60,11 @@ while True:
     if textSelect == '1':
         os.system(cmd)
         url = input(str('Ingresa la URL de la PlayList: '))
-        queryYTurl(splitURL(url))
+        validation = splitURL(url)
+        if validation == False:
+            print('Ingresa una URL valida')
+            time.sleep(5)
+        else:
+            queryYTurl(validation)
     elif textSelect == '2':
         break
