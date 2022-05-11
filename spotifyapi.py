@@ -28,7 +28,7 @@ class spotifyPlay:
         jsonLoads = json.loads(resp.content.decode("utf-8"))
         return jsonLoads['access_token']
 
-    def getPlaylist(self, id) -> dict: #return dict (se necesita transformar a json para acceder)
+    def getPlaylist(self, id) -> dict: #return dict playlist
         url = f'https://api.spotify.com/v1/playlists/{id}'
         headers = CaseInsensitiveDict()
         headers["Authorization"] = "Bearer "+self.getBearer()

@@ -3,7 +3,7 @@ import tqdm
 import requests
 
 class main_f:
-    def fileNameCheck(str) -> str:
+    def fileNameCheck(str) -> str: #checked incorrect character in filename
         lst = []
         strBlock = ["/", "\\", ":", "*", "?", "\"", "<", ">", "|"]
         for r,char in enumerate(str):
@@ -33,13 +33,13 @@ class main_f:
                 file.write(r)
         progress_bar.close()
 
-    def splitURL(url) -> str or bool:
+    def splitURL(url) -> str or bool: #get id from url playlist
         try:
             return url.split(sep='/')[4]
         except IndexError:
             return False
 
-    def queryYTurl(id, api, yt_dl, dirt, cmd) -> None:
+    def queryYTurl(id, api, yt_dl, dirt, cmd) -> None: #get url music from youtube_dl
         music_list = api.getTracksPlaylist(id)
         music_count = len(music_list)
         suple = 0
@@ -47,5 +47,5 @@ class main_f:
             suple += 1
             name = f'{r[0]} - {r[1]}'
             url_download = yt_dl.search(name)['entries'][0]['url']
-            os.system(cmd)#only for terminal app
+            os.system(cmd) #only for terminal app
             main_f.download(url_download, name, f'[{suple} - {music_count}]', dirt)

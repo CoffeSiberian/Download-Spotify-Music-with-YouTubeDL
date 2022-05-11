@@ -14,8 +14,6 @@ cmd = load['systen_clear_cmd']
 os.system(cmd)
 api = spotifyPlay(load['client_id'], load['client_secret'])
 yt_dl = youtube()
-#5OOvspVe9Qzb9jcZrVLN9V
-#0PCekXImFJ6K3EIIKDyfGH
 
 #lobbyMenu
 menu = BeautifulTable()
