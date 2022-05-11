@@ -35,7 +35,8 @@ class main_f:
 
     def splitURL(url) -> str or bool: #get id from url playlist
         try:
-            return url.split(sep='/')[4]
+            start = url.split(sep='?')[0]
+            return start.split(sep='/')[4]
         except IndexError:
             return False
 
