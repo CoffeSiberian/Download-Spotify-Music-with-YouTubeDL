@@ -33,13 +33,13 @@ class main_f:
                 file.write(r)
         progress_bar.close()
 
-    def splitURL(url) -> str:
+    def splitURL(url) -> str or bool:
         try:
             return url.split(sep='/')[4]
         except IndexError:
             return False
 
-    def queryYTurl(id, api, yt_dl) -> str:
+    def queryYTurl(id, api, yt_dl, dirt, cmd) -> None:
         music_list = api.getTracksPlaylist(id)
         music_count = len(music_list)
         suple = 0
@@ -47,5 +47,5 @@ class main_f:
             suple += 1
             name = f'{r[0]} - {r[1]}'
             url_download = yt_dl.search(name)['entries'][0]['url']
-            os.system('cls')
-            main_f.download(url_download, name, f'[{suple} - {music_count}]')
+            os.system(cmd)#only for terminal app
+            main_f.download(url_download, name, f'[{suple} - {music_count}]', dirt)

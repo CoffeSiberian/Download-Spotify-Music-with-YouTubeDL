@@ -36,6 +36,6 @@ while True:
             print('Ingresa una URL valida')
             time.sleep(5)
         else:
-            main_f.queryYTurl(validation, api, yt_dl)
+            main_f.queryYTurl(validation, api, yt_dl, dirt, cmd)
     elif textSelect == '2':
         break
