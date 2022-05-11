@@ -23,15 +23,32 @@ menu.rows.append(['1', 'Descargar playlist Spotify'])
 menu.rows.append(['2', 'Salir'])
 menu.columns.alignment = BeautifulTable.ALIGN_LEFT
 
+def fileNameCheck(str) -> str:
+    lst = []
+    strBlock = ["/", "\\", ":", "*", "?", "\"", "<", ">", "|"]
+    for r,char in enumerate(str):
+        for i in strBlock:
+            if char == i:
+                lst.append(r)
+                break
+    list_str = list(str)
+    if len(lst) == 0:
+        return str
+    for r in lst:
+        list_str[r] = '_'
+        name = ''.join(list_str)
+    return name
+
 def download(url, name_file, remaining) -> None:
     os.system(cmd)
+    name_file = fileNameCheck(name_file)
     print(f'Downloading... {name_file} | {remaining}')
     print('')
     response = requests.get(url, stream=True)
     total_size = int(response.headers.get('content-length'))
     block_size = 1024
     progress_bar = tqdm.tqdm(total=total_size, unit='iB', unit_scale=True)
-    with open(f'{name_file}.mp3', 'wb') as file:
+    with open(f'{dirt}/music/{name_file} - {remaining}.mp3', 'wb') as file:
         for r in response.iter_content(block_size):
             progress_bar.update(len(r))
             file.write(r)
