@@ -28,7 +28,7 @@ class main_f:
         total_size = int(response.headers.get('content-length'))
         block_size = 1024
         progress_bar = tqdm.tqdm(total=total_size, unit='iB', unit_scale=True)
-        with open(f'{dirt}/music/{playListName}/{nameFile} - {remaining}.mp3', 'wb') as file:
+        with open(f'{dirt}/music/{playListName}/{remaining} - {nameFile}.mp3', 'wb') as file:
             for r in response.iter_content(block_size):
                 progress_bar.update(len(r))
                 file.write(r)
@@ -43,27 +43,40 @@ class main_f:
 
     def queryYTurl(id, api, yt_dl, dirt, cmd) -> bool: #get url music from youtube_dl
         js = api.getTracksPlaylist(id)
-        playListName = main_f.fileNameCheck(js[1])
+        playlistName = main_f.fileNameCheck(js[1])
         music_list = js[0]
         main_f.createMusicFolder(dirt)
-        main_f.createFolderList(dirt, playListName)
+        main_f.createFolderList(dirt, playlistName)
+        logRead = main_f.readLog(dirt, playlistName)
         music_count = len(music_list)
         suple = 0
-        for r in music_list:
+        if logRead == False:
+            pass
+        else:
+            suple = int(logRead)
+        for r in music_list[suple:]:
             suple += 1
             name = f'{r[0]} - {r[1]}'
             url_download = yt_dl.search(name)['entries'][0]['url']
             os.system(cmd) #only for terminal app
             try:
-                main_f.download(url_download, name, playListName, f'[{suple} - {music_count}]', dirt)
+                main_f.download(url_download, name, playlistName, f'[{suple}]', dirt)
+                main_f.downloadLog(dirt, playlistName, suple)
                 if suple == music_count:
                     return True
             except KeyboardInterrupt:
                 return False
     
-    def createDownloadLog():
-        pass
+    def downloadLog(dirt, playListName, remaining) -> None: #saved id of last track downloaded
+        with open(f'{dirt}/music/{playListName}/log', 'w') as outfile:
+            outfile.write(str(remaining))
 
+    def readLog(dirt, playlistName) -> str or bool: #checks last download correct
+        if os.path.exists(f'{dirt}/music/{playlistName}/log') == False:
+            return False
+        with open(f'{dirt}/music/{playlistName}/log') as file:
+            return file.read()
+    
     def createFolderList(dirt, nameFolder) -> bool:
         if os.path.exists(f'{dirt}/music/{nameFolder}') == False:
             os.mkdir(f'{dirt}/music/{nameFolder}')
@@ -74,5 +87,5 @@ class main_f:
             os.mkdir(f'{dirt}/music')
         return True
     
-    def removeMusic(name) -> bool:
-        pass
+    def removeFileMusic(dirt, playListName, name) -> None:
+        os.remove(f'{dirt}/music/{playListName}/{name}')
