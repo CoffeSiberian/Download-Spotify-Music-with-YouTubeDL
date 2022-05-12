@@ -35,5 +35,7 @@ while True:
             time.sleep(5)
         else:
             main_f.queryYTurl(validation, api, yt_dl, dirt, cmd)
+            os.system(cmd)
+            conf = input(str('Fin de la descarga. Presiona Intro '))
     elif textSelect == '2':
         break

@@ -19,16 +19,16 @@ class main_f:
             name = ''.join(list_str)
         return name
 
-    def download(url, name_file, remaining, dirt) -> None:
-        name_file = main_f.fileNameCheck(name_file)
-        print(f'Downloading... {name_file} | {remaining}')
+    def download(url, nameFile, playListName, remaining, dirt) -> None:
+        nameFile = main_f.fileNameCheck(nameFile)
+        print(f'Downloading... {nameFile} | {remaining}')
         print('Ctrl + c to cancel')
         print('')
         response = requests.get(url, stream=True)
         total_size = int(response.headers.get('content-length'))
         block_size = 1024
         progress_bar = tqdm.tqdm(total=total_size, unit='iB', unit_scale=True)
-        with open(f'{dirt}/music/{name_file} - {remaining}.mp3', 'wb') as file:
+        with open(f'{dirt}/music/{playListName}/{nameFile} - {remaining}.mp3', 'wb') as file:
             for r in response.iter_content(block_size):
                 progress_bar.update(len(r))
                 file.write(r)
@@ -41,8 +41,12 @@ class main_f:
         except IndexError:
             return False
 
-    def queryYTurl(id, api, yt_dl, dirt, cmd) -> None: #get url music from youtube_dl
-        music_list = api.getTracksPlaylist(id)
+    def queryYTurl(id, api, yt_dl, dirt, cmd) -> bool: #get url music from youtube_dl
+        js = api.getTracksPlaylist(id)
+        playListName = main_f.fileNameCheck(js[1])
+        music_list = js[0]
+        main_f.createMusicFolder(dirt)
+        main_f.createFolderList(dirt, playListName)
         music_count = len(music_list)
         suple = 0
         for r in music_list:
@@ -51,6 +55,24 @@ class main_f:
             url_download = yt_dl.search(name)['entries'][0]['url']
             os.system(cmd) #only for terminal app
             try:
-                main_f.download(url_download, name, f'[{suple} - {music_count}]', dirt)
+                main_f.download(url_download, name, playListName, f'[{suple} - {music_count}]', dirt)
+                if suple == music_count:
+                    return True
             except KeyboardInterrupt:
-                break
+                return False
+    
+    def createDownloadLog():
+        pass
+
+    def createFolderList(dirt, nameFolder) -> bool:
+        if os.path.exists(f'{dirt}/music/{nameFolder}') == False:
+            os.mkdir(f'{dirt}/music/{nameFolder}')
+        return True
+
+    def createMusicFolder(dirt) -> bool:
+        if os.path.exists(f'{dirt}/music') == False:
+            os.mkdir(f'{dirt}/music')
+        return True
+    
+    def removeMusic(name) -> bool:
+        pass

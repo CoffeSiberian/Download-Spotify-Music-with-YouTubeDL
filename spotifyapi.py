@@ -36,7 +36,7 @@ class spotifyPlay:
         resp = requests.get(url, headers=headers)
         return resp.content
     
-    def getTracksPlaylist(self, id) -> list: #returns an list with song name and author [name, author]
+    def getTracksPlaylist(self, id) -> list: #returns an list with song name and author [namePlayList][name, author]
         get_json = json.loads(self.getPlaylist(id))
         try:
             playlist = get_json['tracks']
@@ -58,4 +58,4 @@ class spotifyPlay:
                 iterator += 1
             except IndexError:
                 break
-        return rescueTracks
+        return rescueTracks, get_json['name']
