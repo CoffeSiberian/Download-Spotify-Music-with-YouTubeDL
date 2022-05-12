@@ -22,6 +22,7 @@ class main_f:
     def download(url, name_file, remaining, dirt) -> None:
         name_file = main_f.fileNameCheck(name_file)
         print(f'Downloading... {name_file} | {remaining}')
+        print('Ctrl + c to cancel')
         print('')
         response = requests.get(url, stream=True)
         total_size = int(response.headers.get('content-length'))
@@ -49,4 +50,7 @@ class main_f:
             name = f'{r[0]} - {r[1]}'
             url_download = yt_dl.search(name)['entries'][0]['url']
             os.system(cmd) #only for terminal app
-            main_f.download(url_download, name, f'[{suple} - {music_count}]', dirt)
+            try:
+                main_f.download(url_download, name, f'[{suple} - {music_count}]', dirt)
+            except KeyboardInterrupt:
+                break
