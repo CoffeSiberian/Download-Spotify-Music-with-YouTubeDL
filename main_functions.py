@@ -65,6 +65,7 @@ class main_f:
                 if suple == music_count:
                     return True
             except KeyboardInterrupt:
+                main_f.removeFileMusic(dirt, playlistName, name, suple)
                 return False
     
     def downloadLog(dirt, playListName, remaining) -> None: #saved id of last track downloaded
@@ -87,5 +88,5 @@ class main_f:
             os.mkdir(f'{dirt}/music')
         return True
     
-    def removeFileMusic(dirt, playListName, name) -> None:
-        os.remove(f'{dirt}/music/{playListName}/{name}')
+    def removeFileMusic(dirt, playlistName, nameFile, remaining) -> None: #delete bad downloaded files (download not finish)
+        os.remove(f'{dirt}/music/{playlistName}/[{remaining}] - {nameFile}.mp3')
