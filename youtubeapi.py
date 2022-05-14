@@ -1,4 +1,4 @@
-import youtube_dl
+from yt_dlp import YoutubeDL
 
 class youtube:
     def __init__(self) -> None:
@@ -12,7 +12,7 @@ class youtube:
         'logtostderr': False,
         'quiet': True
         }
-        self.__ytdl = youtube_dl.YoutubeDL(self.__ytdl_options)
+        self.__ytdl = YoutubeDL(self.__ytdl_options)
 
     def findVideoInfoURL(self, url) -> list:
         vidinfo = self.__ytdl.extract_info(url, download=False)
