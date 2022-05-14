@@ -6,11 +6,18 @@ import os
 import pathlib
 from beautifultable import BeautifulTable
 import time
+import platform
+
+osSystem = platform.system()
+
+if osSystem == 'Linux' or osSystem == 'Darwin':
+    cmd = 'clear'
+elif osSystem == 'Windows':
+    cmd = 'cls'
 
 dirt = str(pathlib.Path(__file__).parent.absolute())
 conf_d = open(dirt+'/credentials.json')
 load = json.load(conf_d)
-cmd = load['systen_clear_cmd']
 os.system(cmd)
 api = spotifyPlay(load['client_id'], load['client_secret'])
 yt_dl = youtube()
