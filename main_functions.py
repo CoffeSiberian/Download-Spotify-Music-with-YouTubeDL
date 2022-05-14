@@ -66,6 +66,7 @@ class main_f:
                 if suple == music_count:
                     return True
             except KeyboardInterrupt:
+                name = main_f.fileNameCheck(name)
                 main_f.removeFileMusic(dirt, playlistName, name, suple)
                 return False
     
