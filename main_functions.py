@@ -22,8 +22,7 @@ class main_f:
     def download(url, nameFile, playListName, remaining, dirt) -> None:
         nameFile = main_f.fileNameCheck(nameFile)
         print(f'Downloading... {nameFile} | {remaining}')
-        print('Ctrl + c to cancel')
-        print('')
+        print('Ctrl + c to cancel\n')
         headers = {'content-type':'audio/webm', 'Range': 'bytes=0-'}
         response = requests.get(url=url, headers=headers ,stream=True)
         total_size = int(response.headers.get('content-length'))

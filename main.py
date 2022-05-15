@@ -19,6 +19,9 @@ dirt = str(pathlib.Path(__file__).parent.absolute())
 conf_d = open(dirt+'/credentials.json')
 load = json.load(conf_d)
 os.system(cmd)
+if load['client_id'] == '' or load['client_secret'] == '':
+    print('Please first write inside credentials.json your Spotify credentials (read README.md)')
+    g = input(str(''))
 api = spotifyPlay(load['client_id'], load['client_secret'])
 yt_dl = youtube()
 
@@ -36,6 +39,7 @@ while True:
     textSelect = input(str('Ingresa un numero: '))
     if textSelect == '1':
         os.system(cmd)
+        print('Please make you playlist to public view for get data\n')
         url = input(str('Ingresa la URL de la PlayList: '))
         validation = main_f.splitURL(url)
         if validation == False:
