@@ -42,7 +42,11 @@ class main_f:
         except IndexError:
             return False
 
-    def queryYTurl(id, api, yt_dl, dirt, cmd) -> bool: #get url music from youtube_dl
+    def queryYTurlPlaylist(id, api, yt_dl, dirt, cmd) -> bool: #get url music from youtube_dl
+        '''
+        get the link of the song in yt_dlp and 
+        start downloading (this function is only used to download playlist)
+        '''
         js = api.getTracksPlaylist(id)
         playlistName = main_f.fileNameCheck(js[1])
         music_list = js[0]
@@ -70,6 +74,25 @@ class main_f:
                 main_f.removeFileMusic(dirt, playlistName, name, suple)
                 return False
     
+    def queryYTurlTrack(id, api, yt_dl, dirt, cmd) -> bool: #get url music from youtube_dl
+        '''
+        get the link of the song in yt_dlp and 
+        start downloading (this function is only used to download tracks)
+        '''
+        js = api.getTrack(id)
+        trackName = main_f.fileNameCheck(js)
+        nameFolder = 'manual_track'
+        main_f.createMusicFolder(dirt)
+        main_f.createFolderList(dirt, nameFolder)
+        url_download = yt_dl.search(trackName)['entries'][0]['url']
+        os.system(cmd) #only for terminal app
+        try:
+            main_f.download(url_download, trackName, nameFolder, '0', dirt)
+        except KeyboardInterrupt:
+            name = main_f.fileNameCheck(name)
+            main_f.removeFileMusic(dirt, nameFolder, name, '0')
+            return False
+
     def downloadLog(dirt, playListName, remaining) -> None: #saved id of last track downloaded
         with open(f'{dirt}/music/{playListName}/log', 'w') as outfile:
             outfile.write(str(remaining))

@@ -26,7 +26,8 @@ yt_dl = youtube()
 menu = BeautifulTable()
 menu.columns.header = ['*','****** Descargar Musica de Spotify y YouTube ******'] 
 menu.rows.append(['1', 'Descargar playlist Spotify'])
-menu.rows.append(['2', 'Salir'])
+menu.rows.append(['2', 'Descargar cancion Spotify'])
+menu.rows.append(['3', 'Salir'])
 menu.columns.alignment = BeautifulTable.ALIGN_LEFT
 
 while True:
@@ -41,8 +42,19 @@ while True:
             print('Ingresa una URL valida')
             time.sleep(5)
         else:
-            main_f.queryYTurl(validation, api, yt_dl, dirt, cmd)
+            main_f.queryYTurlPlaylist(validation, api, yt_dl, dirt, cmd)
             os.system(cmd)
             conf = input(str('Fin de la descarga. Presiona Intro '))
     elif textSelect == '2':
+        os.system(cmd)
+        url = input(str('Ingresa la URL de la cancion: '))
+        validation = main_f.splitURL(url)
+        if validation == False:
+            print('Ingresa una URL valida')
+            time.sleep(5)
+        else:
+            main_f.queryYTurlTrack(validation, api, yt_dl, dirt, cmd)
+            os.system(cmd)
+            conf = input(str('Fin de la descarga. Presiona Intro '))
+    elif textSelect == '3':
         break
