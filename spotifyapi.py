@@ -21,7 +21,7 @@ class spotifyPlay:
         encoded = base64.b64encode(bytes(concat, "utf-8")).decode(("utf-8"))
         url = "https://accounts.spotify.com/api/token"
         headers = CaseInsensitiveDict()
-        headers["Authorization"] = "Basic "+encoded
+        headers["Authorization"] = f"Basic {encoded}"
         headers["Content-Type"] = "application/x-www-form-urlencoded"
         data = "grant_type=client_credentials"
         resp = requests.post(url, headers=headers, data=data)
@@ -31,7 +31,7 @@ class spotifyPlay:
     def getPlaylist(self, id) -> dict: #return dict playlist
         url = f'https://api.spotify.com/v1/playlists/{id}'
         headers = CaseInsensitiveDict()
-        headers["Authorization"] = "Bearer "+self.getBearer()
+        headers["Authorization"] = f"Bearer {self.getBearer()}"
         headers["Content-Type"] = "application/json"
         resp = requests.get(url, headers=headers)
         return resp.content
@@ -59,3 +59,15 @@ class spotifyPlay:
             except IndexError:
                 break
         return rescueTracks, get_json['name']
+    
+    def getTrack(self, id) -> str:
+        url = f'https://api.spotify.com/v1/tracks/{id}'
+        headers = CaseInsensitiveDict()
+        headers["Authorization"] = f"Bearer {self.getBearer()}"
+        headers["Content-Type"] = "application/json"
+        resp = requests.get(url, headers=headers)
+        get_json = json.loads(resp.content)
+        name = get_json['name']
+        artists = get_json['artists'][0]['name']
+        rescueTrack = f'{name} - {artists}'
+        return rescueTrack
