@@ -1,4 +1,3 @@
-import os
 import tqdm
 import requests
 from validations import Validations
@@ -7,8 +6,6 @@ class main_f:
 
     def download(url, nameFile, playListName, remaining, dirt) -> None:
         nameFile = Validations.fileNameCheck(nameFile)
-        print(f'Downloading... {nameFile} | {remaining}')
-        print('Ctrl + c to cancel\n')
         headers = {'content-type':'audio/webm', 'Range': 'bytes=0-'}
         response = requests.get(url=url, headers=headers ,stream=True)
         total_size = int(response.headers.get('content-length'))
@@ -27,7 +24,7 @@ class main_f:
         except IndexError:
             return False
 
-    def queryYTurlPlaylist(id, api, yt_dl, dirt, cmd) -> bool: #get url music from youtube_dl
+    def queryYTurlPlaylist(id, api, yt_dl, dirt) -> bool: #get url music from youtube_dl
         '''
         get the link of the song in yt_dlp and 
         start downloading (this function is only used to download playlist)
@@ -48,7 +45,6 @@ class main_f:
             suple += 1
             name = f'{r[0]} - {r[1]}'
             url_download = yt_dl.search(name)['entries'][0]['url']
-            os.system(cmd) #only for terminal app
             try:
                 main_f.download(url_download, name, playlistName, f'[{suple}]', dirt)
                 Validations.downloadLog(dirt, playlistName, suple)
@@ -59,7 +55,7 @@ class main_f:
                 Validations.removeFileMusic(dirt, playlistName, name, suple)
                 return False
     
-    def queryYTurlTrack(id, api, yt_dl, dirt, cmd) -> bool: #get url music from youtube_dl
+    def queryYTurlTrack(id, api, yt_dl, dirt) -> bool: #get url music from youtube_dl
         '''
         get the link of the song in yt_dlp and 
         start downloading (this function is only used to download tracks)
@@ -70,7 +66,6 @@ class main_f:
         Validations.createMusicFolder(dirt)
         Validations.createFolderList(dirt, nameFolder)
         url_download = yt_dl.search(trackName)['entries'][0]['url']
-        os.system(cmd) #only for terminal app
         try:
             main_f.download(url_download, trackName, nameFolder, '0', dirt)
         except KeyboardInterrupt:
