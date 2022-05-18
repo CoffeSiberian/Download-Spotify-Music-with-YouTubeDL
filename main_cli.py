@@ -1,6 +1,6 @@
 from spotifyapi import *
 from youtubeapi import *
-from main_functions import *
+from main_functions_cli import *
 
 import os
 import pathlib
