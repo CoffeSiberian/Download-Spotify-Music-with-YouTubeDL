@@ -32,16 +32,16 @@ class DowloadMenuLink(object):
         self.text_info_frame.setFrameShadow(QFrame.Raised)
         self.verticalLayout_2 = QVBoxLayout(self.text_info_frame)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.label = QLabel(self.text_info_frame)
-        self.label.setObjectName(u"label")
+        self.title_dowload_menu = QLabel(self.text_info_frame)
+        self.title_dowload_menu.setObjectName(u"title_dowload_menu")
         font = QFont()
         font.setFamilies([u"Arial"])
         font.setPointSize(14)
         font.setBold(True)
-        self.label.setFont(font)
-        self.label.setAlignment(Qt.AlignCenter)
+        self.title_dowload_menu.setFont(font)
+        self.title_dowload_menu.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_2.addWidget(self.label)
+        self.verticalLayout_2.addWidget(self.title_dowload_menu)
 
 
         self.verticalLayout_3.addWidget(self.text_info_frame)
@@ -52,56 +52,68 @@ class DowloadMenuLink(object):
         self.link_frame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_3 = QHBoxLayout(self.link_frame)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.horizontalLayout = QHBoxLayout()
+        self.link_frame_2 = QFrame(self.link_frame)
+        self.link_frame_2.setObjectName(u"link_frame_2")
+        self.link_frame_2.setFrameShape(QFrame.StyledPanel)
+        self.link_frame_2.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout = QHBoxLayout(self.link_frame_2)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.label_2 = QLabel(self.link_frame)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setMinimumSize(QSize(30, 30))
-        self.label_2.setMaximumSize(QSize(30, 30))
-        self.label_2.setPixmap(QPixmap(u"./assets/icons/link.png"))
-        self.label_2.setScaledContents(True)
+        self.horizontal_spacer_dowload_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.horizontalLayout.addWidget(self.label_2)
+        self.horizontalLayout.addItem(self.horizontal_spacer_dowload_2)
 
-        self.lineEdit = QLineEdit(self.link_frame)
-        self.lineEdit.setObjectName(u"lineEdit")
-        self.lineEdit.setMinimumSize(QSize(290, 30))
-        self.lineEdit.setMaximumSize(QSize(0, 0))
+        self.link_icon = QLabel(self.link_frame_2)
+        self.link_icon.setObjectName(u"link_icon")
+        self.link_icon.setMinimumSize(QSize(30, 30))
+        self.link_icon.setMaximumSize(QSize(30, 30))
+        self.link_icon.setPixmap(QPixmap(u"./assets/icons/link.png"))
+        self.link_icon.setScaledContents(True)
 
-        self.horizontalLayout.addWidget(self.lineEdit)
+        self.horizontalLayout.addWidget(self.link_icon)
+
+        self.textobox_link = QLineEdit(self.link_frame_2)
+        self.textobox_link.setObjectName(u"textobox_link")
+        self.textobox_link.setMinimumSize(QSize(250, 30))
+        self.textobox_link.setMaximumSize(QSize(250, 30))
+
+        self.horizontalLayout.addWidget(self.textobox_link)
+
+        self.horizontal_spacer_dowload_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontal_spacer_dowload_3)
 
 
-        self.horizontalLayout_3.addLayout(self.horizontalLayout)
+        self.horizontalLayout_3.addWidget(self.link_frame_2)
 
 
         self.verticalLayout_3.addWidget(self.link_frame)
 
-        self.frame_3 = QFrame(self.background_frame_link)
-        self.frame_3.setObjectName(u"frame_3")
-        self.frame_3.setFrameShape(QFrame.StyledPanel)
-        self.frame_3.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_2 = QHBoxLayout(self.frame_3)
+        self.manu_dowload_options_frame = QFrame(self.background_frame_link)
+        self.manu_dowload_options_frame.setObjectName(u"manu_dowload_options_frame")
+        self.manu_dowload_options_frame.setFrameShape(QFrame.StyledPanel)
+        self.manu_dowload_options_frame.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_2 = QHBoxLayout(self.manu_dowload_options_frame)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontal_spacer_dowload_1 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.horizontalLayout_2.addItem(self.horizontalSpacer)
+        self.horizontalLayout_2.addItem(self.horizontal_spacer_dowload_1)
 
-        self.pushButton_2 = QPushButton(self.frame_3)
-        self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setEnabled(True)
-        self.pushButton_2.setMinimumSize(QSize(90, 30))
+        self.dowload_menu_dowload_botton = QPushButton(self.manu_dowload_options_frame)
+        self.dowload_menu_dowload_botton.setObjectName(u"dowload_menu_dowload_botton")
+        self.dowload_menu_dowload_botton.setEnabled(True)
+        self.dowload_menu_dowload_botton.setMinimumSize(QSize(90, 30))
 
-        self.horizontalLayout_2.addWidget(self.pushButton_2)
+        self.horizontalLayout_2.addWidget(self.dowload_menu_dowload_botton)
 
-        self.pushButton = QPushButton(self.frame_3)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setEnabled(True)
-        self.pushButton.setMinimumSize(QSize(90, 30))
+        self.dowload_menu_cancel_botton = QPushButton(self.manu_dowload_options_frame)
+        self.dowload_menu_cancel_botton.setObjectName(u"dowload_menu_cancel_botton")
+        self.dowload_menu_cancel_botton.setEnabled(True)
+        self.dowload_menu_cancel_botton.setMinimumSize(QSize(90, 30))
 
-        self.horizontalLayout_2.addWidget(self.pushButton)
+        self.horizontalLayout_2.addWidget(self.dowload_menu_cancel_botton)
 
 
-        self.verticalLayout_3.addWidget(self.frame_3)
+        self.verticalLayout_3.addWidget(self.manu_dowload_options_frame)
 
 
         self.verticalLayout.addWidget(self.background_frame_link)
@@ -110,10 +122,10 @@ class DowloadMenuLink(object):
         self.retranslateUi(dowload_menu_link)
 
         QMetaObject.connectSlotsByName(dowload_menu_link)
-
+        
     def retranslateUi(self, dowload_menu_link):
         dowload_menu_link.setWindowTitle(QCoreApplication.translate("dowload_menu_link", u"Dowload", None))
-        self.label.setText(QCoreApplication.translate("dowload_menu_link", u"Paste your Spotify Link", None))
-        self.label_2.setText("")
-        self.pushButton_2.setText(QCoreApplication.translate("dowload_menu_link", u"Dowload", None))
-        self.pushButton.setText(QCoreApplication.translate("dowload_menu_link", u"Cancel", None))
+        self.title_dowload_menu.setText(QCoreApplication.translate("dowload_menu_link", u"Paste your Spotify Link", None))
+        self.link_icon.setText("")
+        self.dowload_menu_dowload_botton.setText(QCoreApplication.translate("dowload_menu_link", u"Dowload", None))
+        self.dowload_menu_cancel_botton.setText(QCoreApplication.translate("dowload_menu_link", u"Cancel", None))
