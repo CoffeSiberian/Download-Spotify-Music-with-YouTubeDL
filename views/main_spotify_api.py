@@ -5,22 +5,22 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QCommandLinkButton, QFrame, QHBoxLayout,
-    QLabel, QLineEdit, QPushButton, QSizePolicy,
-    QSpacerItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QCommandLinkButton, QDialog, QFrame,
+    QHBoxLayout, QLabel, QLineEdit, QPushButton,
+    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
 
-class SpotifyConfig(object):
-    def setupUi(self, Form):
-        if not Form.objectName():
-            Form.setObjectName(u"Form")
-        Form.resize(400, 300)
-        Form.setMinimumSize(QSize(400, 300))
-        Form.setMaximumSize(QSize(400, 300))
-        self.verticalLayout = QVBoxLayout(Form)
-        self.verticalLayout.setSpacing(0)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.background_frame_api = QFrame(Form)
+class Ui_main_spotify_api_dialog(object):
+    def setupUi(self, main_spotify_api_dialog):
+        if not main_spotify_api_dialog.objectName():
+            main_spotify_api_dialog.setObjectName(u"main_spotify_api_dialog")
+        main_spotify_api_dialog.resize(400, 300)
+        main_spotify_api_dialog.setMinimumSize(QSize(400, 300))
+        main_spotify_api_dialog.setMaximumSize(QSize(400, 300))
+        self.horizontalLayout_5 = QHBoxLayout(main_spotify_api_dialog)
+        self.horizontalLayout_5.setSpacing(0)
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(0, 0, 0, 0)
+        self.background_frame_api = QFrame(main_spotify_api_dialog)
         self.background_frame_api.setObjectName(u"background_frame_api")
         self.background_frame_api.setFrameShape(QFrame.StyledPanel)
         self.background_frame_api.setFrameShadow(QFrame.Raised)
@@ -28,141 +28,141 @@ class SpotifyConfig(object):
         self.verticalLayout_5.setSpacing(0)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
         self.verticalLayout_5.setContentsMargins(0, 0, 0, 0)
-        self.frame = QFrame(self.background_frame_api)
-        self.frame.setObjectName(u"frame")
-        self.frame.setFrameShape(QFrame.StyledPanel)
-        self.frame.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_4 = QVBoxLayout(self.frame)
+        self.title_frame = QFrame(self.background_frame_api)
+        self.title_frame.setObjectName(u"title_frame")
+        self.title_frame.setFrameShape(QFrame.StyledPanel)
+        self.title_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_4 = QVBoxLayout(self.title_frame)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.frame_4 = QFrame(self.frame)
-        self.frame_4.setObjectName(u"frame_4")
-        self.frame_4.setMinimumSize(QSize(0, 50))
-        self.frame_4.setFrameShape(QFrame.StyledPanel)
-        self.frame_4.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_6 = QVBoxLayout(self.frame_4)
+        self.title_frame_2 = QFrame(self.title_frame)
+        self.title_frame_2.setObjectName(u"title_frame_2")
+        self.title_frame_2.setMinimumSize(QSize(0, 50))
+        self.title_frame_2.setFrameShape(QFrame.StyledPanel)
+        self.title_frame_2.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_6 = QVBoxLayout(self.title_frame_2)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
-        self.horizontalLayout_4 = QHBoxLayout()
-        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalLayout_4_title = QHBoxLayout()
+        self.horizontalLayout_4_title.setObjectName(u"horizontalLayout_4_title")
+        self.horizontalSpacer_2_title = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.horizontalLayout_4.addItem(self.horizontalSpacer_2)
+        self.horizontalLayout_4_title.addItem(self.horizontalSpacer_2_title)
 
-        self.label_4 = QLabel(self.frame_4)
-        self.label_4.setObjectName(u"label_4")
-        self.label_4.setMinimumSize(QSize(30, 30))
-        self.label_4.setMaximumSize(QSize(30, 30))
-        self.label_4.setPixmap(QPixmap(u"./assets/icons/spotify.png"))
-        self.label_4.setScaledContents(True)
+        self.img = QLabel(self.title_frame_2)
+        self.img.setObjectName(u"img")
+        self.img.setMinimumSize(QSize(30, 30))
+        self.img.setMaximumSize(QSize(30, 30))
+        self.img.setPixmap(QPixmap(u"./assets/icons/spotify.png"))
+        self.img.setScaledContents(True)
 
-        self.horizontalLayout_4.addWidget(self.label_4)
+        self.horizontalLayout_4_title.addWidget(self.img)
 
-        self.label_3 = QLabel(self.frame_4)
-        self.label_3.setObjectName(u"label_3")
+        self.title_dialog = QLabel(self.title_frame_2)
+        self.title_dialog.setObjectName(u"title_dialog")
         font = QFont()
         font.setFamilies([u"Arial"])
         font.setPointSize(16)
         font.setBold(True)
-        self.label_3.setFont(font)
-        self.label_3.setAlignment(Qt.AlignCenter)
-        self.label_3.setMargin(3)
+        self.title_dialog.setFont(font)
+        self.title_dialog.setAlignment(Qt.AlignCenter)
+        self.title_dialog.setMargin(3)
 
-        self.horizontalLayout_4.addWidget(self.label_3)
+        self.horizontalLayout_4_title.addWidget(self.title_dialog)
 
-        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_3_title = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.horizontalLayout_4.addItem(self.horizontalSpacer_3)
-
-
-        self.verticalLayout_6.addLayout(self.horizontalLayout_4)
+        self.horizontalLayout_4_title.addItem(self.horizontalSpacer_3_title)
 
 
-        self.verticalLayout_4.addWidget(self.frame_4)
+        self.verticalLayout_6.addLayout(self.horizontalLayout_4_title)
 
-        self.horizontalLayout = QHBoxLayout()
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.verticalLayout_3 = QVBoxLayout()
-        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.label = QLabel(self.frame)
-        self.label.setObjectName(u"label")
+
+        self.verticalLayout_4.addWidget(self.title_frame_2)
+
+        self.horizontalLayout_form = QHBoxLayout()
+        self.horizontalLayout_form.setObjectName(u"horizontalLayout_form")
+        self.verticalLayout_names = QVBoxLayout()
+        self.verticalLayout_names.setObjectName(u"verticalLayout_names")
+        self.client_id = QLabel(self.title_frame)
+        self.client_id.setObjectName(u"client_id")
         font1 = QFont()
         font1.setFamilies([u"Arial"])
         font1.setPointSize(10)
         font1.setBold(True)
-        self.label.setFont(font1)
-        self.label.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.client_id.setFont(font1)
+        self.client_id.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.verticalLayout_3.addWidget(self.label)
+        self.verticalLayout_names.addWidget(self.client_id)
 
-        self.label_2 = QLabel(self.frame)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setFont(font1)
-        self.label_2.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.client_secret = QLabel(self.title_frame)
+        self.client_secret.setObjectName(u"client_secret")
+        self.client_secret.setFont(font1)
+        self.client_secret.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.verticalLayout_3.addWidget(self.label_2)
-
-
-        self.horizontalLayout.addLayout(self.verticalLayout_3)
-
-        self.verticalLayout_2 = QVBoxLayout()
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
-        self.lineEdit = QLineEdit(self.frame)
-        self.lineEdit.setObjectName(u"lineEdit")
-        self.lineEdit.setMinimumSize(QSize(250, 30))
-
-        self.verticalLayout_2.addWidget(self.lineEdit)
-
-        self.lineEdit_2 = QLineEdit(self.frame)
-        self.lineEdit_2.setObjectName(u"lineEdit_2")
-        self.lineEdit_2.setMinimumSize(QSize(250, 30))
-
-        self.verticalLayout_2.addWidget(self.lineEdit_2)
+        self.verticalLayout_names.addWidget(self.client_secret)
 
 
-        self.horizontalLayout.addLayout(self.verticalLayout_2)
+        self.horizontalLayout_form.addLayout(self.verticalLayout_names)
+
+        self.verticalLayout_textbox = QVBoxLayout()
+        self.verticalLayout_textbox.setObjectName(u"verticalLayout_textbox")
+        self.lineEdit_client_id = QLineEdit(self.title_frame)
+        self.lineEdit_client_id.setObjectName(u"lineEdit_client_id")
+        self.lineEdit_client_id.setMinimumSize(QSize(250, 30))
+
+        self.verticalLayout_textbox.addWidget(self.lineEdit_client_id)
+
+        self.lineEdit_client_secret = QLineEdit(self.title_frame)
+        self.lineEdit_client_secret.setObjectName(u"lineEdit_client_secret")
+        self.lineEdit_client_secret.setMinimumSize(QSize(250, 30))
+
+        self.verticalLayout_textbox.addWidget(self.lineEdit_client_secret)
 
 
-        self.verticalLayout_4.addLayout(self.horizontalLayout)
+        self.horizontalLayout_form.addLayout(self.verticalLayout_textbox)
 
-        self.frame_3 = QFrame(self.frame)
-        self.frame_3.setObjectName(u"frame_3")
-        self.frame_3.setFrameShape(QFrame.StyledPanel)
-        self.frame_3.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_3 = QHBoxLayout(self.frame_3)
+
+        self.verticalLayout_4.addLayout(self.horizontalLayout_form)
+
+        self.frame_save_botton = QFrame(self.title_frame)
+        self.frame_save_botton.setObjectName(u"frame_save_botton")
+        self.frame_save_botton.setFrameShape(QFrame.StyledPanel)
+        self.frame_save_botton.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_3 = QHBoxLayout(self.frame_save_botton)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.pushButton_2 = QPushButton(self.frame_3)
-        self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setEnabled(True)
-        self.pushButton_2.setMinimumSize(QSize(90, 30))
-        self.pushButton_2.setMaximumSize(QSize(90, 30))
+        self.pushButton_save = QPushButton(self.frame_save_botton)
+        self.pushButton_save.setObjectName(u"pushButton_save")
+        self.pushButton_save.setEnabled(True)
+        self.pushButton_save.setMinimumSize(QSize(90, 30))
+        self.pushButton_save.setMaximumSize(QSize(90, 30))
         icon = QIcon()
         icon.addFile(u"./assets/icons/diskette.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_2.setIcon(icon)
+        self.pushButton_save.setIcon(icon)
 
-        self.horizontalLayout_3.addWidget(self.pushButton_2)
-
-
-        self.verticalLayout_4.addWidget(self.frame_3)
+        self.horizontalLayout_3.addWidget(self.pushButton_save)
 
 
-        self.verticalLayout_5.addWidget(self.frame)
+        self.verticalLayout_4.addWidget(self.frame_save_botton)
+
+
+        self.verticalLayout_5.addWidget(self.title_frame)
 
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout_5.addItem(self.verticalSpacer)
 
-        self.frame_2 = QFrame(self.background_frame_api)
-        self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setFrameShape(QFrame.StyledPanel)
-        self.frame_2.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_2 = QHBoxLayout(self.frame_2)
+        self.boton_frame = QFrame(self.background_frame_api)
+        self.boton_frame.setObjectName(u"boton_frame")
+        self.boton_frame.setFrameShape(QFrame.StyledPanel)
+        self.boton_frame.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_2 = QHBoxLayout(self.boton_frame)
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(0, 0, 6, 6)
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_boton = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.horizontalLayout_2.addItem(self.horizontalSpacer)
+        self.horizontalLayout_2.addItem(self.horizontalSpacer_boton)
 
-        self.gitHub = QCommandLinkButton(self.frame_2)
+        self.gitHub = QCommandLinkButton(self.boton_frame)
         self.gitHub.setObjectName(u"gitHub")
         sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -184,21 +184,21 @@ class SpotifyConfig(object):
         self.horizontalLayout_2.addWidget(self.gitHub)
 
 
-        self.verticalLayout_5.addWidget(self.frame_2)
+        self.verticalLayout_5.addWidget(self.boton_frame)
 
 
-        self.verticalLayout.addWidget(self.background_frame_api)
+        self.horizontalLayout_5.addWidget(self.background_frame_api)
 
 
-        self.retranslateUi(Form)
+        self.retranslateUi(main_spotify_api_dialog)
 
-        QMetaObject.connectSlotsByName(Form)
+        QMetaObject.connectSlotsByName(main_spotify_api_dialog)
 
-    def retranslateUi(self, Form):
-        Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
-        self.label_4.setText("")
-        self.label_3.setText(QCoreApplication.translate("Form", u"Spotify API KEY", None))
-        self.label.setText(QCoreApplication.translate("Form", u"Client ID", None))
-        self.label_2.setText(QCoreApplication.translate("Form", u"Client Secret", None))
-        self.pushButton_2.setText(QCoreApplication.translate("Form", u"Save", None))
-        self.gitHub.setText(QCoreApplication.translate("Form", u"How to get API KEY", None))
+    def retranslateUi(self, main_spotify_api_dialog):
+        main_spotify_api_dialog.setWindowTitle(QCoreApplication.translate("main_spotify_api_dialog", u"Dialog", None))
+        self.img.setText("")
+        self.title_dialog.setText(QCoreApplication.translate("main_spotify_api_dialog", u"Spotify API KEY", None))
+        self.client_id.setText(QCoreApplication.translate("main_spotify_api_dialog", u"Client ID", None))
+        self.client_secret.setText(QCoreApplication.translate("main_spotify_api_dialog", u"Client Secret", None))
+        self.pushButton_save.setText(QCoreApplication.translate("main_spotify_api_dialog", u"Save", None))
+        self.gitHub.setText(QCoreApplication.translate("main_spotify_api_dialog", u"How to get API KEY", None))

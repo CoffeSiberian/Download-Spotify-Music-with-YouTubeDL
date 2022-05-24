@@ -5,27 +5,27 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QLineEdit, QPushButton, QSizePolicy, QSpacerItem,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QHBoxLayout,
+    QLabel, QLineEdit, QPushButton, QSizePolicy,
+    QSpacerItem, QVBoxLayout, QWidget)
 
-class DowloadMenuLink(object):
-    def setupUi(self, dowload_menu_link):
-        if not dowload_menu_link.objectName():
-            dowload_menu_link.setObjectName(u"dowload_menu_link")
-        dowload_menu_link.resize(400, 200)
-        dowload_menu_link.setMinimumSize(QSize(400, 200))
-        dowload_menu_link.setMaximumSize(QSize(400, 200))
-        self.verticalLayout = QVBoxLayout(dowload_menu_link)
-        self.verticalLayout.setSpacing(0)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.background_frame_link = QFrame(dowload_menu_link)
+class Ui_dialog_menu_dowload_link(object):
+    def setupUi(self, dialog_menu_dowload_link):
+        if not dialog_menu_dowload_link.objectName():
+            dialog_menu_dowload_link.setObjectName(u"dialog_menu_dowload_link")
+        dialog_menu_dowload_link.resize(400, 200)
+        dialog_menu_dowload_link.setMinimumSize(QSize(0, 0))
+        dialog_menu_dowload_link.setMaximumSize(QSize(400, 200))
+        self.horizontalLayout_4 = QHBoxLayout(dialog_menu_dowload_link)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.background_frame_link = QFrame(dialog_menu_dowload_link)
         self.background_frame_link.setObjectName(u"background_frame_link")
         self.background_frame_link.setFrameShape(QFrame.StyledPanel)
         self.background_frame_link.setFrameShadow(QFrame.Raised)
         self.verticalLayout_3 = QVBoxLayout(self.background_frame_link)
+        self.verticalLayout_3.setSpacing(0)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
+        self.verticalLayout_3.setContentsMargins(0, 0, 0, 0)
         self.text_info_frame = QFrame(self.background_frame_link)
         self.text_info_frame.setObjectName(u"text_info_frame")
         self.text_info_frame.setFrameShape(QFrame.StyledPanel)
@@ -116,16 +116,16 @@ class DowloadMenuLink(object):
         self.verticalLayout_3.addWidget(self.manu_dowload_options_frame)
 
 
-        self.verticalLayout.addWidget(self.background_frame_link)
+        self.horizontalLayout_4.addWidget(self.background_frame_link)
 
 
-        self.retranslateUi(dowload_menu_link)
+        self.retranslateUi(dialog_menu_dowload_link)
 
-        QMetaObject.connectSlotsByName(dowload_menu_link)
+        QMetaObject.connectSlotsByName(dialog_menu_dowload_link)
         
-    def retranslateUi(self, dowload_menu_link):
-        dowload_menu_link.setWindowTitle(QCoreApplication.translate("dowload_menu_link", u"Dowload", None))
-        self.title_dowload_menu.setText(QCoreApplication.translate("dowload_menu_link", u"Paste your Spotify Link", None))
+    def retranslateUi(self, dialog_menu_dowload_link):
+        dialog_menu_dowload_link.setWindowTitle(QCoreApplication.translate("dialog_menu_dowload_link", u"Dialog", None))
+        self.title_dowload_menu.setText(QCoreApplication.translate("dialog_menu_dowload_link", u"Paste your Spotify Link", None))
         self.link_icon.setText("")
-        self.dowload_menu_dowload_botton.setText(QCoreApplication.translate("dowload_menu_link", u"Dowload", None))
-        self.dowload_menu_cancel_botton.setText(QCoreApplication.translate("dowload_menu_link", u"Cancel", None))
+        self.dowload_menu_dowload_botton.setText(QCoreApplication.translate("dialog_menu_dowload_link", u"Dowload", None))
+        self.dowload_menu_cancel_botton.setText(QCoreApplication.translate("dialog_menu_dowload_link", u"Cancel", None))

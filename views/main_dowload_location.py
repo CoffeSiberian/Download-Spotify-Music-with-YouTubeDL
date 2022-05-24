@@ -5,22 +5,22 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QLineEdit, QPushButton, QSizePolicy, QVBoxLayout,
-    QWidget)
+from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QHBoxLayout,
+    QLabel, QLineEdit, QPushButton, QSizePolicy,
+    QVBoxLayout, QWidget)
 
-class DowloadLocation(object):
-    def setupUi(self, Form):
-        if not Form.objectName():
-            Form.setObjectName(u"Form")
-        Form.resize(400, 200)
-        Form.setMinimumSize(QSize(400, 200))
-        Form.setMaximumSize(QSize(400, 200))
-        self.verticalLayout = QVBoxLayout(Form)
-        self.verticalLayout.setSpacing(0)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.background_frame_location = QFrame(Form)
+class Ui_main_dowloadlocation_dialog(object):
+    def setupUi(self, main_dowloadlocation_dialog):
+        if not main_dowloadlocation_dialog.objectName():
+            main_dowloadlocation_dialog.setObjectName(u"main_dowloadlocation_dialog")
+        main_dowloadlocation_dialog.resize(400, 200)
+        main_dowloadlocation_dialog.setMinimumSize(QSize(400, 200))
+        main_dowloadlocation_dialog.setMaximumSize(QSize(400, 200))
+        self.horizontalLayout = QHBoxLayout(main_dowloadlocation_dialog)
+        self.horizontalLayout.setSpacing(0)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.background_frame_location = QFrame(main_dowloadlocation_dialog)
         self.background_frame_location.setObjectName(u"background_frame_location")
         self.background_frame_location.setFrameShape(QFrame.StyledPanel)
         self.background_frame_location.setFrameShadow(QFrame.Raised)
@@ -32,64 +32,64 @@ class DowloadLocation(object):
         self.frame_conten_location.setObjectName(u"frame_conten_location")
         self.frame_conten_location.setFrameShape(QFrame.StyledPanel)
         self.frame_conten_location.setFrameShadow(QFrame.Raised)
-        self.label = QLabel(self.frame_conten_location)
-        self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(30, 10, 341, 41))
+        self.title_cfg_label = QLabel(self.frame_conten_location)
+        self.title_cfg_label.setObjectName(u"title_cfg_label")
+        self.title_cfg_label.setGeometry(QRect(30, 10, 341, 41))
         font = QFont()
         font.setFamilies([u"Arial"])
         font.setPointSize(16)
         font.setBold(True)
-        self.label.setFont(font)
-        self.label.setAlignment(Qt.AlignCenter)
+        self.title_cfg_label.setFont(font)
+        self.title_cfg_label.setAlignment(Qt.AlignCenter)
 
         self.verticalLayout_2.addWidget(self.frame_conten_location)
 
-        self.frame = QFrame(self.background_frame_location)
-        self.frame.setObjectName(u"frame")
-        self.frame.setFrameShape(QFrame.StyledPanel)
-        self.frame.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_4 = QHBoxLayout(self.frame)
+        self.text_input_frame = QFrame(self.background_frame_location)
+        self.text_input_frame.setObjectName(u"text_input_frame")
+        self.text_input_frame.setFrameShape(QFrame.StyledPanel)
+        self.text_input_frame.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_4 = QHBoxLayout(self.text_input_frame)
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.lineEdit = QLineEdit(self.frame)
-        self.lineEdit.setObjectName(u"lineEdit")
-        self.lineEdit.setMinimumSize(QSize(300, 25))
-        self.lineEdit.setMaximumSize(QSize(300, 25))
+        self.lineEdit_location = QLineEdit(self.text_input_frame)
+        self.lineEdit_location.setObjectName(u"lineEdit_location")
+        self.lineEdit_location.setMinimumSize(QSize(300, 25))
+        self.lineEdit_location.setMaximumSize(QSize(300, 25))
 
-        self.horizontalLayout_4.addWidget(self.lineEdit)
+        self.horizontalLayout_4.addWidget(self.lineEdit_location)
 
 
-        self.verticalLayout_2.addWidget(self.frame)
+        self.verticalLayout_2.addWidget(self.text_input_frame)
 
-        self.frame_2 = QFrame(self.background_frame_location)
-        self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setFrameShape(QFrame.StyledPanel)
-        self.frame_2.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_3 = QHBoxLayout(self.frame_2)
+        self.botton_save_frame = QFrame(self.background_frame_location)
+        self.botton_save_frame.setObjectName(u"botton_save_frame")
+        self.botton_save_frame.setFrameShape(QFrame.StyledPanel)
+        self.botton_save_frame.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_3 = QHBoxLayout(self.botton_save_frame)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.pushButton_3 = QPushButton(self.frame_2)
-        self.pushButton_3.setObjectName(u"pushButton_3")
-        self.pushButton_3.setEnabled(True)
-        self.pushButton_3.setMinimumSize(QSize(90, 30))
-        self.pushButton_3.setMaximumSize(QSize(90, 30))
+        self.pushButton_save = QPushButton(self.botton_save_frame)
+        self.pushButton_save.setObjectName(u"pushButton_save")
+        self.pushButton_save.setEnabled(True)
+        self.pushButton_save.setMinimumSize(QSize(90, 30))
+        self.pushButton_save.setMaximumSize(QSize(90, 30))
         icon = QIcon()
         icon.addFile(u"./assets/icons/diskette.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.pushButton_3.setIcon(icon)
+        self.pushButton_save.setIcon(icon)
 
-        self.horizontalLayout_3.addWidget(self.pushButton_3)
-
-
-        self.verticalLayout_2.addWidget(self.frame_2)
+        self.horizontalLayout_3.addWidget(self.pushButton_save)
 
 
-        self.verticalLayout.addWidget(self.background_frame_location)
+        self.verticalLayout_2.addWidget(self.botton_save_frame)
 
 
-        self.retranslateUi(Form)
+        self.horizontalLayout.addWidget(self.background_frame_location)
 
-        QMetaObject.connectSlotsByName(Form)
 
-    def retranslateUi(self, Form):
-        Form.setWindowTitle(QCoreApplication.translate("Form", u"Form", None))
-        self.label.setText(QCoreApplication.translate("Form", u"Select download location", None))
-        self.lineEdit.setText(QCoreApplication.translate("Form", u"c:/location", None))
-        self.pushButton_3.setText(QCoreApplication.translate("Form", u"Save", None))
+        self.retranslateUi(main_dowloadlocation_dialog)
+
+        QMetaObject.connectSlotsByName(main_dowloadlocation_dialog)
+
+    def retranslateUi(self, main_dowloadlocation_dialog):
+        main_dowloadlocation_dialog.setWindowTitle(QCoreApplication.translate("main_dowloadlocation_dialog", u"Dialog", None))
+        self.title_cfg_label.setText(QCoreApplication.translate("main_dowloadlocation_dialog", u"Select download location", None))
+        self.lineEdit_location.setText(QCoreApplication.translate("main_dowloadlocation_dialog", u"c:/location", None))
+        self.pushButton_save.setText(QCoreApplication.translate("main_dowloadlocation_dialog", u"Save", None))

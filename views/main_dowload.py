@@ -5,22 +5,22 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QFrame, QHBoxLayout, QLabel,
-    QProgressBar, QPushButton, QSizePolicy, QSpacerItem,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QHBoxLayout,
+    QLabel, QProgressBar, QPushButton, QSizePolicy,
+    QSpacerItem, QVBoxLayout, QWidget)
 
-class DowloadWindow(object):
-    def setupUi(self, Form):
-        if not Form.objectName():
-            Form.setObjectName(u"Form")
-        Form.resize(500, 200)
-        Form.setMinimumSize(QSize(500, 200))
-        Form.setMaximumSize(QSize(500, 200))
-        self.verticalLayout = QVBoxLayout(Form)
-        self.verticalLayout.setSpacing(0)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.background_frame_dowload = QFrame(Form)
+class Ui_main_dowload_dialog(object):
+    def setupUi(self, main_dowload_dialog):
+        if not main_dowload_dialog.objectName():
+            main_dowload_dialog.setObjectName(u"main_dowload_dialog")
+        main_dowload_dialog.resize(500, 200)
+        main_dowload_dialog.setMinimumSize(QSize(500, 200))
+        main_dowload_dialog.setMaximumSize(QSize(500, 200))
+        self.horizontalLayout_3 = QHBoxLayout(main_dowload_dialog)
+        self.horizontalLayout_3.setSpacing(0)
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.horizontalLayout_3.setContentsMargins(-1, 0, 0, 0)
+        self.background_frame_dowload = QFrame(main_dowload_dialog)
         self.background_frame_dowload.setObjectName(u"background_frame_dowload")
         self.background_frame_dowload.setFrameShape(QFrame.StyledPanel)
         self.background_frame_dowload.setFrameShadow(QFrame.Raised)
@@ -34,91 +34,91 @@ class DowloadWindow(object):
         self.conten_dowload.setFrameShadow(QFrame.Raised)
         self.verticalLayout_4 = QVBoxLayout(self.conten_dowload)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.frame = QFrame(self.conten_dowload)
-        self.frame.setObjectName(u"frame")
-        self.frame.setFrameShape(QFrame.StyledPanel)
-        self.frame.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout_2 = QHBoxLayout(self.frame)
+        self.progresbar_frame = QFrame(self.conten_dowload)
+        self.progresbar_frame.setObjectName(u"progresbar_frame")
+        self.progresbar_frame.setFrameShape(QFrame.StyledPanel)
+        self.progresbar_frame.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout_2 = QHBoxLayout(self.progresbar_frame)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.label_2 = QLabel(self.frame)
-        self.label_2.setObjectName(u"label_2")
-        self.label_2.setMaximumSize(QSize(50, 50))
-        self.label_2.setPixmap(QPixmap(u"./assets/icons/downloading.png"))
-        self.label_2.setScaledContents(True)
+        self.img_bar = QLabel(self.progresbar_frame)
+        self.img_bar.setObjectName(u"img_bar")
+        self.img_bar.setMaximumSize(QSize(50, 50))
+        self.img_bar.setPixmap(QPixmap(u"./assets/icons/downloading.png"))
+        self.img_bar.setScaledContents(True)
 
-        self.horizontalLayout_2.addWidget(self.label_2)
+        self.horizontalLayout_2.addWidget(self.img_bar)
 
-        self.progressBar = QProgressBar(self.frame)
-        self.progressBar.setObjectName(u"progressBar")
-        self.progressBar.setMinimumSize(QSize(0, 30))
-        self.progressBar.setValue(24)
+        self.progressBardowload = QProgressBar(self.progresbar_frame)
+        self.progressBardowload.setObjectName(u"progressBardowload")
+        self.progressBardowload.setMinimumSize(QSize(0, 30))
+        self.progressBardowload.setValue(24)
 
-        self.horizontalLayout_2.addWidget(self.progressBar)
+        self.horizontalLayout_2.addWidget(self.progressBardowload)
 
 
-        self.verticalLayout_4.addWidget(self.frame)
+        self.verticalLayout_4.addWidget(self.progresbar_frame)
 
-        self.frame_2 = QFrame(self.conten_dowload)
-        self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setFrameShape(QFrame.StyledPanel)
-        self.frame_2.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_3 = QVBoxLayout(self.frame_2)
+        self.name_frame = QFrame(self.conten_dowload)
+        self.name_frame.setObjectName(u"name_frame")
+        self.name_frame.setFrameShape(QFrame.StyledPanel)
+        self.name_frame.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_3 = QVBoxLayout(self.name_frame)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.label = QLabel(self.frame_2)
-        self.label.setObjectName(u"label")
+        self.track_name = QLabel(self.name_frame)
+        self.track_name.setObjectName(u"track_name")
         font = QFont()
         font.setFamilies([u"Arial"])
         font.setPointSize(14)
         font.setBold(True)
-        self.label.setFont(font)
-        self.label.setAlignment(Qt.AlignCenter)
+        self.track_name.setFont(font)
+        self.track_name.setAlignment(Qt.AlignCenter)
 
-        self.verticalLayout_3.addWidget(self.label)
+        self.verticalLayout_3.addWidget(self.track_name)
 
 
-        self.verticalLayout_4.addWidget(self.frame_2)
+        self.verticalLayout_4.addWidget(self.name_frame)
 
-        self.frame_3 = QFrame(self.conten_dowload)
-        self.frame_3.setObjectName(u"frame_3")
-        self.frame_3.setFrameShape(QFrame.StyledPanel)
-        self.frame_3.setFrameShadow(QFrame.Raised)
-        self.horizontalLayout = QHBoxLayout(self.frame_3)
+        self.bottons_frame = QFrame(self.conten_dowload)
+        self.bottons_frame.setObjectName(u"bottons_frame")
+        self.bottons_frame.setFrameShape(QFrame.StyledPanel)
+        self.bottons_frame.setFrameShadow(QFrame.Raised)
+        self.horizontalLayout = QHBoxLayout(self.bottons_frame)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_botton = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
-        self.horizontalLayout.addItem(self.horizontalSpacer)
+        self.horizontalLayout.addItem(self.horizontalSpacer_botton)
 
-        self.pushButton_2 = QPushButton(self.frame_3)
-        self.pushButton_2.setObjectName(u"pushButton_2")
-        self.pushButton_2.setEnabled(True)
-        self.pushButton_2.setMinimumSize(QSize(90, 30))
+        self.pushButton_cancel = QPushButton(self.bottons_frame)
+        self.pushButton_cancel.setObjectName(u"pushButton_cancel")
+        self.pushButton_cancel.setEnabled(True)
+        self.pushButton_cancel.setMinimumSize(QSize(90, 30))
 
-        self.horizontalLayout.addWidget(self.pushButton_2)
+        self.horizontalLayout.addWidget(self.pushButton_cancel)
 
-        self.pushButton = QPushButton(self.frame_3)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setEnabled(False)
-        self.pushButton.setMinimumSize(QSize(90, 30))
+        self.pushButton_exit = QPushButton(self.bottons_frame)
+        self.pushButton_exit.setObjectName(u"pushButton_exit")
+        self.pushButton_exit.setEnabled(False)
+        self.pushButton_exit.setMinimumSize(QSize(90, 30))
 
-        self.horizontalLayout.addWidget(self.pushButton)
+        self.horizontalLayout.addWidget(self.pushButton_exit)
 
 
-        self.verticalLayout_4.addWidget(self.frame_3)
+        self.verticalLayout_4.addWidget(self.bottons_frame)
 
 
         self.verticalLayout_2.addWidget(self.conten_dowload)
 
 
-        self.verticalLayout.addWidget(self.background_frame_dowload)
+        self.horizontalLayout_3.addWidget(self.background_frame_dowload)
 
 
-        self.retranslateUi(Form)
+        self.retranslateUi(main_dowload_dialog)
 
-        QMetaObject.connectSlotsByName(Form)
+        QMetaObject.connectSlotsByName(main_dowload_dialog)
 
-    def retranslateUi(self, Form):
-        Form.setWindowTitle(QCoreApplication.translate("Form", u"Downloading", None))
-        self.label_2.setText("")
-        self.label.setText(QCoreApplication.translate("Form", u"CANCION", None))
-        self.pushButton_2.setText(QCoreApplication.translate("Form", u"Cancel", None))
-        self.pushButton.setText(QCoreApplication.translate("Form", u"Exit", None))
+    def retranslateUi(self, main_dowload_dialog):
+        main_dowload_dialog.setWindowTitle(QCoreApplication.translate("main_dowload_dialog", u"Dialog", None))
+        self.img_bar.setText("")
+        self.track_name.setText(QCoreApplication.translate("main_dowload_dialog", u"CANCION", None))
+        self.pushButton_cancel.setText(QCoreApplication.translate("main_dowload_dialog", u"Cancel", None))
+        self.pushButton_exit.setText(QCoreApplication.translate("main_dowload_dialog", u"Exit", None))
