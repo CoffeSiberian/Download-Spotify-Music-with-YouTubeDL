@@ -9,7 +9,7 @@ from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QHBoxLayout,
     QLabel, QProgressBar, QPushButton, QSizePolicy,
     QSpacerItem, QVBoxLayout, QWidget)
 
-class Ui_main_dowload_dialog(object):
+class DowloadWindow(object):
     def setupUi(self, main_dowload_dialog):
         if not main_dowload_dialog.objectName():
             main_dowload_dialog.setObjectName(u"main_dowload_dialog")

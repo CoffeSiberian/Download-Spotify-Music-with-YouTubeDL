@@ -9,7 +9,7 @@ from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QHBoxLayout,
     QLabel, QLineEdit, QPushButton, QSizePolicy,
     QSpacerItem, QVBoxLayout, QWidget)
 
-class Ui_dialog_menu_dowload_link(object):
+class DowloadMenuLink(object):
     def setupUi(self, dialog_menu_dowload_link):
         if not dialog_menu_dowload_link.objectName():
             dialog_menu_dowload_link.setObjectName(u"dialog_menu_dowload_link")

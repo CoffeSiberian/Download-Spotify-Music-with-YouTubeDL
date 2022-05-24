@@ -9,7 +9,7 @@ from PySide6.QtWidgets import (QApplication, QCommandLinkButton, QDialog, QFrame
     QHBoxLayout, QLabel, QLineEdit, QPushButton,
     QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
 
-class Ui_main_spotify_api_dialog(object):
+class SpotifyConfig(object):
     def setupUi(self, main_spotify_api_dialog):
         if not main_spotify_api_dialog.objectName():
             main_spotify_api_dialog.setObjectName(u"main_spotify_api_dialog")

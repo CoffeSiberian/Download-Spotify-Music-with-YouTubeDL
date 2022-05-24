@@ -10,7 +10,10 @@ class MainWindowForm(QMainWindow, MainWindow):
     def __init__(self) -> None:
         super().__init__()
         self.setupUi(self)
+
         self.dowloadPlayList.clicked.connect(self.openDowloadPlayList)
+        self.dowloadTrack.clicked.connect(self.openDowloadPlayList)
+
 
     def openDowloadPlayList(self):
         self.w = MainWindowFormDowload()

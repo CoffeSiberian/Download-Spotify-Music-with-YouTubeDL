@@ -9,7 +9,7 @@ from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QHBoxLayout,
     QLabel, QLineEdit, QPushButton, QSizePolicy,
     QVBoxLayout, QWidget)
 
-class Ui_main_dowloadlocation_dialog(object):
+class DowloadLocation(object):
     def setupUi(self, main_dowloadlocation_dialog):
         if not main_dowloadlocation_dialog.objectName():
             main_dowloadlocation_dialog.setObjectName(u"main_dowloadlocation_dialog")
