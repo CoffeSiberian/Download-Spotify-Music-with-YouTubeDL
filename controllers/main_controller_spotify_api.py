@@ -1,4 +1,5 @@
 from PySide6.QtWidgets import QDialog, QMessageBox
+
 import json
 
 from views.main_spotify_api import SpotifyConfig
