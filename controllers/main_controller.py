@@ -18,7 +18,6 @@ class MainWindowForm(QMainWindow, MainWindow):
         self.actionSpotify_API_KEY.triggered.connect(self.openSpotifyApiCfg)
         self.actionDowload_Location.triggered.connect(self.openDowloadLocation)
 
-
     def openDowloadPlayList(self):
         self.w = MainWindowFormDowload()
         self.w.show()

@@ -114,6 +114,7 @@ class SpotifyConfig(object):
         self.lineEdit_client_secret = QLineEdit(self.title_frame)
         self.lineEdit_client_secret.setObjectName(u"lineEdit_client_secret")
         self.lineEdit_client_secret.setMinimumSize(QSize(250, 30))
+        self.lineEdit_client_secret.setEchoMode(QLineEdit.Password)
 
         self.verticalLayout_textbox.addWidget(self.lineEdit_client_secret)
 
