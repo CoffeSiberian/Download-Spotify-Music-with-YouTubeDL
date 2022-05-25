@@ -19,10 +19,11 @@ class MainWindowFormDowload(QDialog, DowloadMenuLink):
         super().__init__()
         self.setupUi(self)
     
+    def getUrl(self):
+        self.textobox_link.text
 
-    
     '''
-    
+    download functions
     '''
     def download(self, url, nameFile, playListName, remaining, dirt) -> None:
         nameFile = Validations.fileNameCheck(nameFile)

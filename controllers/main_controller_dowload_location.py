@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QDialog, QStyle, QLineEdit, QFileDialog, QMessageBox
 from PySide6.QtCore import QStandardPaths, QDir
 
-import json
+from functions.jsonedit import configEdit
 
 from views.main_dowload_location import DowloadLocation
 
@@ -39,17 +39,11 @@ class MainWindowQDialogDowloadLocation(QDialog, DowloadLocation):
 
     def getTextAfterPushSave(self):
         dir = self.lineEdit_location.text()
-        with open('./credentials.json', 'r+') as r:
-            data = json.load(r)
-            data['dir'] = dir
-            r.seek(0)
-            json.dump(data, r, indent=4)
-            r.truncate()
+        configEdit.saveValue('dir', dir)
         QMessageBox.information(self, 'Saved!', 
         'Your modification was saved', 
         QMessageBox.Ok)
     
     def getNowData(self):
-        data = json.load(open('./credentials.json'))
-        client_id = data['dir']
-        return client_id
+        data = configEdit.getValue()
+        return data[2]
