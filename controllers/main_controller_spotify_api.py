@@ -1,4 +1,3 @@
-from array import array
 from PySide6.QtWidgets import QDialog, QMessageBox
 import json
 
@@ -28,7 +27,7 @@ class MainWindowQDialogApi(QDialog, SpotifyConfig):
         'Your modification was saved', 
         QMessageBox.Ok)
     
-    def getNowData(self) -> array:
+    def getNowData(self):
         data = json.load(open('./credentials.json'))
         client_id = data['client_id']
         client_secret = data['client_secret']
