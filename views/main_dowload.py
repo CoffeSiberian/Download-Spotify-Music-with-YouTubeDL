@@ -50,8 +50,6 @@ class DowloadWindow(object):
 
         self.progressBardowload = QProgressBar(self.progresbar_frame)
         self.progressBardowload.setObjectName(u"progressBardowload")
-        self.progressBardowload.setMinimumSize(QSize(0, 30))
-        self.progressBardowload.setValue(24)
 
         self.horizontalLayout_2.addWidget(self.progressBardowload)
 
