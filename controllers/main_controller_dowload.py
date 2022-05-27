@@ -1,11 +1,44 @@
 from PySide6.QtWidgets import QDialog, QMessageBox
-from PySide6.QtCore import QThread
+from PySide6.QtCore import QRunnable, Slot, Signal, QObject, QThreadPool
 
 from views.main_dowload import DowloadWindow
 from functions.validations import Validations
 
 import requests
-import threading
+import traceback
+import sys
+
+class WorkerSignals(QObject):
+
+    finished = Signal()
+    error = Signal(tuple)
+    result = Signal(object)
+    progress = Signal(int)
+
+class Worker(QRunnable):
+
+    def __init__(self, fn, *args, **kwargs):
+        super(Worker, self).__init__()
+
+        self.fn = fn
+        self.args = args
+        self.kwargs = kwargs
+        self.signals = WorkerSignals()
+
+        self.kwargs['progress_callback'] = self.signals.progress
+
+    @Slot()
+    def run(self):
+        try:
+            result = self.fn(*self.args, **self.kwargs)
+        except:
+            traceback.print_exc()
+            exctype, value = sys.exc_info()[:2]
+            self.signals.error.emit((exctype, value, traceback.format_exc()))
+        else:
+            self.signals.result.emit(result)  # Return the result of the processing
+        finally:
+            self.signals.finished.emit()  # Done
 
 class MainWindowFormDowloadBar(QDialog, DowloadWindow):
 
@@ -18,26 +51,38 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         self.__yt_dl = yt_dl
         self.__dir = dir
 
-    def checkTrackOrPlayList(self):
-        d = threading.Thread(target=self.queryYTurlPlaylist, args=[self.__getId, self.__api, self.__yt_dl, self.__dir], name='Daemon')
-        d.setDaemon
-        d.start()
+        self.threadpool = QThreadPool()
 
-    def download(self, url, nameFile, playListName, remaining, dirt) -> None:
+    def checkTrackOrPlayList(self):
+        # Pass the function to execute
+        worker = Worker(self.queryYTurlPlaylist, self.__getId, self.__api, self.__yt_dl, self.__dir) # Any other args, kwargs are passed to the run function
+        #worker.signals.result.connect(self.print_output)
+        #worker.signals.finished.connect(self.thread_complete)
+        worker.signals.progress.connect(self.dowloadProgres)
+
+        # Execute
+        self.threadpool.start(worker)
+
+    def download(self, url, nameFile, playListName, remaining, dirt, progress_callback) -> None:
         nameFile = Validations.fileNameCheck(nameFile)
         headers = {'content-type':'audio/webm', 'Range': 'bytes=0-'}
         filename = f'{remaining} - {nameFile}.mp3'
         response = requests.get(url=url, headers=headers ,stream=True)
         total_size = int(response.headers.get('content-length'))
         block_size = 1024
+        dowloadedSize = 0
         self.track_name.setText(filename)
         self.progressBardowload.setRange(0, total_size)
         with open(f'{dirt}/music/{playListName}/{filename}', 'wb') as file:
             for r in response.iter_content(block_size):
-                self.progressBardowload.setValue(len(r))
+                dowloadedSize+=len(r)
+                progress_callback.emit(dowloadedSize)
                 file.write(r)
 
-    def queryYTurlPlaylist(self, id, api, yt_dl, dirt) -> bool: #get url music from youtube_dl
+    def dowloadProgres(self, bits):
+        self.progressBardowload.setValue(bits)
+
+    def queryYTurlPlaylist(self, id, api, yt_dl, dirt, progress_callback) -> bool: #get url music from youtube_dl
         '''
         get the link of the song in yt_dlp and 
         start downloading (this function is only used to download playlist)
@@ -60,7 +105,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
             name = f'{r[0]} - {r[1]}'
             url_download = yt_dl.search(name)['entries'][0]['url']
             try:
-                self.download(url_download, name, playlistName, f'[{suple}]', dirt)
+                self.download(url_download, name, playlistName, f'[{suple}]', dirt, progress_callback)
                 Validations.downloadLog(dirt, playlistName, suple)
                 if suple == music_count:
                     return True
