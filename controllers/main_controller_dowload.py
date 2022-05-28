@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QDialog, QMessageBox
 from PySide6.QtCore import QRunnable, Slot, Signal, QObject, QThreadPool
+from PySide6.QtGui import QCloseEvent
 
 from views.main_dowload import DowloadWindow
 from functions.validations import Validations
@@ -59,14 +60,18 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
     
     #Here we define the download status to false so that it is canceled
     @property
-    def status(self):
+    def status(self) -> bool:
         return self.__status
     @status.setter
-    def status(self, data):
+    def status(self, data) -> None:
         self.__status = data
-    def statusChange(self, data=False):
+    def statusChange(self, data=False) -> None:
         self.status = data
     #####
+
+    def closeEvent(self, event:QCloseEvent) -> None: #stop download process on close window event
+        self.statusChange()
+        return super().closeEvent(event)
 
     def checkTrackOrPlayList(self) -> None: #We create the worker so that the download can proceed
         # Pass the function to execute
@@ -77,7 +82,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         # Execute
         self.threadpool.start(worker)
 
-    def download(self, url, nameFile, playListName, remaining, dirt, progress_callback) -> None:
+    def download(self, url, nameFile, playListName, remaining, dirt, progress_callback) -> bool:
         nameFile = Validations.fileNameCheck(nameFile)
         headers = {'content-type':'audio/webm', 'Range': 'bytes=0-'}
         filename = f'{remaining} - {nameFile}.mp3'
@@ -90,10 +95,11 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         with open(f'{dirt}/music/{playListName}/{filename}', 'wb') as file:
             for r in response.iter_content(block_size):
                 if self.__status == False:
-                    break
+                    return False
                 dowloadedSize+=len(r)
                 progress_callback.emit(dowloadedSize)
                 file.write(r)
+        return True
 
     def dowloadProgres(self, bits) -> None: #set a progress bar status
         self.progressBardowload.setValue(bits)
@@ -132,8 +138,10 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
             name = f'{r[0]} - {r[1]}'
             url_download = yt_dl.search(name)['entries'][0]['url']
             try:
-                self.download(url_download, name, playlistName, f'[{suple}]', dirt, progress_callback)
-                Validations.downloadLog(dirt, playlistName, suple)
+                if self.download(url_download, name, playlistName, f'[{suple}]', dirt, progress_callback):
+                    Validations.downloadLog(dirt, playlistName, suple)
+                else:
+                    Validations.removeFileMusic(dirt, playlistName, name, suple)
                 if suple == music_count:
                     self.pushButton_cancel.setEnabled(False)
                     return True
