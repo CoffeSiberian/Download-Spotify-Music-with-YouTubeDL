@@ -66,7 +66,7 @@ class DowloadWindow(object):
         self.track_name.setObjectName(u"track_name")
         font = QFont()
         font.setFamilies([u"Arial"])
-        font.setPointSize(14)
+        font.setPointSize(9)
         font.setBold(True)
         self.track_name.setFont(font)
         self.track_name.setAlignment(Qt.AlignCenter)
@@ -88,7 +88,7 @@ class DowloadWindow(object):
 
         self.pushButton_cancel = QPushButton(self.bottons_frame)
         self.pushButton_cancel.setObjectName(u"pushButton_cancel")
-        self.pushButton_cancel.setEnabled(True)
+        self.pushButton_cancel.setEnabled(False)
         self.pushButton_cancel.setMinimumSize(QSize(90, 30))
 
         self.horizontalLayout.addWidget(self.pushButton_cancel)
@@ -117,6 +117,6 @@ class DowloadWindow(object):
     def retranslateUi(self, main_dowload_dialog):
         main_dowload_dialog.setWindowTitle(QCoreApplication.translate("main_dowload_dialog", u"Dialog", None))
         self.img_bar.setText("")
-        self.track_name.setText(QCoreApplication.translate("main_dowload_dialog", u"CANCION", None))
+        self.track_name.setText(QCoreApplication.translate("main_dowload_dialog", u"", None))
         self.pushButton_cancel.setText(QCoreApplication.translate("main_dowload_dialog", u"Cancel", None))
         self.pushButton_exit.setText(QCoreApplication.translate("main_dowload_dialog", u"Exit", None))

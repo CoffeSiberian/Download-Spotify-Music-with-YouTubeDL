@@ -24,6 +24,7 @@ class MainWindowFormDowload(QDialog, DowloadMenuLink):
             self.w = MainWindowFormDowloadBar(getId, api, yt_dl, values[2])
             self.w.show()
             self.w.checkTrackOrPlayList()
+            self.close()
 
         else:
             pass
