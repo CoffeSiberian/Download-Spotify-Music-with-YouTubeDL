@@ -19,22 +19,26 @@ class MainWindowFormDowload(QDialog, DowloadMenuLink):
     
     def getUrl(self):
         url = self.textobox_link.text()
-        getId = self.splitURL(url)
+        getId = self.splitType(url)
         if getId:
-            self.w = MainWindowFormDowloadBar(getId, api, yt_dl, values[2])
+            type = getId[1]
+            self.w = MainWindowFormDowloadBar(getId[0], api, yt_dl, values[2], type.lower())
             self.w.show()
             self.w.checkTrackOrPlayList()
             self.close()
-
         else:
             pass
 
     '''
     download functions
     '''
-    def splitURL(self, url) -> str or bool: #get id from url playlist
+    def splitURL(self, url, type) -> str: #get id from url playlist or track
+        start = url.split(sep='?')[0]
+        return start.split(sep='/')[4], type
+
+    def splitType(self, url) -> str or bool: #get if the url is track or playlist
         try:
             start = url.split(sep='?')[0]
-            return start.split(sep='/')[4]
+            return(self.splitURL(url, start.split(sep='/')[3]))
         except IndexError:
             return False

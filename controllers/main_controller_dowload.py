@@ -43,7 +43,7 @@ class Worker(QRunnable):
 
 class MainWindowFormDowloadBar(QDialog, DowloadWindow):
 
-    def __init__(self, getId, api, yt_dl, dir) -> None:
+    def __init__(self, getId, api, yt_dl, dir, type) -> None:
         self.__status = True
         super().__init__()
         self.setupUi(self)
@@ -52,6 +52,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         self.__api = api
         self.__yt_dl = yt_dl
         self.__dir = dir
+        self.__type = type
 
         self.pushButton_exit.clicked.connect(self.close)
         self.pushButton_cancel.clicked.connect(self.statusChange)
@@ -69,18 +70,40 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         self.status = data
     #####
 
+    #events
     def closeEvent(self, event:QCloseEvent) -> None: #stop download process on close window event
         self.statusChange()
         return super().closeEvent(event)
+    def dowloadProgres(self, bits) -> None: #set a progress bar status
+        self.progressBardowload.setValue(bits)
+    def thread_complete(self) -> None: #when the download thread ends, this function is executed
+        self.messageBox('Download finished', 'Your download finished', QMessageBox.Information, 'Ok')
+        self.pushButton_exit.setEnabled(True)
+        if self.__status == False:
+            self.pushButton_cancel.setEnabled(False)
+    ####
 
+    def messageBox(self, title, lowInfo, level, details):
+        msgBox = QMessageBox()
+        msgBox.setWindowTitle(title)
+        msgBox.setText(lowInfo)
+        msgBox.setIcon(level)
+        msgBox.setDetailedText(details)
+        msgBox.setStandardButtons(QMessageBox.Ok)
+        msgBox.detailedText()
+        msgBox.exec()
+    
     def checkTrackOrPlayList(self) -> None: #We create the worker so that the download can proceed
         # Pass the function to execute
-        worker = Worker(self.queryYTurlPlaylist, self.__getId, self.__api, self.__yt_dl, self.__dir)
+        if self.__type == 'playlist':
+            worker = Worker(self.queryYTurlPlaylist, self.__getId, self.__api, self.__yt_dl, self.__dir)
+        elif self.__type == 'track':
+            worker = Worker(self.queryYTurlTrack, self.__getId, self.__api, self.__yt_dl, self.__dir)
         #worker.signals.result.connect(self.print_output)
         worker.signals.finished.connect(self.thread_complete)
         worker.signals.progress.connect(self.dowloadProgres)
         # Execute
-        self.threadpool.start(worker)
+        self.threadpool.start(worker)        
 
     def download(self, url, nameFile, playListName, remaining, dirt, progress_callback) -> bool:
         nameFile = Validations.fileNameCheck(nameFile)
@@ -101,24 +124,15 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
                 file.write(r)
         return True
 
-    def dowloadProgres(self, bits) -> None: #set a progress bar status
-        self.progressBardowload.setValue(bits)
-
-    def thread_complete(self) -> None:
-        QMessageBox.information(self, 'Download finished', 
-        'Your download finished', 
-        QMessageBox.Ok)
-        self.pushButton_exit.setEnabled(True)
-        if self.__status == False:
-            self.pushButton_cancel.setEnabled(False)
-
     def queryYTurlPlaylist(self, id, api, yt_dl, dirt, progress_callback) -> bool: #get url music from youtube_dl
         '''
         get the link of the song in yt_dlp and 
         start downloading (this function is only used to download playlist)
         '''
         js = api.getTracksPlaylist(id)
-        playlistName = Validations.fileNameCheck(js[1])
+        if js[1] != 200:
+            return js[0]
+        playlistName = Validations.fileNameCheck(js[2])
         music_list = js[0]
         Validations.createMusicFolder(dirt)
         Validations.createFolderList(dirt, playlistName)
@@ -157,7 +171,9 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         start downloading (this function is only used to download tracks)
         '''
         js = api.getTrack(id)
-        trackName = Validations.fileNameCheck(js)
+        if js[1] != 200:
+            return js[0]
+        trackName = Validations.fileNameCheck(js[0])
         nameFolder = 'manual_track'
         Validations.createMusicFolder(dirt)
         Validations.createFolderList(dirt, nameFolder)

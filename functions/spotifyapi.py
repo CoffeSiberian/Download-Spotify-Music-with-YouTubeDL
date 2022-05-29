@@ -41,7 +41,7 @@ class spotifyPlay:
         try:
             playlist = get_json['tracks']
         except KeyError:
-            return [get_json['error']['status'], get_json['error']['message']]
+            return [get_json['error']['message'], get_json['error']['status']]
         rescueTracks = []
         iterator = 0
         while True:
@@ -58,16 +58,19 @@ class spotifyPlay:
                 iterator += 1
             except IndexError:
                 break
-        return rescueTracks, get_json['name']
+        return rescueTracks, 200, get_json['name']
     
-    def getTrack(self, id) -> str:
+    def getTrack(self, id) -> list:
         url = f'https://api.spotify.com/v1/tracks/{id}'
         headers = CaseInsensitiveDict()
         headers["Authorization"] = f"Bearer {self.getBearer()}"
         headers["Content-Type"] = "application/json"
         resp = requests.get(url, headers=headers)
         get_json = json.loads(resp.content)
-        name = get_json['name']
-        artists = get_json['artists'][0]['name']
+        try:
+            name = get_json['name']
+            artists = get_json['artists'][0]['name']
+        except KeyError:
+            return [get_json['error']['message'], get_json['error']['status']]
         rescueTrack = f'{name} - {artists}'
-        return rescueTrack
+        return rescueTrack, 200
