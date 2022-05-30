@@ -8,6 +8,7 @@ from functions.jsonedit import configEdit
 from controllers.main_controller_dowload_menu import MainWindowFormDowload
 from controllers.main_controller_spotify_api import MainWindowQDialogApi
 from controllers.main_controller_dowload_location import MainWindowQDialogDowloadLocation
+from controllers.main_controller_about import MainWindowAbout
 
 
 class MainWindowForm(QMainWindow, MainWindow):
@@ -21,6 +22,7 @@ class MainWindowForm(QMainWindow, MainWindow):
         self.dowloadTrack.clicked.connect(lambda: self.openDowloadPlayList(self.dowloadTrack))
         self.actionSpotify_API_KEY.triggered.connect(self.openSpotifyApiCfg)
         self.actionDowload_Location.triggered.connect(self.openDowloadLocation)
+        self.actionHelp.triggered.connect(self.openAbout)
         self.actionExit.triggered.connect(self.close)
 
     def openDowloadPlayList(self, buttonObj):
@@ -33,6 +35,10 @@ class MainWindowForm(QMainWindow, MainWindow):
     
     def openDowloadLocation(self):
         self.w=MainWindowQDialogDowloadLocation()
+        self.w.show()
+    
+    def openAbout(self):
+        self.w=MainWindowAbout()
         self.w.show()
     
     def defaultPath(self):

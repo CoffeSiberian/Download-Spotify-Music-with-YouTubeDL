@@ -220,7 +220,7 @@ class MainWindow(object):
         self.actionExit.setText(QCoreApplication.translate("MainWindow", u"Exit", None))
         self.actionSpotify_API_KEY.setText(QCoreApplication.translate("MainWindow", u"Spotify API KEY", None))
         self.actionDowload_Location.setText(QCoreApplication.translate("MainWindow", u"Dowload Location", None))
-        self.actionHelp.setText(QCoreApplication.translate("MainWindow", u"Help", None))
+        self.actionHelp.setText(QCoreApplication.translate("MainWindow", u"About", None))
         self.icon.setText("")
         self.title.setText(QCoreApplication.translate("MainWindow", u"Download Spotify Music", None))
         self.dowloadPlayList.setText(QCoreApplication.translate("MainWindow", u"Dowload PlayList", None))
