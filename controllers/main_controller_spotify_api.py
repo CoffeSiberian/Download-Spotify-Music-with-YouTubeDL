@@ -4,6 +4,8 @@ from functions.jsonedit import configEdit
 
 from views.main_spotify_api import SpotifyConfig
 
+import webbrowser
+
 class MainWindowQDialogApi(QDialog, SpotifyConfig):
 
     def __init__(self) -> None:
@@ -13,6 +15,8 @@ class MainWindowQDialogApi(QDialog, SpotifyConfig):
         self.lineEdit_client_id.setText(jdata[0])
         self.lineEdit_client_secret.setText(jdata[1])
         self.pushButton_save.clicked.connect(self.getTextAfterPushSave)
+        self.gitHub.clicked.connect(lambda: webbrowser.open(
+            'https://github.com/CoffeSiberian/Download-Spotify-Music-with-YouTubeDL/blob/master/README.md'))
 
     def getTextAfterPushSave(self):
         clientId = self.lineEdit_client_id.text()
