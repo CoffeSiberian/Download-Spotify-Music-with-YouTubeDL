@@ -89,7 +89,7 @@ class DowloadLocation(object):
         QMetaObject.connectSlotsByName(main_dowloadlocation_dialog)
 
     def retranslateUi(self, main_dowloadlocation_dialog):
-        main_dowloadlocation_dialog.setWindowTitle(QCoreApplication.translate("main_dowloadlocation_dialog", u"Dialog", None))
+        main_dowloadlocation_dialog.setWindowTitle(QCoreApplication.translate("main_dowloadlocation_dialog", u"Select download folder", None))
         self.title_cfg_label.setText(QCoreApplication.translate("main_dowloadlocation_dialog", u"Select download location", None))
         self.lineEdit_location.setText(QCoreApplication.translate("main_dowloadlocation_dialog", u"c:/location", None))
         self.pushButton_save.setText(QCoreApplication.translate("main_dowloadlocation_dialog", u"Save", None))

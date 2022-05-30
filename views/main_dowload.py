@@ -115,7 +115,7 @@ class DowloadWindow(object):
         QMetaObject.connectSlotsByName(main_dowload_dialog)
 
     def retranslateUi(self, main_dowload_dialog):
-        main_dowload_dialog.setWindowTitle(QCoreApplication.translate("main_dowload_dialog", u"Dialog", None))
+        main_dowload_dialog.setWindowTitle(QCoreApplication.translate("main_dowload_dialog", u"To download", None))
         self.img_bar.setText("")
         self.track_name.setText(QCoreApplication.translate("main_dowload_dialog", u"", None))
         self.pushButton_cancel.setText(QCoreApplication.translate("main_dowload_dialog", u"Cancel", None))

@@ -124,7 +124,7 @@ class DowloadMenuLink(object):
         QMetaObject.connectSlotsByName(dialog_menu_dowload_link)
         
     def retranslateUi(self, dialog_menu_dowload_link):
-        dialog_menu_dowload_link.setWindowTitle(QCoreApplication.translate("dialog_menu_dowload_link", u"Dialog", None))
+        dialog_menu_dowload_link.setWindowTitle(QCoreApplication.translate("dialog_menu_dowload_link", u"Spotify Downloader", None))
         self.title_dowload_menu.setText(QCoreApplication.translate("dialog_menu_dowload_link", u"Paste your Spotify Link", None))
         self.link_icon.setText("")
         self.dowload_menu_dowload_botton.setText(QCoreApplication.translate("dialog_menu_dowload_link", u"Dowload", None))

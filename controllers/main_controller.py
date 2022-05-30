@@ -17,6 +17,7 @@ class MainWindowForm(QMainWindow, MainWindow):
         self.dowloadTrack.clicked.connect(lambda: self.openDowloadPlayList(self.dowloadTrack))
         self.actionSpotify_API_KEY.triggered.connect(self.openSpotifyApiCfg)
         self.actionDowload_Location.triggered.connect(self.openDowloadLocation)
+        self.actionExit.triggered.connect(self.close)
 
     def openDowloadPlayList(self, buttonObj):
         self.w = MainWindowFormDowload(buttonObj.objectName())

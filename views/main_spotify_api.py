@@ -196,7 +196,7 @@ class SpotifyConfig(object):
         QMetaObject.connectSlotsByName(main_spotify_api_dialog)
 
     def retranslateUi(self, main_spotify_api_dialog):
-        main_spotify_api_dialog.setWindowTitle(QCoreApplication.translate("main_spotify_api_dialog", u"Dialog", None))
+        main_spotify_api_dialog.setWindowTitle(QCoreApplication.translate("main_spotify_api_dialog", u"API KEY", None))
         self.img.setText("")
         self.title_dialog.setText(QCoreApplication.translate("main_spotify_api_dialog", u"Spotify API KEY", None))
         self.client_id.setText(QCoreApplication.translate("main_spotify_api_dialog", u"Client ID", None))
