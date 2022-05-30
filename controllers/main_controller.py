@@ -13,13 +13,13 @@ class MainWindowForm(QMainWindow, MainWindow):
         super().__init__()
         self.setupUi(self)
 
-        self.dowloadPlayList.clicked.connect(self.openDowloadPlayList)
-        self.dowloadTrack.clicked.connect(self.openDowloadPlayList)
+        self.dowloadPlayList.clicked.connect(lambda: self.openDowloadPlayList(self.dowloadPlayList))
+        self.dowloadTrack.clicked.connect(lambda: self.openDowloadPlayList(self.dowloadTrack))
         self.actionSpotify_API_KEY.triggered.connect(self.openSpotifyApiCfg)
         self.actionDowload_Location.triggered.connect(self.openDowloadLocation)
 
-    def openDowloadPlayList(self):
-        self.w = MainWindowFormDowload()
+    def openDowloadPlayList(self, buttonObj):
+        self.w = MainWindowFormDowload(buttonObj.objectName())
         self.w.show()
     
     def openSpotifyApiCfg(self):
