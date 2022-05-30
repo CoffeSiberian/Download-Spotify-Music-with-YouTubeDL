@@ -2,7 +2,7 @@ import json
 
 class configEdit:
 
-    def saveValue(key ,value):
+    def saveValue(key ,value) -> None:
         with open('./credentials.json', 'r+') as r:
             data = json.load(r)
             data[key] = value
@@ -10,7 +10,7 @@ class configEdit:
             json.dump(data, r, indent=4)
             r.truncate()
     
-    def getValue():
+    def getValue() -> list:
         data = json.load(open('./credentials.json'))
         client_id = data['client_id']
         client_secret = data['client_secret']

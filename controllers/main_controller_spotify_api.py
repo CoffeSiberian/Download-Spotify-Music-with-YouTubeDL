@@ -22,6 +22,7 @@ class MainWindowQDialogApi(QDialog, SpotifyConfig):
         QMessageBox.information(self, 'Saved!', 
         'Your modification was saved', 
         QMessageBox.Ok)
+        self.close()
     
     def getNowData(self):
         data = configEdit.getValue()
