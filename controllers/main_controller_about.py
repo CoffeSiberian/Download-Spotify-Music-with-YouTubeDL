@@ -9,4 +9,5 @@ class MainWindowAbout(QDialog, About):
     def __init__(self) -> None:
         super().__init__()
         self.setupUi(self)
+        self.setModal(True)
         self.gitHub.clicked.connect(lambda: webbrowser.open('https://github.com/CoffeSiberian'))

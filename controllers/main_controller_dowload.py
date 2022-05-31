@@ -56,6 +56,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         self.__yt_dl = yt_dl
         self.__dir = dir
 
+        self.setModal(True)
         self.pushButton_exit.clicked.connect(self.close)
         self.pushButton_cancel.clicked.connect(self.statusChange)
 

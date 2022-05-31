@@ -15,6 +15,7 @@ class MainWindowFormDowload(QDialog, DowloadMenuLink):
         self.__values = configEdit.getValue()
         self.__api = spotifyPlay(self.__values[0], self.__values[1])
         self.__yt_dl = youtube()
+        self.setModal(True)
         self.dowload_menu_dowload_botton.clicked.connect(self.getUrl)
         self.dowload_menu_cancel_botton.clicked.connect(self.close)
 
@@ -36,9 +37,9 @@ class MainWindowFormDowload(QDialog, DowloadMenuLink):
         if getId:
             self.w = MainWindowFormDowloadBar(getId, self.__api, self.__yt_dl, 
             self.__values[2], self.__buttonObj)
+            self.close()
             self.w.show()
             self.w.checkTrackOrPlayList()
-            self.close()
         else:
             self.messageBox('Invalid URL', 'The provided url is invalid', 
             QMessageBox.Warning, 'Invalid URL')

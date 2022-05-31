@@ -11,6 +11,7 @@ class MainWindowQDialogDowloadLocation(QDialog, DowloadLocation):
         super().__init__()
         self.setupUi(self)
         dirt = self.getPath()
+        self.setModal(True)
         self.lineEdit_location.setText(dirt)
 
         self._open_folder_action = self.lineEdit_location.addAction(
