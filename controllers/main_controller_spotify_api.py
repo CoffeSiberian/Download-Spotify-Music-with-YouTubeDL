@@ -1,4 +1,5 @@
 from PySide6.QtWidgets import QDialog, QMessageBox
+from PySide6.QtGui import QIcon
 
 from functions.jsonedit import configEdit
 
@@ -15,6 +16,7 @@ class MainWindowQDialogApi(QDialog, SpotifyConfig):
         self.lineEdit_client_id.setText(jdata[0])
         self.lineEdit_client_secret.setText(jdata[1])
         self.setModal(True)
+        self.setWindowIcon(QIcon('./assets/icons/spotify.png'))
         self.pushButton_save.clicked.connect(self.getTextAfterPushSave)
         self.gitHub.clicked.connect(lambda: webbrowser.open(
             'https://github.com/CoffeSiberian/Download-Spotify-Music-with-YouTubeDL/blob/master/README.md'))

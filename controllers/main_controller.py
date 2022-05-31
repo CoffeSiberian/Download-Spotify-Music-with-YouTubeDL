@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QMainWindow
 from PySide6.QtCore import QStandardPaths, QDir
+from PySide6.QtGui import QIcon
 
 from views.main_Window import MainWindow
 
@@ -19,6 +20,7 @@ class MainWindowForm(QMainWindow, MainWindow):
         self.setupUi(self)
 
         self.defaultPath()
+        self.setWindowIcon(QIcon('./assets/icons/img.ico'))
         self.dowloadPlayList.clicked.connect(lambda: self.openDowloadPlayList(self.dowloadPlayList))
         self.dowloadTrack.clicked.connect(lambda: self.openDowloadPlayList(self.dowloadTrack))
         self.gitHub.clicked.connect(lambda: webbrowser.open(

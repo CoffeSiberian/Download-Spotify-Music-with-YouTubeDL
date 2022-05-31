@@ -1,6 +1,7 @@
 from PySide6.QtWidgets import QDialog, QMessageBox
 from PySide6.QtCore import QRunnable, Slot, Signal, QObject, QThreadPool
 from PySide6.QtGui import QCloseEvent
+from PySide6.QtGui import QIcon
 
 from views.main_dowload import DowloadWindow
 from functions.validations import Validations
@@ -57,6 +58,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         self.__dir = dir
 
         self.setModal(True)
+        self.setWindowIcon(QIcon('./assets/icons/downloading.png'))
         self.pushButton_exit.clicked.connect(self.close)
         self.pushButton_cancel.clicked.connect(self.statusChange)
 

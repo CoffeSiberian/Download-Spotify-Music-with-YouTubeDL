@@ -1,4 +1,5 @@
 from PySide6.QtWidgets import QDialog, QMessageBox
+from PySide6.QtGui import QIcon
 
 from views.main_dowload_menu import DowloadMenuLink
 from controllers.main_controller_dowload import MainWindowFormDowloadBar
@@ -16,6 +17,7 @@ class MainWindowFormDowload(QDialog, DowloadMenuLink):
         self.__api = spotifyPlay(self.__values[0], self.__values[1])
         self.__yt_dl = youtube()
         self.setModal(True)
+        self.setWindowIcon(QIcon('./assets/icons/link.png'))
         self.dowload_menu_dowload_botton.clicked.connect(self.getUrl)
         self.dowload_menu_cancel_botton.clicked.connect(self.close)
 

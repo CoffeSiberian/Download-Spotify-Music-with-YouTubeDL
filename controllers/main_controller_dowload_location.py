@@ -1,5 +1,6 @@
 from PySide6.QtWidgets import QDialog, QStyle, QLineEdit, QFileDialog, QMessageBox
 from PySide6.QtCore import QStandardPaths, QDir
+from PySide6.QtGui import QIcon
 
 from functions.jsonedit import configEdit
 
@@ -12,6 +13,7 @@ class MainWindowQDialogDowloadLocation(QDialog, DowloadLocation):
         self.setupUi(self)
         dirt = self.getPath()
         self.setModal(True)
+        self.setWindowIcon(QIcon('./assets/icons/downloading.png'))
         self.lineEdit_location.setText(dirt)
 
         self._open_folder_action = self.lineEdit_location.addAction(
