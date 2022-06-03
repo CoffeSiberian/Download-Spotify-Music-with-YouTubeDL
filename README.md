@@ -17,3 +17,5 @@ Install the following dependencies if you want to run from source code
 
 ### Get your Spotify API KEY
 **Go to https://developer.spotify.com/dashboard to get your *client_id* and *client_secret***
+
+[Imgur step by step images](https://imgur.com/a/v8MLpWb "Imgur Step by Step")
