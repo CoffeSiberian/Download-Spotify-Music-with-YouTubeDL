@@ -17,6 +17,7 @@ class WorkerSignals(QObject):
     result = Signal(object)
     progress = Signal(int)
     notFounds = Signal(str, str, object, str)
+    iteration = Signal(str, int)
 
 class Worker(QRunnable):
 
@@ -29,7 +30,8 @@ class Worker(QRunnable):
         self.signals = WorkerSignals()
 
         self.kwargs['progress_callback'] = self.signals.progress
-        self.kwargs['notFound'] = self.signals.notFounds
+        self.kwargs['notFound'] = self.signals.notFounds #used to generate error messages
+        self.kwargs['iteration'] = self.signals.iteration #used to execute code after a download iteration is finished or not
 
     @Slot()
     def run(self):
@@ -85,8 +87,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         if status:
             self.messageBox('Download finished', 'Your download finished', QMessageBox.Information, 'Ok')
         self.pushButton_exit.setEnabled(True)
-        if self.__status == False:
-            self.pushButton_cancel.setEnabled(False)
+        self.pushButton_cancel.setEnabled(False)
     ####
 
     def messageBox(self, title, lowInfo, level, details):
@@ -98,6 +99,11 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         msgBox.setStandardButtons(QMessageBox.Ok)
         msgBox.detailedText()
         msgBox.exec()
+    
+    def changeStatusDowload(self, filename, total_size):
+        self.track_name.setText(filename)
+        self.progressBardowload.setRange(0, total_size)
+        self.pushButton_cancel.setEnabled(True)
 
     def checkTrackOrPlayList(self) -> None: #We create the worker so that the download can proceed
         # Pass the function to execute
@@ -109,10 +115,11 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         worker.signals.finished.connect(self.thread_complete)
         worker.signals.progress.connect(self.dowloadProgres)
         worker.signals.notFounds.connect(self.messageBox)
+        worker.signals.iteration.connect(self.changeStatusDowload)
         # Execute
         self.threadpool.start(worker)        
 
-    def download(self, url, nameFile, playListName, remaining, dirt, progress_callback) -> bool:
+    def download(self, url, nameFile, playListName, remaining, dirt, progress_callback, iteration) -> bool:
         nameFile = Validations.fileNameCheck(nameFile)
         headers = {'content-type':'audio/webm', 'Range': 'bytes=0-'}
         filename = f'{remaining} - {nameFile}.mp3'
@@ -120,8 +127,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         total_size = int(response.headers.get('content-length'))
         block_size = 1024
         dowloadedSize = 0
-        self.track_name.setText(filename)
-        self.progressBardowload.setRange(0, total_size)
+        iteration.emit(filename, total_size)
         with open(f'{dirt}/music/{playListName}/{filename}', 'wb') as file:
             for r in response.iter_content(block_size):
                 if self.__status == False:
@@ -131,7 +137,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
                 file.write(r)
         return True
 
-    def queryYTurlPlaylist(self, id, api, yt_dl, dirt, progress_callback, notFound) -> bool: #get url music from youtube_dl
+    def queryYTurlPlaylist(self, id, api, yt_dl, dirt, progress_callback, notFound, iteration) -> bool: #get url music from youtube_dl
         '''
         get the link of the song in yt_dlp and 
         start downloading (this function is only used to download playlist)
@@ -145,7 +151,6 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         Validations.createMusicFolder(dirt)
         Validations.createFolderList(dirt, playlistName)
         logRead = Validations.readLog(dirt, playlistName)
-        self.pushButton_cancel.setEnabled(True)
         music_count = len(music_list)
         suple = 0
         if logRead == False:
@@ -160,20 +165,18 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
             name = f'{r[0]} - {r[1]}'
             url_download = yt_dl.search(name)['entries'][0]['url']
             try:
-                if self.download(url_download, name, playlistName, f'[{suple}]', dirt, progress_callback):
+                if self.download(url_download, name, playlistName, f'[{suple}]', dirt, progress_callback, iteration):
                     Validations.downloadLog(dirt, playlistName, suple)
                 else:
                     Validations.removeFileMusic(dirt, playlistName, name, suple)
                 if suple == music_count:
-                    self.pushButton_cancel.setEnabled(False)
                     return True
             except:
                 name = Validations.fileNameCheck(name)
                 Validations.removeFileMusic(dirt, playlistName, name, suple)
-                self.pushButton_cancel.setEnabled(False)
                 return False
 
-    def queryYTurlTrack(self, id, api, yt_dl, dirt, progress_callback, notFound) -> bool: #get url music from youtube_dl
+    def queryYTurlTrack(self, id, api, yt_dl, dirt, progress_callback, notFound, iteration) -> bool: #get url music from youtube_dl
         '''
         get the link of the song in yt_dlp and 
         start downloading (this function is only used to download tracks)
@@ -186,14 +189,11 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         nameFolder = 'manual_track'
         Validations.createMusicFolder(dirt)
         Validations.createFolderList(dirt, nameFolder)
-        self.pushButton_cancel.setEnabled(True)
         url_download = yt_dl.search(trackName)['entries'][0]['url']
         try:
-            self.download(url_download, trackName, nameFolder, '0', dirt, progress_callback)
-            self.pushButton_cancel.setEnabled(False)
+            self.download(url_download, trackName, nameFolder, '0', dirt, progress_callback, iteration)
             return True
-        except KeyboardInterrupt:
+        except:
             name = Validations.fileNameCheck(name)
             Validations.removeFileMusic(dirt, nameFolder, name, '0')
-            self.pushButton_cancel.setEnabled(False)
             return False
