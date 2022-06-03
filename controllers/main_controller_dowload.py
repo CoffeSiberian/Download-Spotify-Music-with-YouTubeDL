@@ -79,8 +79,9 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
 
     #events
     def closeEvent(self, event:QCloseEvent) -> None: #stop download process on close window event
+        if self.__status == True:
+            return event.ignore()
         self.statusChange()
-        return super().closeEvent(event)
     def dowloadProgres(self, bits) -> None: #set a progress bar status
         self.progressBardowload.setValue(bits)
     def thread_complete(self, status) -> None: #when the download thread ends, this function is executed
