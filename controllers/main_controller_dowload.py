@@ -79,7 +79,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
 
     #events
     def closeEvent(self, event:QCloseEvent) -> None: #stop download process on close window event
-        if self.__status == True:
+        if self.__status:
             return event.ignore()
         self.statusChange()
     def dowloadProgres(self, bits) -> None: #set a progress bar status
@@ -171,6 +171,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
                 else:
                     Validations.removeFileMusic(dirt, playlistName, name, suple)
                 if suple == music_count:
+                    self.statusChange()
                     return True
             except:
                 name = Validations.fileNameCheck(name)
@@ -193,6 +194,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         url_download = yt_dl.search(trackName)['entries'][0]['url']
         try:
             self.download(url_download, trackName, nameFolder, '0', dirt, progress_callback, iteration)
+            self.statusChange()
             return True
         except:
             name = Validations.fileNameCheck(name)
