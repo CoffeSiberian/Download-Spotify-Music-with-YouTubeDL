@@ -54,7 +54,7 @@ class spotifyPlay:
             try:
                 name = playlist['items'][iterator]['track']['name']
                 artists = playlist['items'][iterator]['track']['artists'][0]['name']
-                rescueTracks.append(f'{name} {artists}')
+                rescueTracks.append([name, artists])
                 iterator += 1
             except IndexError:
                 break
