@@ -54,10 +54,12 @@ class spotifyPlay:
             try:
                 name = playlist['items'][iterator]['track']['name']
                 artists = playlist['items'][iterator]['track']['artists'][0]['name']
-                rescueTracks.append([name, artists])
+                rescueTracks.append(f'{name} {artists}')
                 iterator += 1
             except IndexError:
                 break
+            except TypeError:
+                iterator += 1
         return rescueTracks, 200, get_json['name']
     
     def getTrack(self, id) -> list:
