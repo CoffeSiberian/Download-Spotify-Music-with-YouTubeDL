@@ -1,13 +1,10 @@
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QCommandLinkButton, QDialog, QFrame,
-    QHBoxLayout, QLabel, QLineEdit, QPushButton,
-    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
+from PySide6.QtCore import QCoreApplication, QMetaObject, QSize, Qt
+from PySide6.QtGui import QCursor,QFont, QIcon, QPixmap
+from PySide6.QtWidgets import (
+    QCommandLinkButton, QFrame, QHBoxLayout, 
+    QLabel, QLineEdit, QPushButton,
+    QSizePolicy, QSpacerItem, QVBoxLayout
+    )
 
 class SpotifyConfig(object):
     def setupUi(self, main_spotify_api_dialog):
@@ -51,7 +48,7 @@ class SpotifyConfig(object):
         self.img.setObjectName(u"img")
         self.img.setMinimumSize(QSize(30, 30))
         self.img.setMaximumSize(QSize(30, 30))
-        self.img.setPixmap(QPixmap(u"./assets/icons/spotify.png"))
+        self.img.setPixmap(QPixmap(u"assets/icons/spotify.png"))
         self.img.setScaledContents(True)
 
         self.horizontalLayout_4_title.addWidget(self.img)
@@ -136,7 +133,7 @@ class SpotifyConfig(object):
         self.pushButton_save.setMinimumSize(QSize(90, 30))
         self.pushButton_save.setMaximumSize(QSize(90, 30))
         icon = QIcon()
-        icon.addFile(u"./assets/icons/diskette.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"assets/icons/diskette.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_save.setIcon(icon)
 
         self.horizontalLayout_3.addWidget(self.pushButton_save)
@@ -178,7 +175,7 @@ class SpotifyConfig(object):
         self.gitHub.setFont(font2)
         self.gitHub.setCursor(QCursor(Qt.PointingHandCursor))
         icon1 = QIcon()
-        icon1.addFile(u"./assets/icons/question.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u"assets/icons/question.png", QSize(), QIcon.Normal, QIcon.Off)
         self.gitHub.setIcon(icon1)
         self.gitHub.setIconSize(QSize(25, 25))
 

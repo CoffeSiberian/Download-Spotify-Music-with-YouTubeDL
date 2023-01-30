@@ -1,13 +1,9 @@
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QHBoxLayout,
-    QLabel, QLineEdit, QPushButton, QSizePolicy,
-    QVBoxLayout, QWidget)
+from PySide6.QtCore import QCoreApplication,QMetaObject, QRect, QSize, Qt
+from PySide6.QtGui import QFont, QIcon
+from PySide6.QtWidgets import (
+    QFrame, QHBoxLayout, QLabel, 
+    QLineEdit, QPushButton, QVBoxLayout
+    )
 
 class DowloadLocation(object):
     def setupUi(self, main_dowloadlocation_dialog):
@@ -72,7 +68,7 @@ class DowloadLocation(object):
         self.pushButton_save.setMinimumSize(QSize(90, 30))
         self.pushButton_save.setMaximumSize(QSize(90, 30))
         icon = QIcon()
-        icon.addFile(u"./assets/icons/diskette.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"assets/icons/diskette.png", QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_save.setIcon(icon)
 
         self.horizontalLayout_3.addWidget(self.pushButton_save)

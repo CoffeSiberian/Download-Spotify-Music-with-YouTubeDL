@@ -1,13 +1,10 @@
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QHBoxLayout,
-    QLabel, QLineEdit, QPushButton, QSizePolicy,
-    QSpacerItem, QVBoxLayout, QWidget)
+from PySide6.QtCore import QCoreApplication, QMetaObject, QSize, Qt
+from PySide6.QtGui import QFont, QPixmap
+from PySide6.QtWidgets import (
+    QFrame, QHBoxLayout,QLabel, 
+    QLineEdit, QPushButton, QSizePolicy,
+    QSpacerItem, QVBoxLayout
+    )
 
 class DowloadMenuLink(object):
     def setupUi(self, dialog_menu_dowload_link):
@@ -66,7 +63,7 @@ class DowloadMenuLink(object):
         self.link_icon.setObjectName(u"link_icon")
         self.link_icon.setMinimumSize(QSize(30, 30))
         self.link_icon.setMaximumSize(QSize(30, 30))
-        self.link_icon.setPixmap(QPixmap(u"./assets/icons/link.png"))
+        self.link_icon.setPixmap(QPixmap(u"assets/icons/link.png"))
         self.link_icon.setScaledContents(True)
 
         self.horizontalLayout.addWidget(self.link_icon)
@@ -122,7 +119,7 @@ class DowloadMenuLink(object):
         self.retranslateUi(dialog_menu_dowload_link)
 
         QMetaObject.connectSlotsByName(dialog_menu_dowload_link)
-        
+
     def retranslateUi(self, dialog_menu_dowload_link):
         dialog_menu_dowload_link.setWindowTitle(QCoreApplication.translate("dialog_menu_dowload_link", u"Spotify Downloader", None))
         self.title_dowload_menu.setText(QCoreApplication.translate("dialog_menu_dowload_link", u"Paste your Spotify Link", None))

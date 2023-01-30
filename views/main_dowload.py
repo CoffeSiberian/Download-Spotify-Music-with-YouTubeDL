@@ -1,13 +1,10 @@
-from PySide6.QtCore import (QCoreApplication, QDate, QDateTime, QLocale,
-    QMetaObject, QObject, QPoint, QRect,
-    QSize, QTime, QUrl, Qt)
-from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
-    QFont, QFontDatabase, QGradient, QIcon,
-    QImage, QKeySequence, QLinearGradient, QPainter,
-    QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QDialog, QFrame, QHBoxLayout,
-    QLabel, QProgressBar, QPushButton, QSizePolicy,
-    QSpacerItem, QVBoxLayout, QWidget)
+from PySide6.QtCore import QCoreApplication, QMetaObject, QSize, Qt
+from PySide6.QtGui import QFont, QPixmap
+from PySide6.QtWidgets import (
+    QFrame, QHBoxLayout,QLabel, 
+    QProgressBar, QPushButton, QSizePolicy,
+    QSpacerItem, QVBoxLayout
+    )
 
 class DowloadWindow(object):
     def setupUi(self, main_dowload_dialog):
@@ -43,7 +40,7 @@ class DowloadWindow(object):
         self.img_bar = QLabel(self.progresbar_frame)
         self.img_bar.setObjectName(u"img_bar")
         self.img_bar.setMaximumSize(QSize(50, 50))
-        self.img_bar.setPixmap(QPixmap(u"./assets/icons/downloading.png"))
+        self.img_bar.setPixmap(QPixmap(u"assets/icons/downloading.png"))
         self.img_bar.setScaledContents(True)
 
         self.horizontalLayout_2.addWidget(self.img_bar)
@@ -117,6 +114,6 @@ class DowloadWindow(object):
     def retranslateUi(self, main_dowload_dialog):
         main_dowload_dialog.setWindowTitle(QCoreApplication.translate("main_dowload_dialog", u"To download", None))
         self.img_bar.setText("")
-        self.track_name.setText(QCoreApplication.translate("main_dowload_dialog", u"", None))
+        self.track_name.setText("")
         self.pushButton_cancel.setText(QCoreApplication.translate("main_dowload_dialog", u"Cancel", None))
         self.pushButton_exit.setText(QCoreApplication.translate("main_dowload_dialog", u"Exit", None))
