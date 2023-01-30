@@ -9,8 +9,16 @@ You can download the latest executable version [here](https://github.com/CoffeSi
 
 Install the following dependencies if you want to run from source code
 
-`pip install -r requirements.txt`
+```bash
+pip install -r requirements.txt
+```
 
+To transform .ui files to python classes use
+
+```bash
+pyside6-uic window.ui > window.py
+```
+Remember to have the dependencies installed first. You can read more here: [https://doc.qt.io/qtforpython/tutorials/](https://doc.qt.io/qtforpython/tutorials/basictutorial/uifiles.html "https://doc.qt.io/qtforpython/tutorials/")
 ### Get your Spotify API KEY
 **Go to https://developer.spotify.com/dashboard to get your *client_id* and *client_secret***
 
