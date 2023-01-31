@@ -1,5 +1,5 @@
-import requests
 from requests.structures import CaseInsensitiveDict
+from functions.request import postData, getData
 import base64
 import json
 
@@ -24,7 +24,7 @@ class spotifyPlay:
         headers["Authorization"] = f"Basic {encoded}"
         headers["Content-Type"] = "application/x-www-form-urlencoded"
         data = "grant_type=client_credentials"
-        resp = requests.post(url, headers=headers, data=data)
+        resp = postData(url, data, headers)
         jsonLoads = json.loads(resp.content.decode("utf-8"))
         if resp.status_code != 200:
             return jsonLoads['error'], resp.status_code
@@ -38,7 +38,7 @@ class spotifyPlay:
         headers = CaseInsensitiveDict()
         headers["Authorization"] = f"Bearer {bearer[0]}"
         headers["Content-Type"] = "application/json"
-        resp = requests.get(url, headers=headers)
+        resp = getData(url, headers=headers)
         return resp.content.decode("utf-8"), resp.status_code
     
     def getTracksPlaylist(self, id:str) -> tuple[None | list, int, str]: #returns an list with song name and author [namePlayList][name, author]
@@ -80,7 +80,7 @@ class spotifyPlay:
         headers = CaseInsensitiveDict()
         headers["Authorization"] = f"Bearer {bearer[0]}"
         headers["Content-Type"] = "application/json"
-        resp = requests.get(url, headers=headers)
+        resp = getData(url, headers=headers)
         if resp.status_code != 200:
             return  None, resp.status_code, self.errorMsj(resp.content.decode("utf-8"))
 
