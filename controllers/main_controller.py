@@ -12,7 +12,6 @@ from controllers.main_controller_spotify_api import MainWindowQDialogApi
 from controllers.main_controller_dowload_location import MainWindowQDialogDowloadLocation
 from controllers.main_controller_about import MainWindowAbout
 
-
 class MainWindowForm(QMainWindow, MainWindow):
     
     def __init__(self) -> None:

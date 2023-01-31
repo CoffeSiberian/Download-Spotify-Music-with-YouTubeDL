@@ -38,5 +38,5 @@ class Validations:
             os.mkdir(f'{dirt}/music')
         return True
     
-    def removeFileMusic(dirt, playlistName, nameFile, remaining) -> None: #delete bad downloaded files (download not finish)
+    def removeFileMusic(dirt: str, playlistName: str, nameFile: str, remaining: str) -> None: #delete bad downloaded files (download not finish)
         os.remove(f'{dirt}/music/{playlistName}/[{remaining}] - {nameFile}.mp3')

@@ -1,14 +1,14 @@
 from PySide6.QtWidgets import QDialog, QMessageBox
 from PySide6.QtCore import QRunnable, Slot, Signal, QObject, QThreadPool
 from PySide6.QtGui import QCloseEvent
-from PySide6.QtGui import QIcon, QIconEngine
+from PySide6.QtGui import QIcon
 
 from views.main_dowload import DowloadWindow
 from functions.validations import Validations
 from functions.spotifyapi import spotifyPlay
 from functions.youtubeapi import youtube
+from functions.request import getData
 
-import requests
 import traceback
 import sys
 
@@ -104,7 +104,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         msgBox.setStandardButtons(QMessageBox.StandardButton.Ok)
         self.statusChange(False)
         msgBox.exec()
-    
+
     def changeStatusDowload(self, filename, total_size):
         self.track_name.setText(filename)
         self.progressBardowload.setRange(0, total_size)
@@ -131,7 +131,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         nameFile = Validations.fileNameCheck(nameFile)
         headers = {'content-type':'audio/webm', 'Range': 'bytes=0-'}
         filename = f'{remaining} - {nameFile}.mp3'
-        response = requests.get(url=url, headers=headers , stream=True)
+        response = getData(url=url, headers=headers , stream=True)
         total_size = int(response.headers.get('content-length'))
         block_size = 1024
         dowloadedSize = 0
@@ -142,7 +142,8 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
                 dowloadedSize+=len(r)
                 progress_callback.emit(dowloadedSize)
                 file.write(r)
-        return True
+        if total_size == dowloadedSize: return True
+        else: return False
 
     def queryYTurlPlaylist(
         self, id: str, api: spotifyPlay, yt_dl: youtube, dirt: str, 
@@ -154,7 +155,6 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         '''
         js = api.getTracksPlaylist(id)
         if js[1] != 200:
-            print(js[2])
             notFound.emit(str(js[1]), js[2], QMessageBox.Icon.Warning)
             return False
         playlistName = Validations.fileNameCheck(js[2])
@@ -175,22 +175,19 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
             suple += 1
             name = f'{r[0]} - {r[1]}'
             url_download = yt_dl.search(name)['entries'][0]['url']
-            try:
-                if self.download(url_download, name, playlistName, f'[{suple}]', dirt, progress_callback, iteration):
-                    Validations.downloadLog(dirt, playlistName, suple)
-                else:
-                    Validations.removeFileMusic(dirt, playlistName, name, suple)
-                if suple == music_count:
-                    self.statusChange(False)
-                    return True
-            except:
-                name = Validations.fileNameCheck(name)
+
+            dowload = self.download(url_download, name, playlistName, f'[{suple}]', dirt, progress_callback, iteration)
+            if not dowload:
                 Validations.removeFileMusic(dirt, playlistName, name, suple)
-                return False
+            else:
+                Validations.downloadLog(dirt, playlistName, suple)
+            if suple == music_count:
+                self.statusChange(False)
+                return True
 
     def queryYTurlTrack(
         self, id: str, api: spotifyPlay, yt_dl: youtube, dirt: str, 
-        progress_callback: WorkerSignals, notFound: WorkerSignals, iteration: WorkerSignals) -> bool:
+        progress_callback: WorkerSignals, notFound: WorkerSignals, iteration: WorkerSignals):
         '''
         get the link of the song in yt_dlp and 
         start downloading (this function is only used to download tracks)
@@ -204,11 +201,11 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         Validations.createMusicFolder(dirt)
         Validations.createFolderList(dirt, nameFolder)
         url_download = yt_dl.search(trackName)['entries'][0]['url']
-        try:
-            self.download(url_download, trackName, nameFolder, '0', dirt, progress_callback, iteration)
+
+        dowload = self.download(url_download, trackName, nameFolder, '[0]', dirt, progress_callback, iteration)
+        if not dowload:
+            Validations.removeFileMusic(dirt, nameFolder, trackName, '0')
             self.statusChange(False)
-            return True
-        except:
-            name = Validations.fileNameCheck(name)
-            Validations.removeFileMusic(dirt, nameFolder, name, '0')
             return False
+        self.statusChange(False)
+        return True
