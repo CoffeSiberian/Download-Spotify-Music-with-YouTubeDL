@@ -21,13 +21,14 @@ class MainWindowFormDowload(QDialog, DowloadMenuLink):
         self.dowload_menu_dowload_botton.clicked.connect(self.getUrl)
         self.dowload_menu_cancel_botton.clicked.connect(self.close)
 
-    def messageBox(self, title, lowInfo, level, details) -> None:
+    def messageBox(self, title: str, lowInfo: str, level: QMessageBox.Icon, details:str) -> None:
         msgBox = QMessageBox()
         msgBox.setWindowTitle(title)
+        self.setWindowIcon(QIcon('./assets/icons/link.png'))
         msgBox.setText(lowInfo)
         msgBox.setIcon(level)
         msgBox.setDetailedText(details)
-        msgBox.setStandardButtons(QMessageBox.Ok)
+        msgBox.setStandardButtons(QMessageBox.StandardButton.Ok)
         msgBox.detailedText()
         msgBox.exec()
 
@@ -44,19 +45,19 @@ class MainWindowFormDowload(QDialog, DowloadMenuLink):
             self.w.checkTrackOrPlayList()
         else:
             self.messageBox('Invalid URL', 'The provided url is invalid', 
-            QMessageBox.Warning, 'Invalid URL')
+            QMessageBox.Icon.Warning, 'Invalid URL')
 
     def checkConfig(self) -> bool:
         if self.__values[0] == '' or self.__values[1] == '':
             self.close()
             self.messageBox('Not Found API', 'Settings your API key first', 
-            QMessageBox.Warning, 'Go to settings and select the "Spotify API KEY" option')
+            QMessageBox.Icon.Warning, 'Go to settings and select the "Spotify API KEY" option')
             return False
 
     '''
     download functions
     '''
-    def splitURL(self, url) -> str or bool: #get id from url playlist or track
+    def splitURL(self, url: str) -> str | bool: #get id from url playlist or track
         try:
             start = url.split(sep='?')[0]
             return start.split(sep='/')[4]

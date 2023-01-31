@@ -85,7 +85,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
             return event.ignore()
         self.statusChange(False)
 
-    def dowloadProgres(self, bits) -> None: #set a progress bar status
+    def dowloadProgres(self, bits: int) -> None: #set a progress bar status
         self.progressBardowload.setValue(bits)
 
     def thread_complete(self, status: bool) -> None: #when the download thread ends, this function is executed
@@ -105,7 +105,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         self.statusChange(False)
         msgBox.exec()
 
-    def changeStatusDowload(self, filename, total_size):
+    def changeStatusDowload(self, filename: str, total_size: int):
         self.track_name.setText(filename)
         self.progressBardowload.setRange(0, total_size)
         self.pushButton_cancel.setEnabled(True)
