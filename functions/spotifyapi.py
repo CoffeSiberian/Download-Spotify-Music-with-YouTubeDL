@@ -30,7 +30,7 @@ class spotifyPlay:
             return jsonLoads['error'], resp.status_code
         return jsonLoads['access_token'], resp.status_code
 
-    def getPlaylist(self, id:str) -> tuple[dict | str, int]: #return dict playlist
+    def getPlaylist(self, id:str) -> tuple[dict, int]: #return dict playlist
         bearer = self.getBearer()
         if bearer[1] != 200:
             return bearer
@@ -43,7 +43,7 @@ class spotifyPlay:
     
     def getTracksPlaylist(self, id:str) -> tuple[None | list, int, str]: #returns an list with song name and author [namePlayList][name, author]
         info = self.getPlaylist(id)
-        if info[1] != 200: return None, info[1], info["error"]['message']
+        if info[1] != 200: return None, info[1], self.errorMsj(info[0])
 
         infoConten = json.loads(info[0])
         playlist = infoConten['tracks']
@@ -71,21 +71,33 @@ class spotifyPlay:
                 iterator += 1
         return rescueTracks, info[1], infoConten['name']
     
-    def getTrack(self, id:str) -> tuple[str, int]:
+    def getTrack(self, id:str) -> tuple[str | None, int, str | None]:
         bearer = self.getBearer()
         if bearer[1] != 200:
-            return bearer
+            return None, bearer[1], self.errorMsj(bearer[0])
 
         url = f'https://api.spotify.com/v1/tracks/{id}'
         headers = CaseInsensitiveDict()
         headers["Authorization"] = f"Bearer {bearer[0]}"
         headers["Content-Type"] = "application/json"
         resp = requests.get(url, headers=headers)
-        get_json = json.loads(resp.content)
         if resp.status_code != 200:
-            return get_json['error']['message'], resp.status_code
+            return  None, resp.status_code, self.errorMsj(resp.content.decode("utf-8"))
 
+        get_json = json.loads(resp.content)
         name = get_json['name']
         artists = get_json['artists'][0]['name']
         rescueTrack = f'{name} - {artists}'
-        return rescueTrack, bearer[1]
+        return rescueTrack, resp.status_code, None
+    
+    def errorMsj(self, error: str) -> str:
+        msj = None
+        try:
+            loaded = json.loads(error)
+            msj = loaded["error"]['message']
+        except:
+            try:
+                loaded = json.loads(error)
+                msj = loaded["error"]
+            except: msj = error
+        return msj
