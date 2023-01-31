@@ -21,6 +21,7 @@ sdist/
 var/
 wheels/
 pip-wheel-metadata/
+thunder-tests/
 share/python-wheels/
 *.egg-info/
 .installed.cfg

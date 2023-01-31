@@ -4,7 +4,7 @@ import base64
 import json
 
 class spotifyPlay:
-    def __init__(self, clienId, clienSecret) -> None:
+    def __init__(self, clienId: str, clienSecret: str) -> None:
         self.__clienId = clienId
         self.__clienSecret = clienSecret
     
@@ -16,7 +16,7 @@ class spotifyPlay:
     def clienSecret(self) -> str:
         return self.__clienSecret
 
-    def getBearer(self) -> str: #code to access data (the code is temporary)
+    def getBearer(self) -> tuple[str, int]: #code to access data (the code is temporary)
         concat = f'{self.clienId}:{self.clienSecret}'
         encoded = base64.b64encode(bytes(concat, "utf-8")).decode(("utf-8"))
         url = "https://accounts.spotify.com/api/token"
@@ -26,22 +26,27 @@ class spotifyPlay:
         data = "grant_type=client_credentials"
         resp = requests.post(url, headers=headers, data=data)
         jsonLoads = json.loads(resp.content.decode("utf-8"))
-        return jsonLoads['access_token']
+        if resp.status_code != 200:
+            return jsonLoads['error'], resp.status_code
+        return jsonLoads['access_token'], resp.status_code
 
-    def getPlaylist(self, id) -> dict: #return dict playlist
+    def getPlaylist(self, id:str) -> tuple[dict | str, int]: #return dict playlist
+        bearer = self.getBearer()
+        if bearer[1] != 200:
+            return bearer
         url = f'https://api.spotify.com/v1/playlists/{id}'
         headers = CaseInsensitiveDict()
-        headers["Authorization"] = f"Bearer {self.getBearer()}"
+        headers["Authorization"] = f"Bearer {bearer[0]}"
         headers["Content-Type"] = "application/json"
         resp = requests.get(url, headers=headers)
-        return resp.content
+        return resp.content.decode("utf-8"), resp.status_code
     
-    def getTracksPlaylist(self, id) -> list: #returns an list with song name and author [namePlayList][name, author]
-        get_json = json.loads(self.getPlaylist(id))
-        try:
-            playlist = get_json['tracks']
-        except KeyError:
-            return [get_json['error']['message'], get_json['error']['status']]
+    def getTracksPlaylist(self, id:str) -> tuple[None | list, int, str]: #returns an list with song name and author [namePlayList][name, author]
+        info = self.getPlaylist(id)
+        if info[1] != 200: return None, info[1], info["error"]['message']
+
+        infoConten = json.loads(info[0])
+        playlist = infoConten['tracks']
         rescueTracks = []
         iterator = 0
         while True:
@@ -49,7 +54,11 @@ class spotifyPlay:
                 if playlist['next'] == None:
                     break
                 offsetUp = str(playlist['offset']+100)
-                playlist = json.loads(self.getPlaylist(f'{id}/tracks?offset={offsetUp}&limit=100'))
+                infoNext = self.getPlaylist(f'{id}/tracks?offset={offsetUp}&limit=100')
+                if infoNext[1] != 200:
+                    return None, infoNext[1], infoNext["error"]['message']
+
+                playlist = json.loads(infoNext[0])
                 iterator = 0
             try:
                 name = playlist['items'][iterator]['track']['name']
@@ -60,19 +69,23 @@ class spotifyPlay:
                 break
             except TypeError:
                 iterator += 1
-        return rescueTracks, 200, get_json['name']
+        return rescueTracks, info[1], infoConten['name']
     
-    def getTrack(self, id) -> list:
+    def getTrack(self, id:str) -> tuple[str, int]:
+        bearer = self.getBearer()
+        if bearer[1] != 200:
+            return bearer
+
         url = f'https://api.spotify.com/v1/tracks/{id}'
         headers = CaseInsensitiveDict()
-        headers["Authorization"] = f"Bearer {self.getBearer()}"
+        headers["Authorization"] = f"Bearer {bearer[0]}"
         headers["Content-Type"] = "application/json"
         resp = requests.get(url, headers=headers)
         get_json = json.loads(resp.content)
-        try:
-            name = get_json['name']
-            artists = get_json['artists'][0]['name']
-        except KeyError:
-            return [get_json['error']['message'], get_json['error']['status']]
+        if resp.status_code != 200:
+            return get_json['error']['message'], resp.status_code
+
+        name = get_json['name']
+        artists = get_json['artists'][0]['name']
         rescueTrack = f'{name} - {artists}'
-        return rescueTrack, 200
+        return rescueTrack, bearer[1]
