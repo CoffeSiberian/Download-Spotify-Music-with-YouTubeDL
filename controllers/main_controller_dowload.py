@@ -1,10 +1,12 @@
 from PySide6.QtWidgets import QDialog, QMessageBox
 from PySide6.QtCore import QRunnable, Slot, Signal, QObject, QThreadPool
 from PySide6.QtGui import QCloseEvent
-from PySide6.QtGui import QIcon
+from PySide6.QtGui import QIcon, QIconEngine
 
 from views.main_dowload import DowloadWindow
 from functions.validations import Validations
+from functions.spotifyapi import spotifyPlay
+from functions.youtubeapi import youtube
 
 import requests
 import traceback
@@ -16,7 +18,7 @@ class WorkerSignals(QObject):
     error = Signal(tuple)
     result = Signal(object)
     progress = Signal(int)
-    notFounds = Signal(str, str, object, str)
+    notFounds = Signal(str, str, object)
     iteration = Signal(str, int)
 
 class Worker(QRunnable):
@@ -48,7 +50,7 @@ class Worker(QRunnable):
 
 class MainWindowFormDowloadBar(QDialog, DowloadWindow):
 
-    def __init__(self, getId, api, yt_dl, dir, buttonObj) -> None:
+    def __init__(self, getId: str, api: spotifyPlay, yt_dl: youtube, dir: str, buttonObj: str) -> None:
         self.__status = True
         super().__init__()
         self.setupUi(self)
@@ -71,34 +73,36 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
     def status(self) -> bool:
         return self.__status
     @status.setter
-    def status(self, data) -> None:
+    def status(self, data: bool) -> None:
         self.__status = data
     def statusChange(self, data=False) -> None:
         self.status = data
     #####
 
     #events
-    def closeEvent(self, event:QCloseEvent) -> None: #stop download process on close window event
+    def closeEvent(self, event: QCloseEvent) -> None: #stop download process on close window event
         if self.__status:
             return event.ignore()
-        self.statusChange()
+        self.statusChange(False)
+
     def dowloadProgres(self, bits) -> None: #set a progress bar status
         self.progressBardowload.setValue(bits)
-    def thread_complete(self, status) -> None: #when the download thread ends, this function is executed
+
+    def thread_complete(self, status: bool) -> None: #when the download thread ends, this function is executed
         if status:
-            self.messageBox('Download finished', 'Your download finished', QMessageBox.Information, 'Ok')
+            self.messageBox('Download finished', 'Your download finished', QMessageBox.Icon.Information)
         self.pushButton_exit.setEnabled(True)
         self.pushButton_cancel.setEnabled(False)
     ####
 
-    def messageBox(self, title, lowInfo, level, details):
+    def messageBox(self, title: str, lowInfo: str, level: QMessageBox.Icon):
         msgBox = QMessageBox()
         msgBox.setWindowTitle(title)
+        msgBox.setWindowIcon(QIcon('./assets/icons/downloading.png'))
         msgBox.setText(lowInfo)
         msgBox.setIcon(level)
-        msgBox.setDetailedText(details)
-        msgBox.setStandardButtons(QMessageBox.Ok)
-        msgBox.detailedText()
+        msgBox.setStandardButtons(QMessageBox.StandardButton.Ok)
+        self.statusChange(False)
         msgBox.exec()
     
     def changeStatusDowload(self, filename, total_size):
@@ -118,34 +122,40 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         worker.signals.notFounds.connect(self.messageBox)
         worker.signals.iteration.connect(self.changeStatusDowload)
         # Execute
-        self.threadpool.start(worker)        
+        self.threadpool.start(worker)
 
-    def download(self, url, nameFile, playListName, remaining, dirt, progress_callback, iteration) -> bool:
+    def download(
+        self, url: str, nameFile: str, playListName: str, remaining: str, dirt: str, 
+        progress_callback: WorkerSignals, iteration: WorkerSignals) -> bool:
+
         nameFile = Validations.fileNameCheck(nameFile)
         headers = {'content-type':'audio/webm', 'Range': 'bytes=0-'}
         filename = f'{remaining} - {nameFile}.mp3'
-        response = requests.get(url=url, headers=headers ,stream=True)
+        response = requests.get(url=url, headers=headers , stream=True)
         total_size = int(response.headers.get('content-length'))
         block_size = 1024
         dowloadedSize = 0
         iteration.emit(filename, total_size)
         with open(f'{dirt}/music/{playListName}/{filename}', 'wb') as file:
             for r in response.iter_content(block_size):
-                if self.__status == False:
-                    return False
+                if not self.status: return False
                 dowloadedSize+=len(r)
                 progress_callback.emit(dowloadedSize)
                 file.write(r)
         return True
 
-    def queryYTurlPlaylist(self, id, api, yt_dl, dirt, progress_callback, notFound, iteration) -> bool: #get url music from youtube_dl
+    def queryYTurlPlaylist(
+        self, id: str, api: spotifyPlay, yt_dl: youtube, dirt: str, 
+        progress_callback: WorkerSignals, notFound: WorkerSignals, iteration: WorkerSignals) -> bool:
+
         '''
         get the link of the song in yt_dlp and 
         start downloading (this function is only used to download playlist)
         '''
         js = api.getTracksPlaylist(id)
         if js[1] != 200:
-            notFound.emit(str(js[1]), 'error occurred', QMessageBox.Warning, js[0])
+            print(js[2])
+            notFound.emit(str(js[1]), js[2], QMessageBox.Icon.Warning)
             return False
         playlistName = Validations.fileNameCheck(js[2])
         music_list = js[0]
@@ -160,7 +170,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
             suple = int(logRead)
 
         for r in music_list[suple:]:
-            if self.__status == False:
+            if self.status == False:
                 break
             suple += 1
             name = f'{r[0]} - {r[1]}'
@@ -171,21 +181,23 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
                 else:
                     Validations.removeFileMusic(dirt, playlistName, name, suple)
                 if suple == music_count:
-                    self.statusChange()
+                    self.statusChange(False)
                     return True
             except:
                 name = Validations.fileNameCheck(name)
                 Validations.removeFileMusic(dirt, playlistName, name, suple)
                 return False
 
-    def queryYTurlTrack(self, id, api, yt_dl, dirt, progress_callback, notFound, iteration) -> bool: #get url music from youtube_dl
+    def queryYTurlTrack(
+        self, id: str, api: spotifyPlay, yt_dl: youtube, dirt: str, 
+        progress_callback: WorkerSignals, notFound: WorkerSignals, iteration: WorkerSignals) -> bool:
         '''
         get the link of the song in yt_dlp and 
         start downloading (this function is only used to download tracks)
         '''
         js = api.getTrack(id)
         if js[1] != 200:
-            notFound.emit(str(js[1]), 'error occurred', QMessageBox.Warning, js[0])
+            notFound.emit(str(js[1]), js[2], QMessageBox.Icon.Warning)
             return False
         trackName = Validations.fileNameCheck(js[0])
         nameFolder = 'manual_track'
@@ -194,7 +206,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         url_download = yt_dl.search(trackName)['entries'][0]['url']
         try:
             self.download(url_download, trackName, nameFolder, '0', dirt, progress_callback, iteration)
-            self.statusChange()
+            self.statusChange(False)
             return True
         except:
             name = Validations.fileNameCheck(name)

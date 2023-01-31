@@ -9,7 +9,7 @@ from functions.youtubeapi import youtube
 
 class MainWindowFormDowload(QDialog, DowloadMenuLink):
 
-    def __init__(self, buttonObj) -> None:
+    def __init__(self, buttonObj: str) -> None:
         super().__init__()
         self.setupUi(self)
         self.__buttonObj = buttonObj

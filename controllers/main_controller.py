@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QMainWindow
+from PySide6.QtWidgets import QMainWindow, QPushButton
 from PySide6.QtCore import QStandardPaths, QDir
 from PySide6.QtGui import QIcon
 
@@ -30,7 +30,7 @@ class MainWindowForm(QMainWindow, MainWindow):
         self.actionHelp.triggered.connect(self.openAbout)
         self.actionExit.triggered.connect(self.close)
 
-    def openDowloadPlayList(self, buttonObj):
+    def openDowloadPlayList(self, buttonObj: QPushButton):
         self.w = MainWindowFormDowload(buttonObj.objectName())
         self.w.show()
     
