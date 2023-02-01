@@ -171,10 +171,19 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         logRead = readLog(self.dir, playlistName)
         music_count = len(music_list)
         suple = 0
-        if logRead == False:
-            pass
-        else:
+        if logRead != False:
             suple = int(logRead)
+            if music_count == suple: 
+                notFound.emit(
+                    "Attention",
+'''
+You had already finished downloading this playlist.
+
+If it's an error, delete the folder and try again.
+''',
+                    QMessageBox.Icon.Warning,
+                    False)
+                return False
 
         for r in music_list[suple:]:
             if self.status == False:
