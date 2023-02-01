@@ -14,6 +14,7 @@ from functions.request import getData
 
 import traceback
 import sys
+from typing import Optional
 
 class WorkerSignals(QObject):
 
@@ -21,7 +22,7 @@ class WorkerSignals(QObject):
     error = Signal(tuple)
     result = Signal(object)
     progress = Signal(int)
-    notFounds = Signal(str, str, object)
+    notFounds = Signal(str, str, object, bool)
     iteration = Signal(str, int)
 
 class Worker(QRunnable):
@@ -98,14 +99,14 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         self.pushButton_cancel.setEnabled(False)
     ####
 
-    def messageBox(self, title: str, lowInfo: str, level: QMessageBox.Icon):
+    def messageBox(self, title: str, lowInfo: str, level: QMessageBox.Icon, changeStatus: bool = False):
         msgBox = QMessageBox()
         msgBox.setWindowTitle(title)
         msgBox.setWindowIcon(QIcon('./assets/icons/downloading.png'))
         msgBox.setText(lowInfo)
         msgBox.setIcon(level)
         msgBox.setStandardButtons(QMessageBox.StandardButton.Ok)
-        self.statusChange(False)
+        self.statusChange(changeStatus)
         msgBox.exec()
 
     def changeStatusDowload(self, filename: str, total_size: int):
@@ -157,7 +158,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         '''
         js = self.api.getTracksPlaylist(self.getId)
         if js[1] != 200:
-            notFound.emit(str(js[1]), js[2], QMessageBox.Icon.Warning)
+            notFound.emit(str(js[1]), js[2], QMessageBox.Icon.Warning, False)
             return False
         playlistName = fileNameCheck(js[2])
         music_list = js[0]
@@ -176,14 +177,19 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
                 break
             suple += 1
             name = f'{r[0]} - {r[1]}'
-            # error
-            url_download = self.yt_dl.search(name)['entries'][0]['url']
-
-            dowload = self.download(url_download, name, playlistName, f'[{suple}]', self.dir, progress_callback, iteration)
-            if not dowload:
-                removeFileMusic(self.dir, playlistName, name, suple)
+            search = self.yt_dl.search(name)
+            
+            if search[1] == 200:
+                url_download = search[0]['url']
+                dowload = self.download(url_download, name, playlistName, f'[{suple}]', self.dir, progress_callback, iteration)
+                if not dowload:
+                    removeFileMusic(self.dir, playlistName, name, suple)
+                else:
+                    downloadLog(self.dir, playlistName, suple)
             else:
+                notFound.emit(str(search[1]), search[0]["error"], QMessageBox.Icon.Warning, True)
                 downloadLog(self.dir, playlistName, suple)
+
             if suple == music_count:
                 self.statusChange(False)
                 return True
@@ -197,7 +203,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         '''
         js = self.api.getTrack(self.getId)
         if js[1] != 200:
-            notFound.emit(str(js[1]), js[2], QMessageBox.Icon.Warning)
+            notFound.emit(str(js[1]), js[2], QMessageBox.Icon.Warning, False)
             return False
         trackName = fileNameCheck(js[0])
         nameFolder = 'manual_track'

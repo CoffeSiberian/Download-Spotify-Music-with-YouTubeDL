@@ -1,8 +1,9 @@
+from typing import Any
 from yt_dlp import YoutubeDL
 
 class youtube:
     def __init__(self) -> None:
-        self.__ytdl_options = {
+        self.ytdl_options = {
         'format': 'bestaudio/best',
         'no_warnings': True,
         'restrictfilenames': True,
@@ -12,12 +13,20 @@ class youtube:
         'logtostderr': False,
         'quiet': True
         }
-        self.__ytdl = YoutubeDL(self.__ytdl_options)
+        self.ytdl = YoutubeDL(self.ytdl_options)
 
-    def findVideoInfoURL(self, url) -> list:
-        vidinfo = self.__ytdl.extract_info(url, download=False)
-        return vidinfo
+    def findVideoInfoURL(self, url: str) -> tuple[dict, int]:
+        '''
+        Returns the video and an http code
+        '''
+        vidinfo = self.ytdl.extract_info(url, download=False)
+        if vidinfo == None: return {"error":"Connection or search failed"}, 400
+        return vidinfo, 200
     
-    def search(self, find) -> list:
-        vidinfo = self.__ytdl.extract_info(f'ytsearch:{find}', download=False)
-        return vidinfo
+    def search(self, find: str) -> tuple[dict, int]:
+        '''
+        Returns the first search result and an http code
+        '''
+        vidinfo = self.ytdl.extract_info(f'ytsearch:{find}', download=False)
+        if vidinfo['entries'][0] == None: return {"error":"Connection or search failed"}, 400
+        return vidinfo['entries'][0], 200
