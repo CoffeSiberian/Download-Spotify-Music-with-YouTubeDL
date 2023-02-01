@@ -178,7 +178,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
             suple += 1
             name = f'{r[0]} - {r[1]}'
             search = self.yt_dl.search(name)
-            
+
             if search[1] == 200:
                 url_download = search[0]['url']
                 dowload = self.download(url_download, name, playlistName, f'[{suple}]', self.dir, progress_callback, iteration)
@@ -209,12 +209,18 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         nameFolder = 'manual_track'
         createMusicFolder(self.dir)
         createFolderList(self.dir, nameFolder)
-        url_download = self.yt_dl.search(trackName)['entries'][0]['url']
+        search = self.yt_dl.search(trackName)
 
-        dowload = self.download(url_download, trackName, nameFolder, '[0]', self.dir, progress_callback, iteration)
-        if not dowload:
-            removeFileMusic(self.dir, nameFolder, trackName, '0')
-            self.statusChange(False)
+        if search[1] == 200:
+            url_download = search[0]['url']
+            dowload = self.download(url_download, trackName, nameFolder, '[0]', self.dir, progress_callback, iteration)
+
+            if not dowload:
+                removeFileMusic(self.dir, nameFolder, trackName, '0')
+                self.statusChange(False)
+                return False
+        else:
+            notFound.emit(str(search[1]), search[0]["error"], QMessageBox.Icon.Warning, False)
             return False
         self.statusChange(False)
         return True
