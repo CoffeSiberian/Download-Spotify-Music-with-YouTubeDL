@@ -2,7 +2,7 @@ from PySide6.QtWidgets import QDialog, QStyle, QLineEdit, QFileDialog, QMessageB
 from PySide6.QtCore import QStandardPaths, QDir
 from PySide6.QtGui import QIcon
 
-from functions.jsonedit import configEdit
+from functions.jsonedit import saveValue, getValue
 
 from views.main_dowload_location import DowloadLocation
 
@@ -42,12 +42,12 @@ class MainWindowQDialogDowloadLocation(QDialog, DowloadLocation):
 
     def getTextAfterPushSave(self):
         dir = self.lineEdit_location.text()
-        configEdit.saveValue('dir', dir)
+        saveValue('dir', dir)
         QMessageBox.information(self, 'Saved!', 
         'Your modification was saved', 
         QMessageBox.Ok)
         self.close()
     
     def getNowData(self):
-        data = configEdit.getValue()
+        data = getValue()
         return data[2]

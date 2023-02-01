@@ -3,7 +3,7 @@ from PySide6.QtGui import QIcon
 
 from views.main_dowload_menu import DowloadMenuLink
 from controllers.main_controller_dowload import MainWindowFormDowloadBar
-from functions.jsonedit import configEdit
+from functions.jsonedit import getValue
 from functions.spotifyapi import spotifyPlay
 from functions.youtubeapi import youtube
 
@@ -13,7 +13,7 @@ class MainWindowFormDowload(QDialog, DowloadMenuLink):
         super().__init__()
         self.setupUi(self)
         self.__buttonObj = buttonObj
-        self.__values = configEdit.getValue()
+        self.__values = getValue()
         self.__api = spotifyPlay(self.__values[0], self.__values[1])
         self.__yt_dl = youtube()
         self.setModal(True)

@@ -4,7 +4,7 @@ from PySide6.QtGui import QIcon
 
 from views.main_Window import MainWindow
 
-from functions.jsonedit import configEdit
+from functions.jsonedit import getValue, saveValue
 import webbrowser
 
 from controllers.main_controller_dowload_menu import MainWindowFormDowload
@@ -46,7 +46,7 @@ class MainWindowForm(QMainWindow, MainWindow):
         self.w.show()
     
     def defaultPath(self):
-        if configEdit.getValue()[2] == '':
+        if getValue()[2] == '':
             dir = QDir.fromNativeSeparators(
                     QStandardPaths.writableLocation(QStandardPaths.DownloadLocation))
-            configEdit.saveValue('dir', dir)
+            saveValue('dir', dir)

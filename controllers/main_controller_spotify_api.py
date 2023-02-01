@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QDialog, QMessageBox
 from PySide6.QtGui import QIcon
 
-from functions.jsonedit import configEdit
+from functions.jsonedit import saveValue, getValue
 
 from views.main_spotify_api import SpotifyConfig
 
@@ -24,13 +24,13 @@ class MainWindowQDialogApi(QDialog, SpotifyConfig):
     def getTextAfterPushSave(self):
         clientId = self.lineEdit_client_id.text()
         clientSecret = self.lineEdit_client_secret.text()
-        configEdit.saveValue('client_id', clientId)
-        configEdit.saveValue('client_secret', clientSecret)
+        saveValue('client_id', clientId)
+        saveValue('client_secret', clientSecret)
         QMessageBox.information(self, 'Saved!', 
         'Your modification was saved', 
         QMessageBox.Ok)
         self.close()
     
     def getNowData(self):
-        data = configEdit.getValue()
+        data = getValue()
         return data[0], data[1]
