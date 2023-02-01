@@ -155,7 +155,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         get the link of the song in yt_dlp and 
         start downloading (this function is only used to download playlist)
         '''
-        js = self.api.getTracksPlaylist(id)
+        js = self.api.getTracksPlaylist(self.getId)
         if js[1] != 200:
             notFound.emit(str(js[1]), js[2], QMessageBox.Icon.Warning)
             return False
@@ -195,7 +195,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         get the link of the song in yt_dlp and 
         start downloading (this function is only used to download tracks)
         '''
-        js = self.api.getTrack(id)
+        js = self.api.getTrack(self.getId)
         if js[1] != 200:
             notFound.emit(str(js[1]), js[2], QMessageBox.Icon.Warning)
             return False
