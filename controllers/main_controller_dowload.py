@@ -14,7 +14,7 @@ from functions.request import getData
 
 import traceback
 import sys
-from typing import Optional
+import time
 
 class WorkerSignals(QObject):
 
@@ -64,6 +64,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         self.api = api
         self.yt_dl = yt_dl
         self.dir = dir
+        self.modalMessageBoxStatus = False
 
         self.setModal(True)
         self.setWindowIcon(QIcon('./assets/icons/downloading.png'))
@@ -100,14 +101,17 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
     ####
 
     def messageBox(self, title: str, lowInfo: str, level: QMessageBox.Icon, changeStatus: bool = False):
+        self.modalMessageBoxStatus = True
+        self.statusChange(changeStatus)
         msgBox = QMessageBox()
         msgBox.setWindowTitle(title)
         msgBox.setWindowIcon(QIcon('./assets/icons/downloading.png'))
         msgBox.setText(lowInfo)
         msgBox.setIcon(level)
         msgBox.setStandardButtons(QMessageBox.StandardButton.Ok)
-        self.statusChange(changeStatus)
         msgBox.exec()
+        if msgBox.clickedButton() == msgBox.buttons()[0]:
+            self.modalMessageBoxStatus = False
 
     def changeStatusDowload(self, filename: str, total_size: int):
         self.track_name.setText(filename)
@@ -183,12 +187,15 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
                 url_download = search[0]['url']
                 dowload = self.download(url_download, name, playlistName, f'[{suple}]', self.dir, progress_callback, iteration)
                 if not dowload:
+                    notFound.emit("400", "Connection issues", QMessageBox.Icon.Warning, False)
                     removeFileMusic(self.dir, playlistName, name, suple)
                 else:
                     downloadLog(self.dir, playlistName, suple)
             else:
                 notFound.emit(str(search[1]), search[0]["error"], QMessageBox.Icon.Warning, True)
                 downloadLog(self.dir, playlistName, suple)
+                while self.modalMessageBoxStatus:
+                    time.sleep(0.5)
 
             if suple == music_count:
                 self.statusChange(False)
@@ -216,6 +223,7 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
             dowload = self.download(url_download, trackName, nameFolder, '[0]', self.dir, progress_callback, iteration)
 
             if not dowload:
+                notFound.emit("400", "Connection issues", QMessageBox.Icon.Warning, False)
                 removeFileMusic(self.dir, nameFolder, trackName, '0')
                 self.statusChange(False)
                 return False
