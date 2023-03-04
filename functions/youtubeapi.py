@@ -1,16 +1,16 @@
-from typing import Any
 from yt_dlp import YoutubeDL
 
 class youtube:
     def __init__(self) -> None:
         self.ytdl_options = {
-        'format': 'bestaudio/best',
+        'format': 'b',
         'no_warnings': True,
         'restrictfilenames': True,
         'noplaylist': True,
         'nocheckcertificate': True,
         'ignoreerrors': True,
         'logtostderr': False,
+        'windows-filenames': True,
         'quiet': True
         }
         self.ytdl = YoutubeDL(self.ytdl_options)
