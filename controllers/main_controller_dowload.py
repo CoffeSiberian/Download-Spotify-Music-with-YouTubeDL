@@ -137,15 +137,24 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         progress_callback: WorkerSignals, iteration: WorkerSignals) -> bool:
 
         nameFile = fileNameCheck(nameFile)
-        headers = {'content-type':'audio/webm', 'Range': 'bytes=0-'}
         filename = f'{remaining} - {nameFile}.mp3'
-        response = getData(url=url, headers=headers , stream=True)
+
+        # only get file headers info
+        response = getData(url=url, stream=True)
         total_size = int(response.headers.get('content-length'))
+        ############################
+
+        # range use to more speed dowload
+        headers = {'Accept': '*/*', 'Range': f'bytes=0-{total_size}'}
+        getFileUrl = f'{url}&range=0-{total_size}'
+        getFile = getData(url=getFileUrl, headers=headers, stream=True)
+        #################################
+
         block_size = 1024
         dowloadedSize = 0
         iteration.emit(filename, total_size)
         with open(f'{dirt}/music/{playListName}/{filename}', 'wb') as file:
-            for r in response.iter_content(block_size):
+            for r in getFile.iter_content(block_size):
                 if not self.status: return False
                 dowloadedSize+=len(r)
                 progress_callback.emit(dowloadedSize)

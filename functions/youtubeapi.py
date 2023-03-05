@@ -3,7 +3,7 @@ from yt_dlp import YoutubeDL
 class youtube:
     def __init__(self) -> None:
         self.ytdl_options = {
-        'format': 'b',
+        'format': 'ba',
         'no_warnings': True,
         'restrictfilenames': True,
         'noplaylist': True,
