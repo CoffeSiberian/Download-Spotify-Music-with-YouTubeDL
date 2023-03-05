@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Dowload Spotify Music - By: SiberianCoffe</string>
+   <string>Download Spotify Music - By: SiberianCoffe</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="styleSheet">
@@ -195,7 +195,7 @@
                <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="text">
-               <string>Dowload PlayList</string>
+               <string>Download PlayList</string>
               </property>
               <property name="icon">
                <iconset>
@@ -229,7 +229,7 @@
                <cursorShape>PointingHandCursor</cursorShape>
               </property>
               <property name="text">
-               <string>Dowload Track</string>
+               <string>Download Track</string>
               </property>
               <property name="icon">
                <iconset>
@@ -418,7 +418,7 @@
      <normaloff>assets/icons/downloading.png</normaloff>assets/icons/downloading.png</iconset>
    </property>
    <property name="text">
-    <string>Dowload Location</string>
+    <string>Download Location</string>
    </property>
   </action>
   <action name="actionHelp">
