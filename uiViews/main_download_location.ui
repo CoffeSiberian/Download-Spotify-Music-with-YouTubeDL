@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>main_dowloadlocation_dialog</class>
- <widget class="QDialog" name="main_dowloadlocation_dialog">
+ <class>main_downloadlocation_dialog</class>
+ <widget class="QDialog" name="main_downloadlocation_dialog">
   <property name="geometry">
    <rect>
     <x>0</x>

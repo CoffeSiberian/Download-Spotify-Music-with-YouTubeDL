@@ -5,18 +5,18 @@ from PySide6.QtWidgets import (
     QLineEdit, QPushButton, QVBoxLayout
     )
 
-class DowloadLocation(object):
-    def setupUi(self, main_dowloadlocation_dialog):
-        if not main_dowloadlocation_dialog.objectName():
-            main_dowloadlocation_dialog.setObjectName(u"main_dowloadlocation_dialog")
-        main_dowloadlocation_dialog.resize(400, 200)
-        main_dowloadlocation_dialog.setMinimumSize(QSize(400, 200))
-        main_dowloadlocation_dialog.setMaximumSize(QSize(400, 200))
-        self.horizontalLayout = QHBoxLayout(main_dowloadlocation_dialog)
+class downloadLocation(object):
+    def setupUi(self, main_downloadlocation_dialog):
+        if not main_downloadlocation_dialog.objectName():
+            main_downloadlocation_dialog.setObjectName(u"main_downloadlocation_dialog")
+        main_downloadlocation_dialog.resize(400, 200)
+        main_downloadlocation_dialog.setMinimumSize(QSize(400, 200))
+        main_downloadlocation_dialog.setMaximumSize(QSize(400, 200))
+        self.horizontalLayout = QHBoxLayout(main_downloadlocation_dialog)
         self.horizontalLayout.setSpacing(0)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
-        self.background_frame_location = QFrame(main_dowloadlocation_dialog)
+        self.background_frame_location = QFrame(main_downloadlocation_dialog)
         self.background_frame_location.setObjectName(u"background_frame_location")
         self.background_frame_location.setFrameShape(QFrame.StyledPanel)
         self.background_frame_location.setFrameShadow(QFrame.Raised)
@@ -80,12 +80,12 @@ class DowloadLocation(object):
         self.horizontalLayout.addWidget(self.background_frame_location)
 
 
-        self.retranslateUi(main_dowloadlocation_dialog)
+        self.retranslateUi(main_downloadlocation_dialog)
 
-        QMetaObject.connectSlotsByName(main_dowloadlocation_dialog)
+        QMetaObject.connectSlotsByName(main_downloadlocation_dialog)
 
-    def retranslateUi(self, main_dowloadlocation_dialog):
-        main_dowloadlocation_dialog.setWindowTitle(QCoreApplication.translate("main_dowloadlocation_dialog", u"Select download folder", None))
-        self.title_cfg_label.setText(QCoreApplication.translate("main_dowloadlocation_dialog", u"Select download location", None))
-        self.lineEdit_location.setText(QCoreApplication.translate("main_dowloadlocation_dialog", u"c:/location", None))
-        self.pushButton_save.setText(QCoreApplication.translate("main_dowloadlocation_dialog", u"Save", None))
+    def retranslateUi(self, main_downloadlocation_dialog):
+        main_downloadlocation_dialog.setWindowTitle(QCoreApplication.translate("main_downloadlocation_dialog", u"Select download folder", None))
+        self.title_cfg_label.setText(QCoreApplication.translate("main_downloadlocation_dialog", u"Select download location", None))
+        self.lineEdit_location.setText(QCoreApplication.translate("main_downloadlocation_dialog", u"c:/location", None))
+        self.pushButton_save.setText(QCoreApplication.translate("main_downloadlocation_dialog", u"Save", None))

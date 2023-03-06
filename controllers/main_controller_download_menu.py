@@ -1,13 +1,13 @@
 from PySide6.QtWidgets import QDialog, QMessageBox
 from PySide6.QtGui import QIcon
 
-from views.main_dowload_menu import DowloadMenuLink
-from controllers.main_controller_dowload import MainWindowFormDowloadBar
+from views.main_download_menu import downloadMenuLink
+from controllers.main_controller_download import MainWindowFormdownloadBar
 from functions.jsonedit import getValue
 from functions.spotifyapi import spotifyPlay
 from functions.youtubeapi import youtube
 
-class MainWindowFormDowload(QDialog, DowloadMenuLink):
+class MainWindowFormdownload(QDialog, downloadMenuLink):
 
     def __init__(self, buttonObj: str) -> None:
         super().__init__()
@@ -18,8 +18,8 @@ class MainWindowFormDowload(QDialog, DowloadMenuLink):
         self.__yt_dl = youtube()
         self.setModal(True)
         self.setWindowIcon(QIcon('./assets/icons/link.png'))
-        self.dowload_menu_dowload_botton.clicked.connect(self.getUrl)
-        self.dowload_menu_cancel_botton.clicked.connect(self.close)
+        self.download_menu_download_botton.clicked.connect(self.getUrl)
+        self.download_menu_cancel_botton.clicked.connect(self.close)
 
     def messageBox(self, title: str, lowInfo: str, level: QMessageBox.Icon, details:str) -> None:
         msgBox = QMessageBox()
@@ -38,7 +38,7 @@ class MainWindowFormDowload(QDialog, DowloadMenuLink):
         url = self.textobox_link.text()
         getId = self.splitURL(url)
         if getId:
-            self.w = MainWindowFormDowloadBar(getId, self.__api, self.__yt_dl, 
+            self.w = MainWindowFormdownloadBar(getId, self.__api, self.__yt_dl, 
             self.__values[2], self.__buttonObj)
             self.close()
             self.w.show()

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>dialog_menu_dowload_link</class>
- <widget class="QDialog" name="dialog_menu_dowload_link">
+ <class>dialog_menu_download_link</class>
+ <widget class="QDialog" name="dialog_menu_download_link">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -60,7 +60,7 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="QLabel" name="title_dowload_menu">
+          <widget class="QLabel" name="title_download_menu">
            <property name="font">
             <font>
              <family>Arial</family>
@@ -99,7 +99,7 @@
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout">
             <item>
-             <spacer name="horizontal_spacer_dowload_2">
+             <spacer name="horizontal_spacer_download_2">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -153,7 +153,7 @@
              </widget>
             </item>
             <item>
-             <spacer name="horizontal_spacer_dowload_3">
+             <spacer name="horizontal_spacer_download_3">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -172,7 +172,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QFrame" name="manu_dowload_options_frame">
+       <widget class="QFrame" name="manu_download_options_frame">
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
         </property>
@@ -181,7 +181,7 @@
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <spacer name="horizontal_spacer_dowload_1">
+          <spacer name="horizontal_spacer_download_1">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
            </property>
@@ -194,7 +194,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="dowload_menu_dowload_botton">
+          <widget class="QPushButton" name="download_menu_download_botton">
            <property name="enabled">
             <bool>true</bool>
            </property>
@@ -205,12 +205,12 @@
             </size>
            </property>
            <property name="text">
-            <string>Dowload</string>
+            <string>Download</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="dowload_menu_cancel_botton">
+          <widget class="QPushButton" name="download_menu_cancel_botton">
            <property name="enabled">
             <bool>true</bool>
            </property>

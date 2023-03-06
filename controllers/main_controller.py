@@ -7,9 +7,9 @@ from views.main_Window import MainWindow
 from functions.jsonedit import getValue, saveValue
 import webbrowser
 
-from controllers.main_controller_dowload_menu import MainWindowFormDowload
+from controllers.main_controller_download_menu import MainWindowFormdownload
 from controllers.main_controller_spotify_api import MainWindowQDialogApi
-from controllers.main_controller_dowload_location import MainWindowQDialogDowloadLocation
+from controllers.main_controller_download_location import MainWindowQDialogdownloadLocation
 from controllers.main_controller_about import MainWindowAbout
 
 class MainWindowForm(QMainWindow, MainWindow):
@@ -20,25 +20,25 @@ class MainWindowForm(QMainWindow, MainWindow):
 
         self.defaultPath()
         self.setWindowIcon(QIcon('./assets/icons/img.ico'))
-        self.dowloadPlayList.clicked.connect(lambda: self.openDowloadPlayList(self.dowloadPlayList))
-        self.dowloadTrack.clicked.connect(lambda: self.openDowloadPlayList(self.dowloadTrack))
+        self.downloadPlayList.clicked.connect(lambda: self.opendownloadPlayList(self.downloadPlayList))
+        self.downloadTrack.clicked.connect(lambda: self.opendownloadPlayList(self.downloadTrack))
         self.gitHub.clicked.connect(lambda: webbrowser.open(
             'https://github.com/CoffeSiberian/Download-Spotify-Music-with-YouTubeDL'))
         self.actionSpotify_API_KEY.triggered.connect(self.openSpotifyApiCfg)
-        self.actionDowload_Location.triggered.connect(self.openDowloadLocation)
+        self.actiondownload_Location.triggered.connect(self.opendownloadLocation)
         self.actionHelp.triggered.connect(self.openAbout)
         self.actionExit.triggered.connect(self.close)
 
-    def openDowloadPlayList(self, buttonObj: QPushButton):
-        self.w = MainWindowFormDowload(buttonObj.objectName())
+    def opendownloadPlayList(self, buttonObj: QPushButton):
+        self.w = MainWindowFormdownload(buttonObj.objectName())
         self.w.show()
     
     def openSpotifyApiCfg(self):
         self.w=MainWindowQDialogApi()
         self.w.show()
     
-    def openDowloadLocation(self):
-        self.w=MainWindowQDialogDowloadLocation()
+    def opendownloadLocation(self):
+        self.w=MainWindowQDialogdownloadLocation()
         self.w.show()
     
     def openAbout(self):

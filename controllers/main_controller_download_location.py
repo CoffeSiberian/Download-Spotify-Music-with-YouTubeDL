@@ -4,9 +4,9 @@ from PySide6.QtGui import QIcon
 
 from functions.jsonedit import saveValue, getValue
 
-from views.main_dowload_location import DowloadLocation
+from views.main_download_location import downloadLocation
 
-class MainWindowQDialogDowloadLocation(QDialog, DowloadLocation):
+class MainWindowQDialogdownloadLocation(QDialog, downloadLocation):
 
     def __init__(self) -> None:
         super().__init__()

@@ -3,7 +3,7 @@ from PySide6.QtCore import QRunnable, Slot, Signal, QObject, QThreadPool
 from PySide6.QtGui import QCloseEvent
 from PySide6.QtGui import QIcon
 
-from views.main_dowload import DowloadWindow
+from views.main_download import downloadWindow
 from functions.validations import (
     fileNameCheck, createFolderList, createMusicFolder, 
     downloadLog, readLog, removeFileMusic
@@ -52,7 +52,7 @@ class Worker(QRunnable):
         finally:
             self.signals.finished.emit(result)  # Done
 
-class MainWindowFormDowloadBar(QDialog, DowloadWindow):
+class MainWindowFormdownloadBar(QDialog, downloadWindow):
 
     def __init__(self, getId: str, api: spotifyPlay, yt_dl: youtube, dir: str, buttonObj: str) -> None:
         self.__status = True
@@ -90,8 +90,8 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
             return event.ignore()
         self.statusChange(False)
 
-    def dowloadProgres(self, bits: int) -> None: #set a progress bar status
-        self.progressBardowload.setValue(bits)
+    def downloadProgres(self, bits: int) -> None: #set a progress bar status
+        self.progressBardownload.setValue(bits)
 
     def thread_complete(self, status: bool) -> None: #when the download thread ends, this function is executed
         if status:
@@ -113,22 +113,22 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         if msgBox.clickedButton() == msgBox.buttons()[0]:
             self.modalMessageBoxStatus = False
 
-    def changeStatusDowload(self, filename: str, total_size: int):
+    def changeStatusdownload(self, filename: str, total_size: int):
         self.track_name.setText(filename)
-        self.progressBardowload.setRange(0, total_size)
+        self.progressBardownload.setRange(0, total_size)
         self.pushButton_cancel.setEnabled(True)
 
     def checkTrackOrPlayList(self) -> None: #We create the worker so that the download can proceed
         # Pass the function to execute
-        if self.fromButton == 'dowloadPlayList':
+        if self.fromButton == 'downloadPlayList':
             worker = Worker(self.queryYTurlPlaylist)
-        elif self.fromButton == 'dowloadTrack':
+        elif self.fromButton == 'downloadTrack':
             worker = Worker(self.queryYTurlTrack)
         #worker.signals.result.connect(self.print_output)
         worker.signals.finished.connect(self.thread_complete)
-        worker.signals.progress.connect(self.dowloadProgres)
+        worker.signals.progress.connect(self.downloadProgres)
         worker.signals.notFounds.connect(self.messageBox)
-        worker.signals.iteration.connect(self.changeStatusDowload)
+        worker.signals.iteration.connect(self.changeStatusdownload)
         # Execute
         self.threadpool.start(worker)
 
@@ -144,22 +144,22 @@ class MainWindowFormDowloadBar(QDialog, DowloadWindow):
         total_size = int(response.headers.get('content-length'))
         ############################
 
-        # range use to more speed dowload
+        # range use to more speed download
         headers = {'Accept': '*/*', 'Range': f'bytes=0-{total_size}'}
         getFileUrl = f'{url}&range=0-{total_size}'
         getFile = getData(url=getFileUrl, headers=headers, stream=True)
         #################################
 
         block_size = 1024
-        dowloadedSize = 0
+        downloadedSize = 0
         iteration.emit(filename, total_size)
         with open(f'{dirt}/music/{playListName}/{filename}', 'wb') as file:
             for r in getFile.iter_content(block_size):
                 if not self.status: return False
-                dowloadedSize+=len(r)
-                progress_callback.emit(dowloadedSize)
+                downloadedSize+=len(r)
+                progress_callback.emit(downloadedSize)
                 file.write(r)
-        if total_size == dowloadedSize: return True
+        if total_size == downloadedSize: return True
         else: return False
 
     def queryYTurlPlaylist(
@@ -203,8 +203,8 @@ If it's an error, delete the folder and try again.
 
             if search[1] == 200:
                 url_download = search[0]['url']
-                dowload = self.download(url_download, name, playlistName, f'[{suple}]', self.dir, progress_callback, iteration)
-                if not dowload:
+                download = self.download(url_download, name, playlistName, f'[{suple}]', self.dir, progress_callback, iteration)
+                if not download:
                     notFound.emit("400", "Connection issues", QMessageBox.Icon.Warning, False)
                     removeFileMusic(self.dir, playlistName, name, suple)
                 else:
@@ -238,9 +238,9 @@ If it's an error, delete the folder and try again.
 
         if search[1] == 200:
             url_download = search[0]['url']
-            dowload = self.download(url_download, trackName, nameFolder, '[0]', self.dir, progress_callback, iteration)
+            download = self.download(url_download, trackName, nameFolder, '[0]', self.dir, progress_callback, iteration)
 
-            if not dowload:
+            if not download:
                 notFound.emit("400", "Connection issues", QMessageBox.Icon.Warning, False)
                 removeFileMusic(self.dir, nameFolder, trackName, '0')
                 self.statusChange(False)

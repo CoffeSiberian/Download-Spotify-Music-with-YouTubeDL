@@ -6,32 +6,32 @@ from PySide6.QtWidgets import (
     QSpacerItem, QVBoxLayout
     )
 
-class DowloadWindow(object):
-    def setupUi(self, main_dowload_dialog):
-        if not main_dowload_dialog.objectName():
-            main_dowload_dialog.setObjectName(u"main_dowload_dialog")
-        main_dowload_dialog.resize(500, 200)
-        main_dowload_dialog.setMinimumSize(QSize(500, 200))
-        main_dowload_dialog.setMaximumSize(QSize(500, 200))
-        self.horizontalLayout_3 = QHBoxLayout(main_dowload_dialog)
+class downloadWindow(object):
+    def setupUi(self, main_download_dialog):
+        if not main_download_dialog.objectName():
+            main_download_dialog.setObjectName(u"main_download_dialog")
+        main_download_dialog.resize(500, 200)
+        main_download_dialog.setMinimumSize(QSize(500, 200))
+        main_download_dialog.setMaximumSize(QSize(500, 200))
+        self.horizontalLayout_3 = QHBoxLayout(main_download_dialog)
         self.horizontalLayout_3.setSpacing(0)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.horizontalLayout_3.setContentsMargins(-1, 0, 0, 0)
-        self.background_frame_dowload = QFrame(main_dowload_dialog)
-        self.background_frame_dowload.setObjectName(u"background_frame_dowload")
-        self.background_frame_dowload.setFrameShape(QFrame.StyledPanel)
-        self.background_frame_dowload.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_2 = QVBoxLayout(self.background_frame_dowload)
+        self.background_frame_download = QFrame(main_download_dialog)
+        self.background_frame_download.setObjectName(u"background_frame_download")
+        self.background_frame_download.setFrameShape(QFrame.StyledPanel)
+        self.background_frame_download.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_2 = QVBoxLayout(self.background_frame_download)
         self.verticalLayout_2.setSpacing(0)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.conten_dowload = QFrame(self.background_frame_dowload)
-        self.conten_dowload.setObjectName(u"conten_dowload")
-        self.conten_dowload.setFrameShape(QFrame.StyledPanel)
-        self.conten_dowload.setFrameShadow(QFrame.Raised)
-        self.verticalLayout_4 = QVBoxLayout(self.conten_dowload)
+        self.conten_download = QFrame(self.background_frame_download)
+        self.conten_download.setObjectName(u"conten_download")
+        self.conten_download.setFrameShape(QFrame.StyledPanel)
+        self.conten_download.setFrameShadow(QFrame.Raised)
+        self.verticalLayout_4 = QVBoxLayout(self.conten_download)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
-        self.progresbar_frame = QFrame(self.conten_dowload)
+        self.progresbar_frame = QFrame(self.conten_download)
         self.progresbar_frame.setObjectName(u"progresbar_frame")
         self.progresbar_frame.setFrameShape(QFrame.StyledPanel)
         self.progresbar_frame.setFrameShadow(QFrame.Raised)
@@ -45,15 +45,15 @@ class DowloadWindow(object):
 
         self.horizontalLayout_2.addWidget(self.img_bar)
 
-        self.progressBardowload = QProgressBar(self.progresbar_frame)
-        self.progressBardowload.setObjectName(u"progressBardowload")
+        self.progressBardownload = QProgressBar(self.progresbar_frame)
+        self.progressBardownload.setObjectName(u"progressBardownload")
 
-        self.horizontalLayout_2.addWidget(self.progressBardowload)
+        self.horizontalLayout_2.addWidget(self.progressBardownload)
 
 
         self.verticalLayout_4.addWidget(self.progresbar_frame)
 
-        self.name_frame = QFrame(self.conten_dowload)
+        self.name_frame = QFrame(self.conten_download)
         self.name_frame.setObjectName(u"name_frame")
         self.name_frame.setFrameShape(QFrame.StyledPanel)
         self.name_frame.setFrameShadow(QFrame.Raised)
@@ -73,7 +73,7 @@ class DowloadWindow(object):
 
         self.verticalLayout_4.addWidget(self.name_frame)
 
-        self.bottons_frame = QFrame(self.conten_dowload)
+        self.bottons_frame = QFrame(self.conten_download)
         self.bottons_frame.setObjectName(u"bottons_frame")
         self.bottons_frame.setFrameShape(QFrame.StyledPanel)
         self.bottons_frame.setFrameShadow(QFrame.Raised)
@@ -101,19 +101,19 @@ class DowloadWindow(object):
         self.verticalLayout_4.addWidget(self.bottons_frame)
 
 
-        self.verticalLayout_2.addWidget(self.conten_dowload)
+        self.verticalLayout_2.addWidget(self.conten_download)
 
 
-        self.horizontalLayout_3.addWidget(self.background_frame_dowload)
+        self.horizontalLayout_3.addWidget(self.background_frame_download)
 
 
-        self.retranslateUi(main_dowload_dialog)
+        self.retranslateUi(main_download_dialog)
 
-        QMetaObject.connectSlotsByName(main_dowload_dialog)
+        QMetaObject.connectSlotsByName(main_download_dialog)
 
-    def retranslateUi(self, main_dowload_dialog):
-        main_dowload_dialog.setWindowTitle(QCoreApplication.translate("main_dowload_dialog", u"To download", None))
+    def retranslateUi(self, main_download_dialog):
+        main_download_dialog.setWindowTitle(QCoreApplication.translate("main_download_dialog", u"To download", None))
         self.img_bar.setText("")
         self.track_name.setText("")
-        self.pushButton_cancel.setText(QCoreApplication.translate("main_dowload_dialog", u"Cancel", None))
-        self.pushButton_exit.setText(QCoreApplication.translate("main_dowload_dialog", u"Exit", None))
+        self.pushButton_cancel.setText(QCoreApplication.translate("main_download_dialog", u"Cancel", None))
+        self.pushButton_exit.setText(QCoreApplication.translate("main_download_dialog", u"Exit", None))

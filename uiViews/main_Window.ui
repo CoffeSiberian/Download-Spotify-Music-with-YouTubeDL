@@ -176,7 +176,7 @@
              <number>30</number>
             </property>
             <item>
-             <widget class="QPushButton" name="dowloadPlayList">
+             <widget class="QPushButton" name="downloadPlayList">
               <property name="minimumSize">
                <size>
                 <width>150</width>
@@ -210,7 +210,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="dowloadTrack">
+             <widget class="QPushButton" name="downloadTrack">
               <property name="minimumSize">
                <size>
                 <width>150</width>
@@ -382,7 +382,7 @@
      <string>Settings</string>
     </property>
     <addaction name="actionSpotify_API_KEY"/>
-    <addaction name="actionDowload_Location"/>
+    <addaction name="actiondownload_Location"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -412,7 +412,7 @@
     <string>Spotify API KEY</string>
    </property>
   </action>
-  <action name="actionDowload_Location">
+  <action name="actiondownload_Location">
    <property name="icon">
     <iconset>
      <normaloff>assets/icons/downloading.png</normaloff>assets/icons/downloading.png</iconset>

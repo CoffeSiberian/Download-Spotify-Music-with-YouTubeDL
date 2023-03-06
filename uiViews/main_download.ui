@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>main_dowload_dialog</class>
- <widget class="QDialog" name="main_dowload_dialog">
+ <class>main_download_dialog</class>
+ <widget class="QDialog" name="main_download_dialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -39,7 +39,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QFrame" name="background_frame_dowload">
+    <widget class="QFrame" name="background_frame_download">
      <property name="frameShape">
       <enum>QFrame::StyledPanel</enum>
      </property>
@@ -63,7 +63,7 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QFrame" name="conten_dowload">
+       <widget class="QFrame" name="conten_download">
         <property name="frameShape">
          <enum>QFrame::StyledPanel</enum>
         </property>
@@ -100,7 +100,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QProgressBar" name="progressBardowload"/>
+             <widget class="QProgressBar" name="progressBardownload"/>
             </item>
            </layout>
           </widget>
