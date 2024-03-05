@@ -1,10 +1,11 @@
 from PySide6.QtCore import QCoreApplication, QMetaObject, QSize, Qt
 from PySide6.QtGui import QCursor, QFont, QIcon, QPixmap
 from PySide6.QtWidgets import (
-    QCommandLinkButton, QFrame, QGroupBox, 
-    QHBoxLayout, QLabel, QSizePolicy, 
+    QCommandLinkButton, QFrame, QGroupBox,
+    QHBoxLayout, QLabel, QSizePolicy,
     QSpacerItem, QVBoxLayout
-    )
+)
+
 
 class About(object):
     def setupUi(self, about):
@@ -45,7 +46,8 @@ class About(object):
         self.pythonico.setObjectName(u"pythonico")
         self.pythonico.setMinimumSize(QSize(70, 70))
         self.pythonico.setMaximumSize(QSize(70, 70))
-        self.pythonico.setPixmap(QPixmap(u"assets/icons/icons8-python-480.png"))
+        self.pythonico.setPixmap(
+            QPixmap(u"assets/icons/icons8-python-480.png"))
         self.pythonico.setScaledContents(True)
 
         self.verticalLayout_3.addWidget(self.pythonico)
@@ -67,7 +69,6 @@ class About(object):
         self.spotifyicon.setScaledContents(True)
 
         self.verticalLayout_3.addWidget(self.spotifyicon)
-
 
         self.horizontalLayout.addLayout(self.verticalLayout_3)
 
@@ -96,16 +97,14 @@ class About(object):
 
         self.verticalLayout_2.addWidget(self.label_3)
 
-
         self.horizontalLayout.addLayout(self.verticalLayout_2)
-
 
         self.horizontalLayout_2.addWidget(self.groupBox)
 
-
         self.verticalLayout_6.addWidget(self.info_used)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer = QSpacerItem(
+            20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout_6.addItem(self.verticalSpacer)
 
@@ -132,17 +131,18 @@ class About(object):
         font2.setBold(False)
         font2.setItalic(False)
         self.nickname_info.setFont(font2)
-        self.nickname_info.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.nickname_info.setAlignment(
+            Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
         self.verticalLayout_5.addWidget(self.nickname_info)
 
         self.name_info = QLabel(self.groupBox_2)
         self.name_info.setObjectName(u"name_info")
         self.name_info.setFont(font2)
-        self.name_info.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.name_info.setAlignment(
+            Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
         self.verticalLayout_5.addWidget(self.name_info)
-
 
         self.horizontalLayout_3.addLayout(self.verticalLayout_5)
 
@@ -165,9 +165,7 @@ class About(object):
 
         self.verticalLayout_4.addWidget(self.name)
 
-
         self.horizontalLayout_3.addLayout(self.verticalLayout_4)
-
 
         self.horizontalLayout_4.addLayout(self.horizontalLayout_3)
 
@@ -176,7 +174,8 @@ class About(object):
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.gitHub.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.gitHub.sizePolicy().hasHeightForWidth())
         self.gitHub.setSizePolicy(sizePolicy)
         self.gitHub.setMaximumSize(QSize(90, 50))
         font5 = QFont()
@@ -186,41 +185,48 @@ class About(object):
         self.gitHub.setFont(font5)
         self.gitHub.setCursor(QCursor(Qt.PointingHandCursor))
         icon = QIcon()
-        icon.addFile(u"assets/icons/github.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"assets/icons/github.png",
+                     QSize(), QIcon.Normal, QIcon.Off)
         self.gitHub.setIcon(icon)
         self.gitHub.setIconSize(QSize(25, 25))
 
         self.horizontalLayout_4.addWidget(self.gitHub)
 
-
         self.horizontalLayout_5.addLayout(self.horizontalLayout_4)
-
 
         self.horizontalLayout_6.addWidget(self.groupBox_2)
 
-
         self.verticalLayout_6.addWidget(self.createby)
 
-
         self.verticalLayout.addWidget(self.centralwidget)
-
 
         self.retranslateUi(about)
 
         QMetaObject.connectSlotsByName(about)
 
     def retranslateUi(self, about):
-        about.setWindowTitle(QCoreApplication.translate("about", u"About", None))
-        self.groupBox.setTitle(QCoreApplication.translate("about", u"what do we use?", None))
+        about.setWindowTitle(
+            QCoreApplication.translate("about", u"About", None))
+        self.groupBox.setTitle(QCoreApplication.translate(
+            "about", u"what do we use?", None))
         self.pythonico.setText("")
         self.pysideicon.setText("")
         self.spotifyicon.setText("")
-        self.label.setText(QCoreApplication.translate("about", u"Python Ver. 3.11.1", None))
-        self.label_2.setText(QCoreApplication.translate("about", u"PySide6 Ver. 6.4.2", None))
-        self.label_3.setText(QCoreApplication.translate("about", u"Spotify Web API Ver. 1", None))
-        self.groupBox_2.setTitle(QCoreApplication.translate("about", u"Create By", None))
-        self.nickname_info.setText(QCoreApplication.translate("about", u"Nickname:", None))
-        self.name_info.setText(QCoreApplication.translate("about", u"Name:", None))
-        self.nickname.setText(QCoreApplication.translate("about", u"SiberianCoffe", None))
-        self.name.setText(QCoreApplication.translate("about", u"Fernando Garrido", None))
-        self.gitHub.setText(QCoreApplication.translate("about", u"GitHub", None))
+        self.label.setText(QCoreApplication.translate(
+            "about", u"Python Ver. 3.11.1", None))
+        self.label_2.setText(QCoreApplication.translate(
+            "about", u"PySide6 Ver. 6.4.2", None))
+        self.label_3.setText(QCoreApplication.translate(
+            "about", u"Spotify Web API Ver. 1", None))
+        self.groupBox_2.setTitle(
+            QCoreApplication.translate("about", u"Create By", None))
+        self.nickname_info.setText(
+            QCoreApplication.translate("about", u"Nickname:", None))
+        self.name_info.setText(
+            QCoreApplication.translate("about", u"Name:", None))
+        self.nickname.setText(QCoreApplication.translate(
+            "about", u"SiberianCoffe", None))
+        self.name.setText(QCoreApplication.translate(
+            "about", u"Fernando Garrido", None))
+        self.gitHub.setText(
+            QCoreApplication.translate("about", u"GitHub", None))

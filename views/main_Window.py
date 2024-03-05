@@ -1,16 +1,17 @@
 from PySide6.QtCore import (
     QCoreApplication, QMetaObject, QRect,
     QSize, Qt
-    )
+)
 from PySide6.QtGui import (
-    QAction, QCursor, QFont,QIcon, QPixmap
-    )
+    QAction, QCursor, QFont, QIcon, QPixmap
+)
 from PySide6.QtWidgets import (
     QCommandLinkButton, QFrame, QHBoxLayout,
     QLabel, QMenu, QMenuBar,
-    QPushButton, QSizePolicy, QSpacerItem, 
+    QPushButton, QSizePolicy, QSpacerItem,
     QVBoxLayout, QWidget
-    )
+)
+
 
 class MainWindow(object):
     def setupUi(self, MainWindow):
@@ -21,17 +22,20 @@ class MainWindow(object):
         self.actionExit = QAction(MainWindow)
         self.actionExit.setObjectName(u"actionExit")
         icon1 = QIcon()
-        icon1.addFile(u"assets/icons/exit.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u"assets/icons/exit.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.actionExit.setIcon(icon1)
         self.actionSpotify_API_KEY = QAction(MainWindow)
         self.actionSpotify_API_KEY.setObjectName(u"actionSpotify_API_KEY")
         icon2 = QIcon()
-        icon2.addFile(u"assets/icons/spotify.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon2.addFile(u"assets/icons/spotify.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.actionSpotify_API_KEY.setIcon(icon2)
         self.actiondownload_Location = QAction(MainWindow)
         self.actiondownload_Location.setObjectName(u"actiondownload_Location")
         icon3 = QIcon()
-        icon3.addFile(u"assets/icons/downloading.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon3.addFile(u"assets/icons/downloading.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.actiondownload_Location.setIcon(icon3)
         self.actionHelp = QAction(MainWindow)
         self.actionHelp.setObjectName(u"actionHelp")
@@ -62,7 +66,8 @@ class MainWindow(object):
         self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_4 = QSpacerItem(
+            40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout_3.addItem(self.horizontalSpacer_4)
 
@@ -71,7 +76,8 @@ class MainWindow(object):
         self.icon.setMaximumSize(QSize(50, 50))
         self.icon.setPixmap(QPixmap(u"assets/icons/img.ico"))
         self.icon.setScaledContents(True)
-        self.icon.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.icon.setAlignment(
+            Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
         self.horizontalLayout_3.addWidget(self.icon)
 
@@ -87,13 +93,12 @@ class MainWindow(object):
 
         self.horizontalLayout_3.addWidget(self.title)
 
-        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_5 = QSpacerItem(
+            40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout_3.addItem(self.horizontalSpacer_5)
 
-
         self.horizontalLayout_4.addLayout(self.horizontalLayout_3)
-
 
         self.verticalLayout_4.addWidget(self.frame)
 
@@ -103,7 +108,8 @@ class MainWindow(object):
         self.options_frame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout = QHBoxLayout(self.options_frame)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer = QSpacerItem(
+            40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer)
 
@@ -120,7 +126,8 @@ class MainWindow(object):
         self.downloadPlayList.setFont(font2)
         self.downloadPlayList.setCursor(QCursor(Qt.PointingHandCursor))
         icon4 = QIcon()
-        icon4.addFile(u"assets/icons/playlist.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon4.addFile(u"assets/icons/playlist.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.downloadPlayList.setIcon(icon4)
         self.downloadPlayList.setIconSize(QSize(25, 25))
 
@@ -132,23 +139,24 @@ class MainWindow(object):
         self.downloadTrack.setFont(font2)
         self.downloadTrack.setCursor(QCursor(Qt.PointingHandCursor))
         icon5 = QIcon()
-        icon5.addFile(u"assets/icons/music-note.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon5.addFile(u"assets/icons/music-note.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.downloadTrack.setIcon(icon5)
         self.downloadTrack.setIconSize(QSize(25, 25))
 
         self.verticalLayout_3.addWidget(self.downloadTrack)
 
-
         self.horizontalLayout.addLayout(self.verticalLayout_3)
 
-        self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_2 = QSpacerItem(
+            40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer_2)
 
-
         self.verticalLayout_4.addWidget(self.options_frame)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer = QSpacerItem(
+            20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout_4.addItem(self.verticalSpacer)
 
@@ -166,7 +174,8 @@ class MainWindow(object):
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.gitHub.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.gitHub.sizePolicy().hasHeightForWidth())
         self.gitHub.setSizePolicy(sizePolicy)
         self.gitHub.setMaximumSize(QSize(90, 50))
         font3 = QFont()
@@ -176,19 +185,19 @@ class MainWindow(object):
         self.gitHub.setFont(font3)
         self.gitHub.setCursor(QCursor(Qt.PointingHandCursor))
         icon6 = QIcon()
-        icon6.addFile(u"assets/icons/github.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon6.addFile(u"assets/icons/github.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.gitHub.setIcon(icon6)
         self.gitHub.setIconSize(QSize(25, 25))
 
         self.horizontalLayout_2.addWidget(self.gitHub)
 
-        self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_3 = QSpacerItem(
+            40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer_3)
 
-
         self.verticalLayout_4.addWidget(self.frame_2)
-
 
         self.verticalLayout.addWidget(self.background_frame)
 
@@ -217,16 +226,28 @@ class MainWindow(object):
         QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Download Spotify Music - By: SiberianCoffe", None))
-        self.actionExit.setText(QCoreApplication.translate("MainWindow", u"Exit", None))
-        self.actionSpotify_API_KEY.setText(QCoreApplication.translate("MainWindow", u"Spotify API KEY", None))
-        self.actiondownload_Location.setText(QCoreApplication.translate("MainWindow", u"Download Location", None))
-        self.actionHelp.setText(QCoreApplication.translate("MainWindow", u"About", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate(
+            "MainWindow", u"Download Spotify Music - By: SiberianCoffe", None))
+        self.actionExit.setText(
+            QCoreApplication.translate("MainWindow", u"Exit", None))
+        self.actionSpotify_API_KEY.setText(
+            QCoreApplication.translate("MainWindow", u"Spotify API KEY", None))
+        self.actiondownload_Location.setText(
+            QCoreApplication.translate("MainWindow", u"Download Location", None))
+        self.actionHelp.setText(
+            QCoreApplication.translate("MainWindow", u"About", None))
         self.icon.setText("")
-        self.title.setText(QCoreApplication.translate("MainWindow", u"Download Spotify Music", None))
-        self.downloadPlayList.setText(QCoreApplication.translate("MainWindow", u"Download PlayList", None))
-        self.downloadTrack.setText(QCoreApplication.translate("MainWindow", u"Download Track", None))
-        self.gitHub.setText(QCoreApplication.translate("MainWindow", u"GitHub", None))
-        self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
-        self.menuConfiguration.setTitle(QCoreApplication.translate("MainWindow", u"Settings", None))
-        self.menuHelp.setTitle(QCoreApplication.translate("MainWindow", u"About", None))
+        self.title.setText(QCoreApplication.translate(
+            "MainWindow", u"Download Spotify Music", None))
+        self.downloadPlayList.setText(QCoreApplication.translate(
+            "MainWindow", u"Download PlayList", None))
+        self.downloadTrack.setText(QCoreApplication.translate(
+            "MainWindow", u"Download Track", None))
+        self.gitHub.setText(QCoreApplication.translate(
+            "MainWindow", u"GitHub", None))
+        self.menuFile.setTitle(
+            QCoreApplication.translate("MainWindow", u"File", None))
+        self.menuConfiguration.setTitle(
+            QCoreApplication.translate("MainWindow", u"Settings", None))
+        self.menuHelp.setTitle(QCoreApplication.translate(
+            "MainWindow", u"About", None))

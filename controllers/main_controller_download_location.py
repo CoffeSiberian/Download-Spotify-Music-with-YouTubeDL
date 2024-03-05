@@ -6,6 +6,7 @@ from functions.jsonedit import saveValue, getValue
 
 from views.main_download_location import downloadLocation
 
+
 class MainWindowQDialogdownloadLocation(QDialog, downloadLocation):
 
     def __init__(self) -> None:
@@ -32,22 +33,23 @@ class MainWindowQDialogdownloadLocation(QDialog, downloadLocation):
 
         if dir_path:
             dest_dir = QDir(dir_path)
-            self.lineEdit_location.setText(QDir.fromNativeSeparators(dest_dir.path()))
-    
+            self.lineEdit_location.setText(
+                QDir.fromNativeSeparators(dest_dir.path()))
+
     def getPath(self):
         if self.getNowData() == '':
             return QDir.fromNativeSeparators(
-                    QStandardPaths.writableLocation(QStandardPaths.DownloadLocation))
+                QStandardPaths.writableLocation(QStandardPaths.DownloadLocation))
         return self.getNowData()
 
     def getTextAfterPushSave(self):
         dir = self.lineEdit_location.text()
         saveValue('dir', dir)
-        QMessageBox.information(self, 'Saved!', 
-        'Your modification was saved', 
-        QMessageBox.Ok)
+        QMessageBox.information(self, 'Saved!',
+                                'Your modification was saved',
+                                QMessageBox.Ok)
         self.close()
-    
+
     def getNowData(self):
         data = getValue()
         return data[2]

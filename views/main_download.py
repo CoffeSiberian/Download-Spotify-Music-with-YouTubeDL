@@ -1,10 +1,11 @@
 from PySide6.QtCore import QCoreApplication, QMetaObject, QSize, Qt
 from PySide6.QtGui import QFont, QPixmap
 from PySide6.QtWidgets import (
-    QFrame, QHBoxLayout,QLabel, 
+    QFrame, QHBoxLayout, QLabel,
     QProgressBar, QPushButton, QSizePolicy,
     QSpacerItem, QVBoxLayout
-    )
+)
+
 
 class downloadWindow(object):
     def setupUi(self, main_download_dialog):
@@ -18,7 +19,8 @@ class downloadWindow(object):
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.horizontalLayout_3.setContentsMargins(-1, 0, 0, 0)
         self.background_frame_download = QFrame(main_download_dialog)
-        self.background_frame_download.setObjectName(u"background_frame_download")
+        self.background_frame_download.setObjectName(
+            u"background_frame_download")
         self.background_frame_download.setFrameShape(QFrame.StyledPanel)
         self.background_frame_download.setFrameShadow(QFrame.Raised)
         self.verticalLayout_2 = QVBoxLayout(self.background_frame_download)
@@ -50,7 +52,6 @@ class downloadWindow(object):
 
         self.horizontalLayout_2.addWidget(self.progressBardownload)
 
-
         self.verticalLayout_4.addWidget(self.progresbar_frame)
 
         self.name_frame = QFrame(self.conten_download)
@@ -70,7 +71,6 @@ class downloadWindow(object):
 
         self.verticalLayout_3.addWidget(self.track_name)
 
-
         self.verticalLayout_4.addWidget(self.name_frame)
 
         self.bottons_frame = QFrame(self.conten_download)
@@ -79,7 +79,8 @@ class downloadWindow(object):
         self.bottons_frame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout = QHBoxLayout(self.bottons_frame)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontalSpacer_botton = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_botton = QSpacerItem(
+            40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontalSpacer_botton)
 
@@ -97,23 +98,22 @@ class downloadWindow(object):
 
         self.horizontalLayout.addWidget(self.pushButton_exit)
 
-
         self.verticalLayout_4.addWidget(self.bottons_frame)
-
 
         self.verticalLayout_2.addWidget(self.conten_download)
 
-
         self.horizontalLayout_3.addWidget(self.background_frame_download)
-
 
         self.retranslateUi(main_download_dialog)
 
         QMetaObject.connectSlotsByName(main_download_dialog)
 
     def retranslateUi(self, main_download_dialog):
-        main_download_dialog.setWindowTitle(QCoreApplication.translate("main_download_dialog", u"To download", None))
+        main_download_dialog.setWindowTitle(QCoreApplication.translate(
+            "main_download_dialog", u"To download", None))
         self.img_bar.setText("")
         self.track_name.setText("")
-        self.pushButton_cancel.setText(QCoreApplication.translate("main_download_dialog", u"Cancel", None))
-        self.pushButton_exit.setText(QCoreApplication.translate("main_download_dialog", u"Exit", None))
+        self.pushButton_cancel.setText(QCoreApplication.translate(
+            "main_download_dialog", u"Cancel", None))
+        self.pushButton_exit.setText(QCoreApplication.translate(
+            "main_download_dialog", u"Exit", None))

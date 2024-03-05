@@ -7,6 +7,7 @@ from functions.jsonedit import getValue
 from functions.spotifyapi import spotifyPlay
 from functions.youtubeapi import youtube
 
+
 class MainWindowFormdownload(QDialog, downloadMenuLink):
 
     def __init__(self, buttonObj: str) -> None:
@@ -21,7 +22,7 @@ class MainWindowFormdownload(QDialog, downloadMenuLink):
         self.download_menu_download_botton.clicked.connect(self.getUrl)
         self.download_menu_cancel_botton.clicked.connect(self.close)
 
-    def messageBox(self, title: str, lowInfo: str, level: QMessageBox.Icon, details:str) -> None:
+    def messageBox(self, title: str, lowInfo: str, level: QMessageBox.Icon, details: str) -> None:
         msgBox = QMessageBox()
         msgBox.setWindowTitle(title)
         self.setWindowIcon(QIcon('./assets/icons/link.png'))
@@ -38,26 +39,27 @@ class MainWindowFormdownload(QDialog, downloadMenuLink):
         url = self.textobox_link.text()
         getId = self.splitURL(url)
         if getId:
-            self.w = MainWindowFormdownloadBar(getId, self.__api, self.__yt_dl, 
-            self.__values[2], self.__buttonObj)
+            self.w = MainWindowFormdownloadBar(getId, self.__api, self.__yt_dl,
+                                               self.__values[2], self.__buttonObj)
             self.close()
             self.w.show()
             self.w.checkTrackOrPlayList()
         else:
-            self.messageBox('Invalid URL', 'The provided url is invalid', 
-            QMessageBox.Icon.Warning, 'Invalid URL')
+            self.messageBox('Invalid URL', 'The provided url is invalid',
+                            QMessageBox.Icon.Warning, 'Invalid URL')
 
     def checkConfig(self) -> bool:
         if self.__values[0] == '' or self.__values[1] == '':
             self.close()
-            self.messageBox('Not Found API', 'Settings your API key first', 
-            QMessageBox.Icon.Warning, 'Go to settings and select the "Spotify API KEY" option')
+            self.messageBox('Not Found API', 'Settings your API key first',
+                            QMessageBox.Icon.Warning, 'Go to settings and select the "Spotify API KEY" option')
             return False
 
     '''
     download functions
     '''
-    def splitURL(self, url: str) -> str | bool: #get id from url playlist or track
+
+    def splitURL(self, url: str) -> str | bool:  # get id from url playlist or track
         try:
             start = url.split(sep='?')[0]
             return start.split(sep='/')[4]

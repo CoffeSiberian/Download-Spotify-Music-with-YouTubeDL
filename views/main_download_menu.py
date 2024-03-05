@@ -1,15 +1,17 @@
 from PySide6.QtCore import QCoreApplication, QMetaObject, QSize, Qt
 from PySide6.QtGui import QFont, QPixmap
 from PySide6.QtWidgets import (
-    QFrame, QHBoxLayout,QLabel, 
+    QFrame, QHBoxLayout, QLabel,
     QLineEdit, QPushButton, QSizePolicy,
     QSpacerItem, QVBoxLayout
-    )
+)
+
 
 class downloadMenuLink(object):
     def setupUi(self, dialog_menu_download_link):
         if not dialog_menu_download_link.objectName():
-            dialog_menu_download_link.setObjectName(u"dialog_menu_download_link")
+            dialog_menu_download_link.setObjectName(
+                u"dialog_menu_download_link")
         dialog_menu_download_link.resize(400, 200)
         dialog_menu_download_link.setMinimumSize(QSize(0, 0))
         dialog_menu_download_link.setMaximumSize(QSize(400, 200))
@@ -40,7 +42,6 @@ class downloadMenuLink(object):
 
         self.verticalLayout_2.addWidget(self.title_download_menu)
 
-
         self.verticalLayout_3.addWidget(self.text_info_frame)
 
         self.link_frame = QFrame(self.background_frame_link)
@@ -55,7 +56,8 @@ class downloadMenuLink(object):
         self.link_frame_2.setFrameShadow(QFrame.Raised)
         self.horizontalLayout = QHBoxLayout(self.link_frame_2)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.horizontal_spacer_download_2 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontal_spacer_download_2 = QSpacerItem(
+            40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontal_spacer_download_2)
 
@@ -75,54 +77,60 @@ class downloadMenuLink(object):
 
         self.horizontalLayout.addWidget(self.textobox_link)
 
-        self.horizontal_spacer_download_3 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontal_spacer_download_3 = QSpacerItem(
+            40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout.addItem(self.horizontal_spacer_download_3)
 
-
         self.horizontalLayout_3.addWidget(self.link_frame_2)
-
 
         self.verticalLayout_3.addWidget(self.link_frame)
 
         self.manu_download_options_frame = QFrame(self.background_frame_link)
-        self.manu_download_options_frame.setObjectName(u"manu_download_options_frame")
+        self.manu_download_options_frame.setObjectName(
+            u"manu_download_options_frame")
         self.manu_download_options_frame.setFrameShape(QFrame.StyledPanel)
         self.manu_download_options_frame.setFrameShadow(QFrame.Raised)
         self.horizontalLayout_2 = QHBoxLayout(self.manu_download_options_frame)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-        self.horizontal_spacer_download_1 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontal_spacer_download_1 = QSpacerItem(
+            40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout_2.addItem(self.horizontal_spacer_download_1)
 
-        self.download_menu_download_botton = QPushButton(self.manu_download_options_frame)
-        self.download_menu_download_botton.setObjectName(u"download_menu_download_botton")
+        self.download_menu_download_botton = QPushButton(
+            self.manu_download_options_frame)
+        self.download_menu_download_botton.setObjectName(
+            u"download_menu_download_botton")
         self.download_menu_download_botton.setEnabled(True)
         self.download_menu_download_botton.setMinimumSize(QSize(90, 30))
 
         self.horizontalLayout_2.addWidget(self.download_menu_download_botton)
 
-        self.download_menu_cancel_botton = QPushButton(self.manu_download_options_frame)
-        self.download_menu_cancel_botton.setObjectName(u"download_menu_cancel_botton")
+        self.download_menu_cancel_botton = QPushButton(
+            self.manu_download_options_frame)
+        self.download_menu_cancel_botton.setObjectName(
+            u"download_menu_cancel_botton")
         self.download_menu_cancel_botton.setEnabled(True)
         self.download_menu_cancel_botton.setMinimumSize(QSize(90, 30))
 
         self.horizontalLayout_2.addWidget(self.download_menu_cancel_botton)
 
-
         self.verticalLayout_3.addWidget(self.manu_download_options_frame)
 
-
         self.horizontalLayout_4.addWidget(self.background_frame_link)
-
 
         self.retranslateUi(dialog_menu_download_link)
 
         QMetaObject.connectSlotsByName(dialog_menu_download_link)
 
     def retranslateUi(self, dialog_menu_download_link):
-        dialog_menu_download_link.setWindowTitle(QCoreApplication.translate("dialog_menu_download_link", u"Spotify Downloader", None))
-        self.title_download_menu.setText(QCoreApplication.translate("dialog_menu_download_link", u"Paste your Spotify Link", None))
+        dialog_menu_download_link.setWindowTitle(QCoreApplication.translate(
+            "dialog_menu_download_link", u"Spotify Downloader", None))
+        self.title_download_menu.setText(QCoreApplication.translate(
+            "dialog_menu_download_link", u"Paste your Spotify Link", None))
         self.link_icon.setText("")
-        self.download_menu_download_botton.setText(QCoreApplication.translate("dialog_menu_download_link", u"Download", None))
-        self.download_menu_cancel_botton.setText(QCoreApplication.translate("dialog_menu_download_link", u"Cancel", None))
+        self.download_menu_download_botton.setText(
+            QCoreApplication.translate("dialog_menu_download_link", u"Download", None))
+        self.download_menu_cancel_botton.setText(
+            QCoreApplication.translate("dialog_menu_download_link", u"Cancel", None))

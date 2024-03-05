@@ -7,6 +7,7 @@ from views.main_spotify_api import SpotifyConfig
 
 import webbrowser
 
+
 class MainWindowQDialogApi(QDialog, SpotifyConfig):
 
     def __init__(self) -> None:
@@ -26,11 +27,11 @@ class MainWindowQDialogApi(QDialog, SpotifyConfig):
         clientSecret = self.lineEdit_client_secret.text()
         saveValue('client_id', clientId)
         saveValue('client_secret', clientSecret)
-        QMessageBox.information(self, 'Saved!', 
-        'Your modification was saved', 
-        QMessageBox.Ok)
+        QMessageBox.information(self, 'Saved!',
+                                'Your modification was saved',
+                                QMessageBox.Ok)
         self.close()
-    
+
     def getNowData(self):
         data = getValue()
         return data[0], data[1]

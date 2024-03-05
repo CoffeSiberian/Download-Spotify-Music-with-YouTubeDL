@@ -1,10 +1,11 @@
 from PySide6.QtCore import QCoreApplication, QMetaObject, QSize, Qt
-from PySide6.QtGui import QCursor,QFont, QIcon, QPixmap
+from PySide6.QtGui import QCursor, QFont, QIcon, QPixmap
 from PySide6.QtWidgets import (
-    QCommandLinkButton, QFrame, QHBoxLayout, 
+    QCommandLinkButton, QFrame, QHBoxLayout,
     QLabel, QLineEdit, QPushButton,
     QSizePolicy, QSpacerItem, QVBoxLayout
-    )
+)
+
 
 class SpotifyConfig(object):
     def setupUi(self, main_spotify_api_dialog):
@@ -39,8 +40,10 @@ class SpotifyConfig(object):
         self.verticalLayout_6 = QVBoxLayout(self.title_frame_2)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.horizontalLayout_4_title = QHBoxLayout()
-        self.horizontalLayout_4_title.setObjectName(u"horizontalLayout_4_title")
-        self.horizontalSpacer_2_title = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalLayout_4_title.setObjectName(
+            u"horizontalLayout_4_title")
+        self.horizontalSpacer_2_title = QSpacerItem(
+            40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout_4_title.addItem(self.horizontalSpacer_2_title)
 
@@ -65,13 +68,12 @@ class SpotifyConfig(object):
 
         self.horizontalLayout_4_title.addWidget(self.title_dialog)
 
-        self.horizontalSpacer_3_title = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_3_title = QSpacerItem(
+            40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout_4_title.addItem(self.horizontalSpacer_3_title)
 
-
         self.verticalLayout_6.addLayout(self.horizontalLayout_4_title)
-
 
         self.verticalLayout_4.addWidget(self.title_frame_2)
 
@@ -86,17 +88,18 @@ class SpotifyConfig(object):
         font1.setPointSize(10)
         font1.setBold(True)
         self.client_id.setFont(font1)
-        self.client_id.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.client_id.setAlignment(
+            Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
         self.verticalLayout_names.addWidget(self.client_id)
 
         self.client_secret = QLabel(self.title_frame)
         self.client_secret.setObjectName(u"client_secret")
         self.client_secret.setFont(font1)
-        self.client_secret.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.client_secret.setAlignment(
+            Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
 
         self.verticalLayout_names.addWidget(self.client_secret)
-
 
         self.horizontalLayout_form.addLayout(self.verticalLayout_names)
 
@@ -115,9 +118,7 @@ class SpotifyConfig(object):
 
         self.verticalLayout_textbox.addWidget(self.lineEdit_client_secret)
 
-
         self.horizontalLayout_form.addLayout(self.verticalLayout_textbox)
-
 
         self.verticalLayout_4.addLayout(self.horizontalLayout_form)
 
@@ -133,18 +134,18 @@ class SpotifyConfig(object):
         self.pushButton_save.setMinimumSize(QSize(90, 30))
         self.pushButton_save.setMaximumSize(QSize(90, 30))
         icon = QIcon()
-        icon.addFile(u"assets/icons/diskette.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u"assets/icons/diskette.png",
+                     QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_save.setIcon(icon)
 
         self.horizontalLayout_3.addWidget(self.pushButton_save)
 
-
         self.verticalLayout_4.addWidget(self.frame_save_botton)
-
 
         self.verticalLayout_5.addWidget(self.title_frame)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
+        self.verticalSpacer = QSpacerItem(
+            20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout_5.addItem(self.verticalSpacer)
 
@@ -156,7 +157,8 @@ class SpotifyConfig(object):
         self.horizontalLayout_2.setSpacing(0)
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(0, 0, 6, 6)
-        self.horizontalSpacer_boton = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+        self.horizontalSpacer_boton = QSpacerItem(
+            40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer_boton)
 
@@ -165,7 +167,8 @@ class SpotifyConfig(object):
         sizePolicy = QSizePolicy(QSizePolicy.Minimum, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.gitHub.sizePolicy().hasHeightForWidth())
+        sizePolicy.setHeightForWidth(
+            self.gitHub.sizePolicy().hasHeightForWidth())
         self.gitHub.setSizePolicy(sizePolicy)
         self.gitHub.setMaximumSize(QSize(160, 16777215))
         font2 = QFont()
@@ -175,28 +178,32 @@ class SpotifyConfig(object):
         self.gitHub.setFont(font2)
         self.gitHub.setCursor(QCursor(Qt.PointingHandCursor))
         icon1 = QIcon()
-        icon1.addFile(u"assets/icons/question.png", QSize(), QIcon.Normal, QIcon.Off)
+        icon1.addFile(u"assets/icons/question.png",
+                      QSize(), QIcon.Normal, QIcon.Off)
         self.gitHub.setIcon(icon1)
         self.gitHub.setIconSize(QSize(25, 25))
 
         self.horizontalLayout_2.addWidget(self.gitHub)
 
-
         self.verticalLayout_5.addWidget(self.boton_frame)
 
-
         self.horizontalLayout_5.addWidget(self.background_frame_api)
-
 
         self.retranslateUi(main_spotify_api_dialog)
 
         QMetaObject.connectSlotsByName(main_spotify_api_dialog)
 
     def retranslateUi(self, main_spotify_api_dialog):
-        main_spotify_api_dialog.setWindowTitle(QCoreApplication.translate("main_spotify_api_dialog", u"API KEY", None))
+        main_spotify_api_dialog.setWindowTitle(
+            QCoreApplication.translate("main_spotify_api_dialog", u"API KEY", None))
         self.img.setText("")
-        self.title_dialog.setText(QCoreApplication.translate("main_spotify_api_dialog", u"Spotify API KEY", None))
-        self.client_id.setText(QCoreApplication.translate("main_spotify_api_dialog", u"Client ID", None))
-        self.client_secret.setText(QCoreApplication.translate("main_spotify_api_dialog", u"Client Secret", None))
-        self.pushButton_save.setText(QCoreApplication.translate("main_spotify_api_dialog", u"Save", None))
-        self.gitHub.setText(QCoreApplication.translate("main_spotify_api_dialog", u"How to get API KEY", None))
+        self.title_dialog.setText(QCoreApplication.translate(
+            "main_spotify_api_dialog", u"Spotify API KEY", None))
+        self.client_id.setText(QCoreApplication.translate(
+            "main_spotify_api_dialog", u"Client ID", None))
+        self.client_secret.setText(QCoreApplication.translate(
+            "main_spotify_api_dialog", u"Client Secret", None))
+        self.pushButton_save.setText(QCoreApplication.translate(
+            "main_spotify_api_dialog", u"Save", None))
+        self.gitHub.setText(QCoreApplication.translate(
+            "main_spotify_api_dialog", u"How to get API KEY", None))
