@@ -5,6 +5,7 @@ from PySide6.QtWidgets import (
     QLineEdit, QPushButton, QSizePolicy,
     QSpacerItem, QVBoxLayout
 )
+from functions.path import FILE_PATH
 
 
 class downloadMenuLink(object):
@@ -65,7 +66,7 @@ class downloadMenuLink(object):
         self.link_icon.setObjectName(u"link_icon")
         self.link_icon.setMinimumSize(QSize(30, 30))
         self.link_icon.setMaximumSize(QSize(30, 30))
-        self.link_icon.setPixmap(QPixmap(u"assets/icons/link.png"))
+        self.link_icon.setPixmap(QPixmap(f"{FILE_PATH}/assets/icons/link.png"))
         self.link_icon.setScaledContents(True)
 
         self.horizontalLayout.addWidget(self.link_icon)

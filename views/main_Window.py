@@ -11,6 +11,7 @@ from PySide6.QtWidgets import (
     QPushButton, QSizePolicy, QSpacerItem,
     QVBoxLayout, QWidget
 )
+from functions.path import FILE_PATH
 
 
 class MainWindow(object):
@@ -22,19 +23,19 @@ class MainWindow(object):
         self.actionExit = QAction(MainWindow)
         self.actionExit.setObjectName(u"actionExit")
         icon1 = QIcon()
-        icon1.addFile(u"assets/icons/exit.png",
+        icon1.addFile(f"{FILE_PATH}/assets/icons/exit.png",
                       QSize(), QIcon.Normal, QIcon.Off)
         self.actionExit.setIcon(icon1)
         self.actionSpotify_API_KEY = QAction(MainWindow)
         self.actionSpotify_API_KEY.setObjectName(u"actionSpotify_API_KEY")
         icon2 = QIcon()
-        icon2.addFile(u"assets/icons/spotify.png",
+        icon2.addFile(f"{FILE_PATH}/assets/icons/spotify.png",
                       QSize(), QIcon.Normal, QIcon.Off)
         self.actionSpotify_API_KEY.setIcon(icon2)
         self.actiondownload_Location = QAction(MainWindow)
         self.actiondownload_Location.setObjectName(u"actiondownload_Location")
         icon3 = QIcon()
-        icon3.addFile(u"assets/icons/downloading.png",
+        icon3.addFile(f"{FILE_PATH}/assets/icons/downloading.png",
                       QSize(), QIcon.Normal, QIcon.Off)
         self.actiondownload_Location.setIcon(icon3)
         self.actionHelp = QAction(MainWindow)
@@ -74,7 +75,7 @@ class MainWindow(object):
         self.icon = QLabel(self.frame)
         self.icon.setObjectName(u"icon")
         self.icon.setMaximumSize(QSize(50, 50))
-        self.icon.setPixmap(QPixmap(u"assets/icons/img.ico"))
+        self.icon.setPixmap(QPixmap(f"{FILE_PATH}/assets/icons/img.ico"))
         self.icon.setScaledContents(True)
         self.icon.setAlignment(
             Qt.AlignRight | Qt.AlignTrailing | Qt.AlignVCenter)
@@ -126,7 +127,7 @@ class MainWindow(object):
         self.downloadPlayList.setFont(font2)
         self.downloadPlayList.setCursor(QCursor(Qt.PointingHandCursor))
         icon4 = QIcon()
-        icon4.addFile(u"assets/icons/playlist.png",
+        icon4.addFile(f"{FILE_PATH}/assets/icons/playlist.png",
                       QSize(), QIcon.Normal, QIcon.Off)
         self.downloadPlayList.setIcon(icon4)
         self.downloadPlayList.setIconSize(QSize(25, 25))
@@ -139,7 +140,7 @@ class MainWindow(object):
         self.downloadTrack.setFont(font2)
         self.downloadTrack.setCursor(QCursor(Qt.PointingHandCursor))
         icon5 = QIcon()
-        icon5.addFile(u"assets/icons/music-note.png",
+        icon5.addFile(f"{FILE_PATH}/assets/icons/music-note.png",
                       QSize(), QIcon.Normal, QIcon.Off)
         self.downloadTrack.setIcon(icon5)
         self.downloadTrack.setIconSize(QSize(25, 25))
@@ -185,7 +186,7 @@ class MainWindow(object):
         self.gitHub.setFont(font3)
         self.gitHub.setCursor(QCursor(Qt.PointingHandCursor))
         icon6 = QIcon()
-        icon6.addFile(u"assets/icons/github.png",
+        icon6.addFile(f"{FILE_PATH}/assets/icons/github.png",
                       QSize(), QIcon.Normal, QIcon.Off)
         self.gitHub.setIcon(icon6)
         self.gitHub.setIconSize(QSize(25, 25))

@@ -5,6 +5,7 @@ from PySide6.QtWidgets import (
     QLabel, QLineEdit, QPushButton,
     QSizePolicy, QSpacerItem, QVBoxLayout
 )
+from functions.path import FILE_PATH
 
 
 class SpotifyConfig(object):
@@ -51,7 +52,7 @@ class SpotifyConfig(object):
         self.img.setObjectName(u"img")
         self.img.setMinimumSize(QSize(30, 30))
         self.img.setMaximumSize(QSize(30, 30))
-        self.img.setPixmap(QPixmap(u"assets/icons/spotify.png"))
+        self.img.setPixmap(QPixmap(f"{FILE_PATH}/assets/icons/spotify.png"))
         self.img.setScaledContents(True)
 
         self.horizontalLayout_4_title.addWidget(self.img)
@@ -134,7 +135,7 @@ class SpotifyConfig(object):
         self.pushButton_save.setMinimumSize(QSize(90, 30))
         self.pushButton_save.setMaximumSize(QSize(90, 30))
         icon = QIcon()
-        icon.addFile(u"assets/icons/diskette.png",
+        icon.addFile(f"{FILE_PATH}/assets/icons/diskette.png",
                      QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_save.setIcon(icon)
 
@@ -178,7 +179,7 @@ class SpotifyConfig(object):
         self.gitHub.setFont(font2)
         self.gitHub.setCursor(QCursor(Qt.PointingHandCursor))
         icon1 = QIcon()
-        icon1.addFile(u"assets/icons/question.png",
+        icon1.addFile(f"{FILE_PATH}/assets/icons/question.png",
                       QSize(), QIcon.Normal, QIcon.Off)
         self.gitHub.setIcon(icon1)
         self.gitHub.setIconSize(QSize(25, 25))

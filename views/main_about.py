@@ -5,6 +5,7 @@ from PySide6.QtWidgets import (
     QHBoxLayout, QLabel, QSizePolicy,
     QSpacerItem, QVBoxLayout
 )
+from functions.path import FILE_PATH
 
 
 class About(object):
@@ -47,7 +48,7 @@ class About(object):
         self.pythonico.setMinimumSize(QSize(70, 70))
         self.pythonico.setMaximumSize(QSize(70, 70))
         self.pythonico.setPixmap(
-            QPixmap(u"assets/icons/icons8-python-480.png"))
+            QPixmap(f"{FILE_PATH}/assets/icons/icons8-python-480.png"))
         self.pythonico.setScaledContents(True)
 
         self.verticalLayout_3.addWidget(self.pythonico)
@@ -56,7 +57,8 @@ class About(object):
         self.pysideicon.setObjectName(u"pysideicon")
         self.pysideicon.setMinimumSize(QSize(70, 70))
         self.pysideicon.setMaximumSize(QSize(70, 70))
-        self.pysideicon.setPixmap(QPixmap(u"assets/icons/pyside6.png"))
+        self.pysideicon.setPixmap(
+            QPixmap(f"{FILE_PATH}/assets/icons/pyside6.png"))
         self.pysideicon.setScaledContents(True)
 
         self.verticalLayout_3.addWidget(self.pysideicon)
@@ -65,7 +67,8 @@ class About(object):
         self.spotifyicon.setObjectName(u"spotifyicon")
         self.spotifyicon.setMinimumSize(QSize(70, 70))
         self.spotifyicon.setMaximumSize(QSize(70, 70))
-        self.spotifyicon.setPixmap(QPixmap(u"assets/icons/spotify.png"))
+        self.spotifyicon.setPixmap(
+            QPixmap(f"{FILE_PATH}/assets/icons/spotify.png"))
         self.spotifyicon.setScaledContents(True)
 
         self.verticalLayout_3.addWidget(self.spotifyicon)
@@ -185,7 +188,7 @@ class About(object):
         self.gitHub.setFont(font5)
         self.gitHub.setCursor(QCursor(Qt.PointingHandCursor))
         icon = QIcon()
-        icon.addFile(u"assets/icons/github.png",
+        icon.addFile(f"{FILE_PATH}/assets/icons/github.png",
                      QSize(), QIcon.Normal, QIcon.Off)
         self.gitHub.setIcon(icon)
         self.gitHub.setIconSize(QSize(25, 25))

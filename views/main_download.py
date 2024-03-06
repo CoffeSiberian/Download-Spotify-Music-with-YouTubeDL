@@ -5,6 +5,7 @@ from PySide6.QtWidgets import (
     QProgressBar, QPushButton, QSizePolicy,
     QSpacerItem, QVBoxLayout
 )
+from functions.path import FILE_PATH
 
 
 class downloadWindow(object):
@@ -42,7 +43,8 @@ class downloadWindow(object):
         self.img_bar = QLabel(self.progresbar_frame)
         self.img_bar.setObjectName(u"img_bar")
         self.img_bar.setMaximumSize(QSize(50, 50))
-        self.img_bar.setPixmap(QPixmap(u"assets/icons/downloading.png"))
+        self.img_bar.setPixmap(
+            QPixmap(f"{FILE_PATH}/assets/icons/downloading.png"))
         self.img_bar.setScaledContents(True)
 
         self.horizontalLayout_2.addWidget(self.img_bar)

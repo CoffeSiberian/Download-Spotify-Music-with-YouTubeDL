@@ -4,6 +4,7 @@ from PySide6.QtWidgets import (
     QFrame, QHBoxLayout, QLabel,
     QLineEdit, QPushButton, QVBoxLayout
 )
+from functions.path import FILE_PATH
 
 
 class downloadLocation(object):
@@ -70,7 +71,7 @@ class downloadLocation(object):
         self.pushButton_save.setMinimumSize(QSize(90, 30))
         self.pushButton_save.setMaximumSize(QSize(90, 30))
         icon = QIcon()
-        icon.addFile(u"assets/icons/diskette.png",
+        icon.addFile(f"{FILE_PATH}/assets/icons/diskette.png",
                      QSize(), QIcon.Normal, QIcon.Off)
         self.pushButton_save.setIcon(icon)
 
