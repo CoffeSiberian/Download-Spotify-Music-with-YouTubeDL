@@ -26,6 +26,14 @@ To transform .ui files to python classes use
 pyside6-uic window.ui > window.py
 ```
 
+So you can compile your own executable with pyinstaller. More details at https://pyinstaller.org/en/stable/usage.html
+
+-   Just remember to first install `pyinstaller` and `Pillow` (This is to be able to add the .ico).
+
+```bash
+pyinstaller --onefile --clean --windowed --name Download-Spotify-Music-with-YouTubeDL --icon assets/icons/img.ico --add-data "assets/icons:assets/icons" app.py
+```
+
 Remember to have the dependencies installed first. You can read more here: [https://doc.qt.io/qtforpython/tutorials/](https://doc.qt.io/qtforpython/tutorials/basictutorial/uifiles.html "https://doc.qt.io/qtforpython/tutorials/")
 
 ### Get your Spotify API KEY
