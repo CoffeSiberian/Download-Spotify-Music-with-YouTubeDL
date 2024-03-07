@@ -11,6 +11,7 @@ from functions.validations import (
 from functions.spotifyapi import spotifyPlay
 from functions.youtubeapi import youtube
 from functions.request import getData
+from functions.path import FILE_PATH
 
 import traceback
 import sys
@@ -73,7 +74,7 @@ class MainWindowFormdownloadBar(QDialog, downloadWindow):
         self.modalMessageBoxStatus = False
 
         self.setModal(True)
-        self.setWindowIcon(QIcon('./assets/icons/downloading.png'))
+        self.setWindowIcon(QIcon(f'{FILE_PATH}/assets/icons/downloading.png'))
         self.pushButton_exit.clicked.connect(self.close)
         self.pushButton_cancel.clicked.connect(self.statusChange)
 
@@ -116,7 +117,8 @@ class MainWindowFormdownloadBar(QDialog, downloadWindow):
         self.statusChange(changeStatus)
         msgBox = QMessageBox()
         msgBox.setWindowTitle(title)
-        msgBox.setWindowIcon(QIcon('./assets/icons/downloading.png'))
+        msgBox.setWindowIcon(
+            QIcon(f'{FILE_PATH}/assets/icons/downloading.png'))
         msgBox.setText(lowInfo)
         msgBox.setIcon(level)
         msgBox.setStandardButtons(QMessageBox.StandardButton.Ok)
@@ -213,10 +215,10 @@ If it's an error, delete the folder and try again.
                 break
             suple += 1
             name = f'{r[0]} - {r[1]}'
-            search = self.yt_dl.search(name)
+            search_yt, status_yt = self.yt_dl.search(name)
 
-            if search[1] == 200:
-                url_download = search[0]['url']
+            if status_yt == 200:
+                url_download = search_yt['url']
                 download = self.download(
                     url_download, name, playlistName, f'[{suple}]', self.dir, progress_callback, iteration)
                 if not download:
@@ -226,7 +228,7 @@ If it's an error, delete the folder and try again.
                 else:
                     downloadLog(self.dir, playlistName, suple)
             else:
-                notFound.emit(str(search[1]), search[0]
+                notFound.emit(str(status_yt), search_yt
                               ["error"], QMessageBox.Icon.Warning, True)
                 downloadLog(self.dir, playlistName, suple)
                 while self.modalMessageBoxStatus:
@@ -243,18 +245,20 @@ If it's an error, delete the folder and try again.
         get the link of the song in yt_dlp and 
         start downloading (this function is only used to download tracks)
         '''
-        js = self.api.getTrack(self.getId)
-        if js[1] != 200:
-            notFound.emit(str(js[1]), js[2], QMessageBox.Icon.Warning, False)
+        track, status, error_msj = self.api.getTrack(self.getId)
+        if status != 200:
+            notFound.emit(str(status), error_msj,
+                          QMessageBox.Icon.Warning, False)
             return False
-        trackName = fileNameCheck(js[0])
+
+        trackName = fileNameCheck(track)
         nameFolder = 'manual_track'
         createMusicFolder(self.dir)
         createFolderList(self.dir, nameFolder)
-        search = self.yt_dl.search(trackName)
+        search_yt, status_yt = self.yt_dl.search(trackName)
 
-        if search[1] == 200:
-            url_download = search[0]['url']
+        if status_yt == 200:
+            url_download = search_yt['url']
             download = self.download(
                 url_download, trackName, nameFolder, '[0]', self.dir, progress_callback, iteration)
 
@@ -265,7 +269,7 @@ If it's an error, delete the folder and try again.
                 self.statusChange(False)
                 return False
         else:
-            notFound.emit(str(search[1]), search[0]
+            notFound.emit(str(status_yt), search_yt
                           ["error"], QMessageBox.Icon.Warning, False)
             return False
         self.statusChange(False)

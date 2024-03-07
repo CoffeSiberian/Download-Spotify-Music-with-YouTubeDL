@@ -6,6 +6,8 @@ from controllers.main_controller_download import MainWindowFormdownloadBar
 from functions.jsonedit import getValue
 from functions.spotifyapi import spotifyPlay
 from functions.youtubeapi import youtube
+from functions.path import FILE_PATH
+from functions.spotify_url_validation import idAndType
 
 
 class MainWindowFormdownload(QDialog, downloadMenuLink):
@@ -18,14 +20,14 @@ class MainWindowFormdownload(QDialog, downloadMenuLink):
         self.__api = spotifyPlay(self.__values[0], self.__values[1])
         self.__yt_dl = youtube()
         self.setModal(True)
-        self.setWindowIcon(QIcon('./assets/icons/link.png'))
+        self.setWindowIcon(QIcon(f'{FILE_PATH}/assets/icons/link.png'))
         self.download_menu_download_botton.clicked.connect(self.getUrl)
         self.download_menu_cancel_botton.clicked.connect(self.close)
 
     def messageBox(self, title: str, lowInfo: str, level: QMessageBox.Icon, details: str) -> None:
         msgBox = QMessageBox()
         msgBox.setWindowTitle(title)
-        self.setWindowIcon(QIcon('./assets/icons/link.png'))
+        self.setWindowIcon(QIcon(f'{FILE_PATH}/assets/icons/link.png'))
         msgBox.setText(lowInfo)
         msgBox.setIcon(level)
         msgBox.setDetailedText(details)
@@ -36,6 +38,7 @@ class MainWindowFormdownload(QDialog, downloadMenuLink):
     def getUrl(self) -> None:
         if self.checkConfig() == False:
             return
+
         url = self.textobox_link.text()
         getId = self.splitURL(url)
         if getId:
@@ -59,9 +62,18 @@ class MainWindowFormdownload(QDialog, downloadMenuLink):
     download functions
     '''
 
-    def splitURL(self, url: str) -> str | bool:  # get id from url playlist or track
-        try:
-            start = url.split(sep='?')[0]
-            return start.split(sep='/')[4]
-        except IndexError:
-            return False
+    def splitURL(self, url: str) -> str | None:
+        # get id from url playlist or track
+
+        valid = idAndType(url)
+
+        if valid != False:
+            typeSp, id = valid
+            if typeSp == 'track':
+                return id
+            elif typeSp == 'playlist':
+                return id
+            elif typeSp == 'album':
+                return id
+            return None
+        return None
