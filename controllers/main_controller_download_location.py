@@ -3,6 +3,7 @@ from PySide6.QtCore import QStandardPaths, QDir
 from PySide6.QtGui import QIcon
 
 from functions.jsonedit import saveValue, getValue
+from functions.path import FILE_PATH
 
 from views.main_download_location import downloadLocation
 
@@ -14,7 +15,7 @@ class MainWindowQDialogdownloadLocation(QDialog, downloadLocation):
         self.setupUi(self)
         dirt = self.getPath()
         self.setModal(True)
-        self.setWindowIcon(QIcon('./assets/icons/downloading.png'))
+        self.setWindowIcon(QIcon(f'{FILE_PATH}/assets/icons/downloading.png'))
         self.lineEdit_location.setText(dirt)
 
         self._open_folder_action = self.lineEdit_location.addAction(

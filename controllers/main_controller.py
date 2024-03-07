@@ -11,6 +11,7 @@ from controllers.main_controller_download_menu import MainWindowFormdownload
 from controllers.main_controller_spotify_api import MainWindowQDialogApi
 from controllers.main_controller_download_location import MainWindowQDialogdownloadLocation
 from controllers.main_controller_about import MainWindowAbout
+from functions.path import FILE_PATH
 
 
 class MainWindowForm(QMainWindow, MainWindow):
@@ -20,7 +21,7 @@ class MainWindowForm(QMainWindow, MainWindow):
         self.setupUi(self)
 
         self.defaultPath()
-        self.setWindowIcon(QIcon('./assets/icons/img.ico'))
+        self.setWindowIcon(QIcon(f'{FILE_PATH}/assets/icons/img.ico'))
         self.downloadPlayList.clicked.connect(
             lambda: self.opendownloadPlayList(self.downloadPlayList))
         self.downloadTrack.clicked.connect(

@@ -1,3 +1,4 @@
+from typing import Tuple
 from yt_dlp import YoutubeDL
 
 
@@ -16,7 +17,7 @@ class youtube:
         }
         self.ytdl = YoutubeDL(self.ytdl_options)
 
-    def findVideoInfoURL(self, url: str) -> tuple[dict, int]:
+    def findVideoInfoURL(self, url: str) -> Tuple[dict, int]:
         '''
         Returns the video and an http code
         '''
@@ -25,7 +26,7 @@ class youtube:
             return {"error": "Connection or search failed"}, 400
         return vidinfo, 200
 
-    def search(self, find: str) -> tuple[dict, int]:
+    def search(self, find: str) -> Tuple[dict, int]:
         '''
         Returns the first search result and an http code
         '''

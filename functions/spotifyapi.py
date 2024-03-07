@@ -1,3 +1,4 @@
+from typing import Tuple
 from requests.structures import CaseInsensitiveDict
 from functions.request import postData, getData
 import base64
@@ -76,7 +77,7 @@ class spotifyPlay:
                 iterator += 1
         return rescueTracks, info[1], infoConten['name']
 
-    def getTrack(self, id: str) -> tuple[str | None, int, str | None]:
+    def getTrack(self, id: str) -> Tuple[str | None, int, str | None]:
         bearer = self.getBearer()
         if bearer[1] != 200:
             return None, bearer[1], self.errorMsj(bearer[0])
@@ -86,6 +87,7 @@ class spotifyPlay:
         headers["Authorization"] = f"Bearer {bearer[0]}"
         headers["Content-Type"] = "application/json"
         resp = getData(url, headers=headers)
+
         if resp.status_code != 200:
             return None, resp.status_code, self.errorMsj(resp.content.decode("utf-8"))
 
