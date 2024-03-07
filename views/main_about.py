@@ -216,11 +216,11 @@ class About(object):
         self.pysideicon.setText("")
         self.spotifyicon.setText("")
         self.label.setText(QCoreApplication.translate(
-            "about", u"Python Ver. 3.11.1", None))
+            "about", u"Python Ver. 3.10", None))
         self.label_2.setText(QCoreApplication.translate(
-            "about", u"PySide6 Ver. 6.4.2", None))
+            "about", u"PySide6 Ver. 6.6", None))
         self.label_3.setText(QCoreApplication.translate(
-            "about", u"Spotify Web API Ver. 1", None))
+            "about", u"Spotify Web API", None))
         self.groupBox_2.setTitle(
             QCoreApplication.translate("about", u"Create By", None))
         self.nickname_info.setText(
