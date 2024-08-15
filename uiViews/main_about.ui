@@ -167,7 +167,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>Python Ver. 3.10</string>
+                 <string>Python Ver. 3.12</string>
                 </property>
                </widget>
               </item>
@@ -183,7 +183,7 @@
                  </font>
                 </property>
                 <property name="text">
-                 <string>PySide6 Ver. 6.6</string>
+                 <string>PySide6</string>
                 </property>
                </widget>
               </item>
