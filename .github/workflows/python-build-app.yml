@@ -18,10 +18,10 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            - name: Set up Python 3.10
+            - name: Set up Python 3.12
               uses: actions/setup-python@v5
               with:
-                  python-version: "3.10"
+                  python-version: "3.12"
 
             - name: Install dependencies
               run: |
@@ -47,10 +47,10 @@ jobs:
         steps:
             - uses: actions/checkout@v4
 
-            - name: Set up Python 3.10
+            - name: Set up Python 3.12
               uses: actions/setup-python@v5
               with:
-                  python-version: "3.10"
+                  python-version: "3.12"
 
             - name: Install dependencies
               run: |
@@ -92,12 +92,10 @@ jobs:
                   name: ${{ env.APP_NAME }}${{ env.APP_VERSION }}-windows.exe
 
             - name: Create a Release
-              uses: marvinpinto/action-automatic-releases@latest
+              uses: softprops/action-gh-release@v2
               with:
-                  repo_token: ${{ secrets.GITHUB_TOKEN }}
-                  title: ${{ env.APP_VERSION }}
-                  automatic_release_tag: ${{ env.APP_VERSION }}
-                  prerelease: false
+                  name: ${{ env.APP_VERSION }}
+                  tag_name: ${{ env.APP_VERSION }}
                   draft: true
                   files: |
                       ${{ env.APP_NAME }}${{ env.APP_VERSION }}-ubuntu
